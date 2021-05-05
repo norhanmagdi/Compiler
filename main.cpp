@@ -17,7 +17,6 @@ void read_file(){
     freopen(RULES_FILE, "r", stdin);
     string input;
     while (getline(std::cin,input)){
-//        cout << input << nLINE;
         RULES_SET.push_back(input);
     }
 }
