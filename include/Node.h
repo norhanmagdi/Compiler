@@ -10,7 +10,8 @@ class Edge;
 class Node
 {
     public:
-        Node();
+        Node(string nodeName, bool endState);
+        Node(bool endState);
         virtual ~Node();
         string getName();
         void setName(string stateName);

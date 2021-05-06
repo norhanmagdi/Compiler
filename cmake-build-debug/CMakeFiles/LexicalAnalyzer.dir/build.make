@@ -88,19 +88,79 @@ CMakeFiles/LexicalAnalyzer.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LexicalAnalyzer.dir/main.cpp.s"
 	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\LexicalAnalyzer\main.cpp -o CMakeFiles\LexicalAnalyzer.dir\main.cpp.s
 
+CMakeFiles/LexicalAnalyzer.dir/src/Parser.cpp.obj: CMakeFiles/LexicalAnalyzer.dir/flags.make
+CMakeFiles/LexicalAnalyzer.dir/src/Parser.cpp.obj: ../src/Parser.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\LexicalAnalyzer\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/LexicalAnalyzer.dir/src/Parser.cpp.obj"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\LexicalAnalyzer.dir\src\Parser.cpp.obj -c D:\LexicalAnalyzer\src\Parser.cpp
+
+CMakeFiles/LexicalAnalyzer.dir/src/Parser.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LexicalAnalyzer.dir/src/Parser.cpp.i"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\LexicalAnalyzer\src\Parser.cpp > CMakeFiles\LexicalAnalyzer.dir\src\Parser.cpp.i
+
+CMakeFiles/LexicalAnalyzer.dir/src/Parser.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LexicalAnalyzer.dir/src/Parser.cpp.s"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\LexicalAnalyzer\src\Parser.cpp -o CMakeFiles\LexicalAnalyzer.dir\src\Parser.cpp.s
+
+CMakeFiles/LexicalAnalyzer.dir/src/NFA.cpp.obj: CMakeFiles/LexicalAnalyzer.dir/flags.make
+CMakeFiles/LexicalAnalyzer.dir/src/NFA.cpp.obj: ../src/NFA.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\LexicalAnalyzer\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/LexicalAnalyzer.dir/src/NFA.cpp.obj"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\LexicalAnalyzer.dir\src\NFA.cpp.obj -c D:\LexicalAnalyzer\src\NFA.cpp
+
+CMakeFiles/LexicalAnalyzer.dir/src/NFA.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LexicalAnalyzer.dir/src/NFA.cpp.i"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\LexicalAnalyzer\src\NFA.cpp > CMakeFiles\LexicalAnalyzer.dir\src\NFA.cpp.i
+
+CMakeFiles/LexicalAnalyzer.dir/src/NFA.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LexicalAnalyzer.dir/src/NFA.cpp.s"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\LexicalAnalyzer\src\NFA.cpp -o CMakeFiles\LexicalAnalyzer.dir\src\NFA.cpp.s
+
+CMakeFiles/LexicalAnalyzer.dir/src/Node.cpp.obj: CMakeFiles/LexicalAnalyzer.dir/flags.make
+CMakeFiles/LexicalAnalyzer.dir/src/Node.cpp.obj: ../src/Node.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\LexicalAnalyzer\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/LexicalAnalyzer.dir/src/Node.cpp.obj"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\LexicalAnalyzer.dir\src\Node.cpp.obj -c D:\LexicalAnalyzer\src\Node.cpp
+
+CMakeFiles/LexicalAnalyzer.dir/src/Node.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LexicalAnalyzer.dir/src/Node.cpp.i"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\LexicalAnalyzer\src\Node.cpp > CMakeFiles\LexicalAnalyzer.dir\src\Node.cpp.i
+
+CMakeFiles/LexicalAnalyzer.dir/src/Node.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LexicalAnalyzer.dir/src/Node.cpp.s"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\LexicalAnalyzer\src\Node.cpp -o CMakeFiles\LexicalAnalyzer.dir\src\Node.cpp.s
+
+CMakeFiles/LexicalAnalyzer.dir/src/Edge.cpp.obj: CMakeFiles/LexicalAnalyzer.dir/flags.make
+CMakeFiles/LexicalAnalyzer.dir/src/Edge.cpp.obj: ../src/Edge.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\LexicalAnalyzer\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/LexicalAnalyzer.dir/src/Edge.cpp.obj"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\LexicalAnalyzer.dir\src\Edge.cpp.obj -c D:\LexicalAnalyzer\src\Edge.cpp
+
+CMakeFiles/LexicalAnalyzer.dir/src/Edge.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LexicalAnalyzer.dir/src/Edge.cpp.i"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\LexicalAnalyzer\src\Edge.cpp > CMakeFiles\LexicalAnalyzer.dir\src\Edge.cpp.i
+
+CMakeFiles/LexicalAnalyzer.dir/src/Edge.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LexicalAnalyzer.dir/src/Edge.cpp.s"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\LexicalAnalyzer\src\Edge.cpp -o CMakeFiles\LexicalAnalyzer.dir\src\Edge.cpp.s
+
 # Object files for target LexicalAnalyzer
 LexicalAnalyzer_OBJECTS = \
-"CMakeFiles/LexicalAnalyzer.dir/main.cpp.obj"
+"CMakeFiles/LexicalAnalyzer.dir/main.cpp.obj" \
+"CMakeFiles/LexicalAnalyzer.dir/src/Parser.cpp.obj" \
+"CMakeFiles/LexicalAnalyzer.dir/src/NFA.cpp.obj" \
+"CMakeFiles/LexicalAnalyzer.dir/src/Node.cpp.obj" \
+"CMakeFiles/LexicalAnalyzer.dir/src/Edge.cpp.obj"
 
 # External object files for target LexicalAnalyzer
 LexicalAnalyzer_EXTERNAL_OBJECTS =
 
 LexicalAnalyzer.exe: CMakeFiles/LexicalAnalyzer.dir/main.cpp.obj
+LexicalAnalyzer.exe: CMakeFiles/LexicalAnalyzer.dir/src/Parser.cpp.obj
+LexicalAnalyzer.exe: CMakeFiles/LexicalAnalyzer.dir/src/NFA.cpp.obj
+LexicalAnalyzer.exe: CMakeFiles/LexicalAnalyzer.dir/src/Node.cpp.obj
+LexicalAnalyzer.exe: CMakeFiles/LexicalAnalyzer.dir/src/Edge.cpp.obj
 LexicalAnalyzer.exe: CMakeFiles/LexicalAnalyzer.dir/build.make
 LexicalAnalyzer.exe: CMakeFiles/LexicalAnalyzer.dir/linklibs.rsp
 LexicalAnalyzer.exe: CMakeFiles/LexicalAnalyzer.dir/objects1.rsp
 LexicalAnalyzer.exe: CMakeFiles/LexicalAnalyzer.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\LexicalAnalyzer\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable LexicalAnalyzer.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\LexicalAnalyzer\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable LexicalAnalyzer.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\LexicalAnalyzer.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

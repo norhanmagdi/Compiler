@@ -5,29 +5,25 @@
 #include <bits/stdc++.h>
 #include "Node.h"
 
-#define EPS '\0'
+#define EPS "\0"
 using namespace std;
 
 class Node;
 class Edge
 {
     public:
-        Edge(Node* destination, char startLetter , char endLetter);
+        Edge(Node* destination, string condition);
         virtual ~Edge();
         Node *getDestination();
         void setDestination(Node *destination);
-        char getStartLetter();
-        void setStartLetter(char start);
-        char getEndLetter();
-        void setEndLetter(char en);
+        string getCondition();
+        void setCondition(string condition);
 
     protected:
 
     private:
         Node* destination;
-        char startLetter;
-        char endLetter;
-        int sizeOfAlphabet;
+        string condition;
 };
 
 #endif // EDGE_H

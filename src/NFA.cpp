@@ -1,4 +1,4 @@
-#include "NFA.h"
+#include "../include/NFA.h"
 
 NFA::NFA(Node *startNode, Node *endNode) {
     this->startNode = startNode;
@@ -16,10 +16,10 @@ Node *NFA::getStart(){
 Node *NFA::getEnd(){
     return endNode;
 }
-NFA *NFA::createAutomata(char startLetter , char endLetter){
-    Node* startNode = new Node("0" ,0);
-    Node* endNode = new Node("1" ,1);
-    startNode->addEdge(new Edge(endNode, startLetter, endLetter));
+NFA *NFA::createAutomata(string condition){
+    Node* startNode = new Node(0);
+    Node* endNode = new Node(1);
+    startNode->addEdge(new Edge(endNode, condition));
     return new NFA(startNode, endNode);
 }
 NFA *NFA::ORautomata(NFA* a1, NFA* a2){
@@ -27,32 +27,31 @@ NFA *NFA::ORautomata(NFA* a1, NFA* a2){
     Node* endNode = new Node(1);
     a1->getEnd()->setEndState(0);
     a2->getEnd()->setEndState(0);
-    startNode->addEdge(new Edge(a1->getStart(), EPS, EPS));
-    startNode->addEdge(new Edge(a2->getStart(), EPS, EPS));
-    a1->getEnd()->addEdge(new Edge(endNode, EPS, EPS));
-    a2->getEnd()->addEdge(new Edge(endNode, EPS, EPS));
+    startNode->addEdge(new Edge(a1->getStart(),EPS));
+    startNode->addEdge(new Edge(a2->getStart(),EPS));
+    a1->getEnd()->addEdge(new Edge(endNode,EPS));
+    a2->getEnd()->addEdge(new Edge(endNode,EPS));
     return new NFA(startNode, endNode);
 }
 NFA *NFA::ANDautomata(NFA* a1, NFA* a2){
     Node* startNode = a1->getStart();
     Node* endNode = a2->getEnd();
     a1->getEnd()->setEndState(0);
-    a1->getEnd()->addEdge(new Edge(a2->getStart(), EPS, EPS));
+    a1->getEnd()->addEdge(new Edge(a2->getStart(), EPS));
     return new NFA(startNode, endNode);
 }
 NFA *NFA::PCLOSUREautomata(NFA* a){
     Node* startNode = new Node(0);
     Node* endNode = new Node(1);
     a->getEnd()->setEndState(0);
-    startNode->addEdge(new Edge(a->getStart(), EPS, EPS));
-    a->getEnd()->addEdge(new Edge(a->getStart(), EPS, EPS));
-    a->getEnd()->addEdge(new Edge(endNode, EPS, EPS));
+    startNode->addEdge(new Edge(a->getStart(), EPS));
+    a->getEnd()->addEdge(new Edge(a->getStart(), EPS));
+    a->getEnd()->addEdge(new Edge(endNode, EPS));
     return new NFA(startNode, endNode);
 }
 NFA *NFA::CLOSUREautomata(NFA* a){
     NFA* newAutomata = PCLOSUREautomata(a);
-    newAutomata->getStart()->addEdge(new Edge(newAutomata->getEnd(), EPS,EPS));
+    newAutomata->getStart()->addEdge(new Edge(newAutomata->getEnd(), EPS));
     return newAutomata;
 }
-
 

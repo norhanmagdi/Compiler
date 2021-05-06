@@ -168,6 +168,114 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+src/Edge.obj: src/Edge.cpp.obj
+
+.PHONY : src/Edge.obj
+
+# target to build an object file
+src/Edge.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/Edge.cpp.obj
+.PHONY : src/Edge.cpp.obj
+
+src/Edge.i: src/Edge.cpp.i
+
+.PHONY : src/Edge.i
+
+# target to preprocess a source file
+src/Edge.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/Edge.cpp.i
+.PHONY : src/Edge.cpp.i
+
+src/Edge.s: src/Edge.cpp.s
+
+.PHONY : src/Edge.s
+
+# target to generate assembly for a file
+src/Edge.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/Edge.cpp.s
+.PHONY : src/Edge.cpp.s
+
+src/NFA.obj: src/NFA.cpp.obj
+
+.PHONY : src/NFA.obj
+
+# target to build an object file
+src/NFA.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/NFA.cpp.obj
+.PHONY : src/NFA.cpp.obj
+
+src/NFA.i: src/NFA.cpp.i
+
+.PHONY : src/NFA.i
+
+# target to preprocess a source file
+src/NFA.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/NFA.cpp.i
+.PHONY : src/NFA.cpp.i
+
+src/NFA.s: src/NFA.cpp.s
+
+.PHONY : src/NFA.s
+
+# target to generate assembly for a file
+src/NFA.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/NFA.cpp.s
+.PHONY : src/NFA.cpp.s
+
+src/Node.obj: src/Node.cpp.obj
+
+.PHONY : src/Node.obj
+
+# target to build an object file
+src/Node.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/Node.cpp.obj
+.PHONY : src/Node.cpp.obj
+
+src/Node.i: src/Node.cpp.i
+
+.PHONY : src/Node.i
+
+# target to preprocess a source file
+src/Node.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/Node.cpp.i
+.PHONY : src/Node.cpp.i
+
+src/Node.s: src/Node.cpp.s
+
+.PHONY : src/Node.s
+
+# target to generate assembly for a file
+src/Node.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/Node.cpp.s
+.PHONY : src/Node.cpp.s
+
+src/Parser.obj: src/Parser.cpp.obj
+
+.PHONY : src/Parser.obj
+
+# target to build an object file
+src/Parser.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/Parser.cpp.obj
+.PHONY : src/Parser.cpp.obj
+
+src/Parser.i: src/Parser.cpp.i
+
+.PHONY : src/Parser.i
+
+# target to preprocess a source file
+src/Parser.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/Parser.cpp.i
+.PHONY : src/Parser.cpp.i
+
+src/Parser.s: src/Parser.cpp.s
+
+.PHONY : src/Parser.s
+
+# target to generate assembly for a file
+src/Parser.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/Parser.cpp.s
+.PHONY : src/Parser.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -180,6 +288,18 @@ help:
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... src/Edge.obj
+	@echo ... src/Edge.i
+	@echo ... src/Edge.s
+	@echo ... src/NFA.obj
+	@echo ... src/NFA.i
+	@echo ... src/NFA.s
+	@echo ... src/Node.obj
+	@echo ... src/Node.i
+	@echo ... src/Node.s
+	@echo ... src/Parser.obj
+	@echo ... src/Parser.i
+	@echo ... src/Parser.s
 .PHONY : help
 
 

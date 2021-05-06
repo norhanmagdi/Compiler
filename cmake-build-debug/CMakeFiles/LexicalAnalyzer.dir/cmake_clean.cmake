@@ -1,5 +1,9 @@
 file(REMOVE_RECURSE
   "CMakeFiles/LexicalAnalyzer.dir/main.cpp.obj"
+  "CMakeFiles/LexicalAnalyzer.dir/src/Edge.cpp.obj"
+  "CMakeFiles/LexicalAnalyzer.dir/src/NFA.cpp.obj"
+  "CMakeFiles/LexicalAnalyzer.dir/src/Node.cpp.obj"
+  "CMakeFiles/LexicalAnalyzer.dir/src/Parser.cpp.obj"
   "LexicalAnalyzer.exe"
   "LexicalAnalyzer.exe.manifest"
   "LexicalAnalyzer.pdb"

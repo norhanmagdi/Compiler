@@ -1,11 +1,16 @@
-#include "Node.h"
+#include "../include/Node.h"
 using namespace std;
 
-Node::Node() {
-    this->nodeName = "";
-    this->endState =false;
-
+Node::Node(string nodeName, bool endState) {
+    this->nodeName = nodeName;
+    this->endState = endState;
 }
+
+Node::Node(bool endState) {
+    this->nodeName = "DEFAULT";
+    this->endState = endState;
+}
+
 Node::~Node()
 {
     //dtor
@@ -26,15 +31,12 @@ void Node::addEdge(Edge* edge){
  this->edges.push_back(edge);
 }
 
-vector<Edge *>Node::getAllEdges()
-{
+vector<Edge *>Node::getAllEdges(){
     return this->edges;
 }
-void Node::setPriority(int priority)
-{
+void Node::setPriority(int priority){
     this->priority = priority;
 }
-int Node::getPriority()
-{
+int Node::getPriority(){
     return priority;
 }
