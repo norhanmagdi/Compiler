@@ -6,6 +6,7 @@
 
 using namespace std;
 
+class Edge;
 class Node
 {
     public:
@@ -13,11 +14,11 @@ class Node
         virtual ~Node();
         string getName();
         void setName(string stateName);
-        bool isAcceptingState();
-        void setAcceptingState(bool acceptingState);
-        void addEdge(char c,string destinationNode);
-        string getDestination(char c);
-        unordered_map<char, string > getAllEdges();
+        bool isEndState();
+        void setEndState(bool acceptingState);
+        void addEdge(Edge* edge);
+       // string getDestination(char c);
+        vector<Edge*> getAllEdges();
         void setPriority(int priority);
         int getPriority();
 
@@ -25,9 +26,9 @@ class Node
     protected:
 
     private:
-        unordered_map<char ,string >edges;
+        vector<Edge*>edges;
         string nodeName;
-        bool acceptingState;
+        bool endState;
         int priority;
 
 };
