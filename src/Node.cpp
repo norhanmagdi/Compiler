@@ -3,7 +3,7 @@ using namespace std;
 
 Node::Node() {
     this->nodeName = "";
-    this->acceptingState =false;
+    this->endState =false;
 
 }
 Node::~Node()
@@ -16,28 +16,19 @@ string Node::getName(){
 void Node::setName(string nodeName) {
     this->nodeName =nodeName;
 }
-bool Node::isAcceptingState(){
-    return acceptingState;
+bool Node::isEndState(){
+    return endState;
 }
-void Node::setAcceptingState(bool acceptingState) {
-    this->acceptingState = acceptingState;
+void Node::setEndState(bool aendState) {
+    this->endState = endState;
 }
-void Node::addEdge(char c,string destinationNode){
- if (edges.find(c) == edges.end())
-        edges[c] = destinationNode;
- else
-        edges[c] += "," + destinationNode;
-}
-string Node::getDestination(char c)
-{
-    if (edges.find(c) == edges.end())
-        return "";
-    return edges[c];
+void Node::addEdge(Edge* edge){
+ this->edges.push_back(edge);
 }
 
-unordered_map<char, string >Node::getAllEdges()
+vector<Edge *>Node::getAllEdges()
 {
-    return edges;
+    return this->edges;
 }
 void Node::setPriority(int priority)
 {
