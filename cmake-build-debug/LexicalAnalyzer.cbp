@@ -80,7 +80,31 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="D:/LexicalAnalyzer/include/Edge.h">
+			<Option target="LexicalAnalyzer"/>
+		</Unit>
+		<Unit filename="D:/LexicalAnalyzer/include/NFA.h">
+			<Option target="LexicalAnalyzer"/>
+		</Unit>
+		<Unit filename="D:/LexicalAnalyzer/include/Node.h">
+			<Option target="LexicalAnalyzer"/>
+		</Unit>
+		<Unit filename="D:/LexicalAnalyzer/include/Parser.h">
+			<Option target="LexicalAnalyzer"/>
+		</Unit>
 		<Unit filename="D:/LexicalAnalyzer/main.cpp">
+			<Option target="LexicalAnalyzer"/>
+		</Unit>
+		<Unit filename="D:/LexicalAnalyzer/src/Edge.cpp">
+			<Option target="LexicalAnalyzer"/>
+		</Unit>
+		<Unit filename="D:/LexicalAnalyzer/src/NFA.cpp">
+			<Option target="LexicalAnalyzer"/>
+		</Unit>
+		<Unit filename="D:/LexicalAnalyzer/src/Node.cpp">
+			<Option target="LexicalAnalyzer"/>
+		</Unit>
+		<Unit filename="D:/LexicalAnalyzer/src/Parser.cpp">
 			<Option target="LexicalAnalyzer"/>
 		</Unit>
 		<Unit filename="D:/LexicalAnalyzer/CMakeLists.txt">
