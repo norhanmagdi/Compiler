@@ -92,6 +92,9 @@
 		<Unit filename="D:/LexicalAnalyzer/include/Parser.h">
 			<Option target="LexicalAnalyzer"/>
 		</Unit>
+		<Unit filename="D:/LexicalAnalyzer/include/naming.h">
+			<Option target="LexicalAnalyzer"/>
+		</Unit>
 		<Unit filename="D:/LexicalAnalyzer/main.cpp">
 			<Option target="LexicalAnalyzer"/>
 		</Unit>
@@ -105,6 +108,9 @@
 			<Option target="LexicalAnalyzer"/>
 		</Unit>
 		<Unit filename="D:/LexicalAnalyzer/src/Parser.cpp">
+			<Option target="LexicalAnalyzer"/>
+		</Unit>
+		<Unit filename="D:/LexicalAnalyzer/src/naming.cpp">
 			<Option target="LexicalAnalyzer"/>
 		</Unit>
 		<Unit filename="D:/LexicalAnalyzer/CMakeLists.txt">

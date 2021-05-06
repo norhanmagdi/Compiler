@@ -9,7 +9,13 @@ class NFA
 {
 public:
     NFA(Node *startNode, Node *endNode);
+    NFA ();
+    NFA (string operation, NFA* a1);
+    NFA (string operation, NFA* a1, NFA* a2);
+    NFA (string operation, string condition);
+
     virtual ~NFA();
+    void printNFA ();
     int numOfStates;
     Node *getStart();
     Node *getEnd();
@@ -24,7 +30,6 @@ protected:
 private:
     Node* startNode;
     Node* endNode;
-
 };
 
 #endif // NFA_H

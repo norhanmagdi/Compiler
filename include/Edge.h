@@ -5,7 +5,7 @@
 #include <bits/stdc++.h>
 #include "Node.h"
 
-#define EPS "\0"
+#define EPS "\\L"
 using namespace std;
 
 class Node;

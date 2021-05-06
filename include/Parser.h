@@ -20,6 +20,7 @@ class Parser
 {
 public:
     Parser() {}
+    const set<string> RE_SYMPOLS = { "-" ,"|" ,"+" ,"*" ,"(" ,")","$"};
     vector<string> to_postfix(const vector<string>& exprVec);
     void parse();
 
@@ -28,7 +29,6 @@ protected:
 private:
     const char* RULES_FILE = "rules.in";
     const set<char> MAIN_PUNCS = { '{' ,'}' ,',' ,';' ,'(' ,')'};
-    const set<string> RE_SYMPOLS = { "-" ,"|" ,"+" ,"*" ,"(" ,")","$"};
     map<string , int>PRECEDENCE = {{"|", 2},
                                    {"$", 3},
                                    {"+", 4},
