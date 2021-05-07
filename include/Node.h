@@ -10,11 +10,10 @@ class Edge;
 class Node
 {
     public:
-        Node(string nodeName, bool endState);
-        Node(bool endState);
+        Node(int nodeName, bool endState);
         virtual ~Node();
-        string getName();
-        void setName(string stateName);
+        int getName();
+        void setName(int stateName);
         bool isEndState();
         void setEndState(bool acceptingState);
         void addEdge(Edge* edge);
@@ -28,7 +27,7 @@ class Node
 
     private:
         vector<Edge*>edges;
-        string nodeName;
+        int nodeName;
         bool endState;
         int priority;
 

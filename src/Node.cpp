@@ -1,13 +1,8 @@
 #include "../include/Node.h"
 using namespace std;
 
-Node::Node(string nodeName, bool endState) {
+Node::Node(int nodeName, bool endState) {
     this->nodeName = nodeName;
-    this->endState = endState;
-}
-
-Node::Node(bool endState) {
-    this->nodeName = "DEFAULT";
     this->endState = endState;
 }
 
@@ -15,10 +10,10 @@ Node::~Node()
 {
     //dtor
 }
-string Node::getName(){
+int Node::getName(){
     return nodeName;
 }
-void Node::setName(string nodeName) {
+void Node::setName(int nodeName) {
     this->nodeName =nodeName;
 }
 bool Node::isEndState(){

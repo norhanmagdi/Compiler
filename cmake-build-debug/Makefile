@@ -195,6 +195,33 @@ src/Edge.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/Edge.cpp.s
 .PHONY : src/Edge.cpp.s
 
+src/GLOBAL.obj: src/GLOBAL.cpp.obj
+
+.PHONY : src/GLOBAL.obj
+
+# target to build an object file
+src/GLOBAL.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/GLOBAL.cpp.obj
+.PHONY : src/GLOBAL.cpp.obj
+
+src/GLOBAL.i: src/GLOBAL.cpp.i
+
+.PHONY : src/GLOBAL.i
+
+# target to preprocess a source file
+src/GLOBAL.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/GLOBAL.cpp.i
+.PHONY : src/GLOBAL.cpp.i
+
+src/GLOBAL.s: src/GLOBAL.cpp.s
+
+.PHONY : src/GLOBAL.s
+
+# target to generate assembly for a file
+src/GLOBAL.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/GLOBAL.cpp.s
+.PHONY : src/GLOBAL.cpp.s
+
 src/NFA.obj: src/NFA.cpp.obj
 
 .PHONY : src/NFA.obj
@@ -276,33 +303,6 @@ src/Parser.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/Parser.cpp.s
 .PHONY : src/Parser.cpp.s
 
-src/naming.obj: src/naming.cpp.obj
-
-.PHONY : src/naming.obj
-
-# target to build an object file
-src/naming.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/naming.cpp.obj
-.PHONY : src/naming.cpp.obj
-
-src/naming.i: src/naming.cpp.i
-
-.PHONY : src/naming.i
-
-# target to preprocess a source file
-src/naming.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/naming.cpp.i
-.PHONY : src/naming.cpp.i
-
-src/naming.s: src/naming.cpp.s
-
-.PHONY : src/naming.s
-
-# target to generate assembly for a file
-src/naming.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/naming.cpp.s
-.PHONY : src/naming.cpp.s
-
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -318,6 +318,9 @@ help:
 	@echo ... src/Edge.obj
 	@echo ... src/Edge.i
 	@echo ... src/Edge.s
+	@echo ... src/GLOBAL.obj
+	@echo ... src/GLOBAL.i
+	@echo ... src/GLOBAL.s
 	@echo ... src/NFA.obj
 	@echo ... src/NFA.i
 	@echo ... src/NFA.s
@@ -327,9 +330,6 @@ help:
 	@echo ... src/Parser.obj
 	@echo ... src/Parser.i
 	@echo ... src/Parser.s
-	@echo ... src/naming.obj
-	@echo ... src/naming.i
-	@echo ... src/naming.s
 .PHONY : help
 
 
