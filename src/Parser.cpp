@@ -27,10 +27,6 @@ void Parser:: save_keyWords(string line){
     stringstream ss(line);
     while (ss >> line)
         keyWords.insert(line);
-
-    for (const auto& keyWord : keyWords){
-        cout << keyWord << nLINE;
-    }
 }
 
 void Parser:: save_puncs(const string& line){
@@ -38,9 +34,6 @@ void Parser:: save_puncs(const string& line){
         if (line.find(sym) != string::npos){
             puncs.insert(sym);
         }
-    }
-    for (auto keyWord : puncs){
-        cout << keyWord << nLINE;
     }
 }
 
@@ -51,8 +44,6 @@ void Parser:: save_RE (const string& line , int sep_indx){
     expr.erase(remove(expr.begin(), expr.end(), ' '), expr.end());
 
     REs[name] = expr;
-    for (const auto& pr : REs)
-        cout << pr.fp << SPACE << SPACE << pr.sp << nLINE;
 }
 
 void Parser:: save_RD (const string& line , int sep_indx){
@@ -63,8 +54,7 @@ void Parser:: save_RD (const string& line , int sep_indx){
 
     RDKeys.push_back(name);
     RDs[name] = expr;
-    for (const auto& pr : RDs)
-        cout << pr.fp << SPACE << SPACE << pr.sp << nLINE;
+
 }
 
 void Parser:: parse_Line(string line){
@@ -97,18 +87,48 @@ void Parser:: parse_Line(string line){
     cout << "NON-VALID RULE" << nLINE;
 }
 
-void Parser:: parse(){
+map<string, vector<string>> Parser:: parse() {
     read_file();
-    for(const auto& line : RULES_SET){
+    for (const auto &line : RULES_SET) {
         cout << line << nLINE;
         parse_Line(line);
-        cout << SEPARATOR;cout << SEPARATOR;cout << SEPARATOR;
+        cout << nLINE;
     }
-    cout << SEPARATOR;cout << SEPARATOR;cout << SEPARATOR;
-    vector<string> h = divide_RE("digit+|digit+.digits(\\L|Edigits)");
-    cout << SEPARATOR;cout << SEPARATOR;cout << SEPARATOR;
-    to_postfix(h);
-    cout << SEPARATOR;cout << SEPARATOR;cout << SEPARATOR;
+    cout << "READ DONE AND MAIN PARSING DONE" << nLINE;
+    cout << "Regular Definitions\n" << SEPARATOR;
+    for (const auto& pr : RDs)
+        cout << pr.fp << SPACE << SPACE << pr.sp << nLINE;
+    cout << SEPARATOR;
+    cout << "Regular Expressions\n" << SEPARATOR;
+    for (const auto& pr : REs)
+        cout << pr.fp << SPACE << SPACE << pr.sp << nLINE;
+    cout << SEPARATOR;
+    cout << "Keywords\n" << SEPARATOR;
+    for (auto keyWord : keyWords)
+        cout << keyWord << nLINE;
+    cout << SEPARATOR;
+    cout << "Symbols\n" << SEPARATOR;
+    for (auto punc : puncs)
+        cout << punc << nLINE;
+    cout << SEPARATOR;
+
+    cout << SEPARATOR;
+    cout << SEPARATOR;
+    cout << SEPARATOR;
+
+    for (auto regExpr : REs) {
+        vector<string> h = divide_RE(regExpr.sp);
+        cout << regExpr.fp << nLINE;
+        h = to_postfix(h);
+        for (auto hh : h) {
+            cout << hh << nLINE;
+        }
+        postfixREs[regExpr.fp] = h;
+    }
+    cout << SEPARATOR;
+    cout << SEPARATOR;
+    cout << SEPARATOR;
+    return postfixREs;
 }
 
 bool Parser:: sort_by_length(const string& s1, const string& s2){
@@ -142,7 +162,6 @@ vector<string> Parser:: divide_RE (string re){
                 s += re[i];
             }
         }
-        cout << s << nLINE;
         if (!expressionTokens.empty() &&
             expressionTokens[expressionTokens.size()-1] != "|" &&
             expressionTokens[expressionTokens.size()-1] != "-" &&
@@ -154,10 +173,6 @@ vector<string> Parser:: divide_RE (string re){
 
         expressionTokens.push_back(s);
     }
-    for (const auto& token : expressionTokens) {
-        cout << token << nLINE;
-    }
-
     return expressionTokens;
 }
 
@@ -167,7 +182,6 @@ vector<string> Parser:: to_postfix(const vector<string>& exprVec){
     vector<string> postfix;
 
     for(const auto& it : exprVec) {
-        cout << it << nLINE;
         if(RE_SYMPOLS.find(it) == RE_SYMPOLS.end())
             postfix.push_back(it);
         else if (it == "(")
@@ -180,11 +194,9 @@ vector<string> Parser:: to_postfix(const vector<string>& exprVec){
             stk.pop();          //remove the '(' from stack
         }
         else {
-            cout << "STCK TOP" << stk.top() << "OTH" << it << nLINE;
             if(PRECEDENCE[it] > PRECEDENCE[stk.top()])
                 stk.push(it);
             else {
-                cout << "HERE" << nLINE;
                 while(stk.top() != "#" && PRECEDENCE[it] <= PRECEDENCE[stk.top()]) {
                     postfix.push_back(stk.top());
                     stk.pop();
@@ -196,10 +208,6 @@ vector<string> Parser:: to_postfix(const vector<string>& exprVec){
     while(stk.top() != "#") {
         postfix.push_back(stk.top());
         stk.pop();
-    }
-    cout << "OUTPUT" << nLINE;
-    for (const auto& po : postfix) {
-        cout << po << nLINE;
     }
     return postfix;
 }

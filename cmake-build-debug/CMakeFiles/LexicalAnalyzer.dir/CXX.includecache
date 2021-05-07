@@ -6,33 +6,13 @@
 
 #IncludeRegexTransform: 
 
-D:/LexicalAnalyzer/include/Edge.h
-iostream
--
+D:/LexicalAnalyzer/include/Parser.h
 bits/stdc++.h
 -
-Node.h
-D:/LexicalAnalyzer/include/Node.h
-
-D:/LexicalAnalyzer/include/GLOBAL.h
-bits/stdc++.h
+regex
 -
 
-D:/LexicalAnalyzer/include/NFA.h
-../include/Node.h
-D:/LexicalAnalyzer/include/Node.h
-../include/Edge.h
-D:/LexicalAnalyzer/include/Edge.h
-../include/GLOBAL.h
-D:/LexicalAnalyzer/include/GLOBAL.h
-
-D:/LexicalAnalyzer/include/Node.h
-iostream
--
-bits/stdc++.h
--
-
-D:/LexicalAnalyzer/src/NFA.cpp
-../include/NFA.h
-D:/LexicalAnalyzer/include/NFA.h
+D:/LexicalAnalyzer/src/Parser.cpp
+../include/Parser.h
+D:/LexicalAnalyzer/include/Parser.h
 

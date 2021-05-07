@@ -30,7 +30,7 @@ public:
 protected:
 
 private:
-    GLOBAL global;
+    GLOBAL *global = global->getInstance();
     Node* startNode;
     Node* endNode;
 };

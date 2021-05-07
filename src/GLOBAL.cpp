@@ -4,6 +4,14 @@
 
 #include "../include/GLOBAL.h"
 
+static GLOBAL* instance;
+
+GLOBAL* GLOBAL::getInstance() {
+    if (!instance)
+        instance = new GLOBAL;
+    return instance;
+}
+
 int GLOBAL::getNumNow() {
     return num;
 }
@@ -11,3 +19,4 @@ int GLOBAL::getNumNow() {
 int GLOBAL::getNum() {
     return num++;
 }
+
