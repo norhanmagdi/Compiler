@@ -105,13 +105,13 @@ map<string, vector<string>> Parser:: parse() {
     cout << SEPARATOR;
     cout << "Keywords\n" << SEPARATOR;
     for (auto keyWord : keyWords)
-        cout << keyWord << nLINE;
+        cout << keyWord << SPACE;
     cout << SEPARATOR;
     cout << "Symbols\n" << SEPARATOR;
     for (auto punc : puncs)
-        cout << punc << nLINE;
-    cout << SEPARATOR;
+        cout << punc << SPACE;
 
+    cout << nLINE << SEPARATOR;
     cout << SEPARATOR;
     cout << SEPARATOR;
     cout << SEPARATOR;
@@ -121,8 +121,9 @@ map<string, vector<string>> Parser:: parse() {
         cout << regExpr.fp << nLINE;
         h = to_postfix(h);
         for (auto hh : h) {
-            cout << hh << nLINE;
+            cout << hh << SPACE;
         }
+        cout << nLINE;
         postfixREs[regExpr.fp] = h;
     }
     cout << SEPARATOR;

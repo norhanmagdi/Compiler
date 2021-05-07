@@ -20,7 +20,7 @@ class Parser
 {
 public:
     Parser() {}
-    const set<string> RE_SYMPOLS = { "-" ,"|" ,"+" ,"*" ,"(" ,")","$"};
+    const set<string> RE_SYMPOLS = { "|" ,"+" ,"*" ,"(" ,")","$"};
     map<string, vector<string>> parse();
 
 protected:

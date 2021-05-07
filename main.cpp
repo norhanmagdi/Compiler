@@ -19,10 +19,10 @@
 int main() {
     Parser pars;
     map<string, vector<string>> REs = pars.parse();
-    cout << REs.size() << nLINE;
     for (auto postfixExpr : REs) {
         stack<NFA *> stck;
         vector<string> postfix = postfixExpr.sp;
+        cout << postfixExpr.fp << nLINE;
         for (auto token : postfix) {
             cout << token << nLINE;
             if (pars.RE_SYMPOLS.find(token) == pars.RE_SYMPOLS.end()) {
