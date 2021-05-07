@@ -3,6 +3,8 @@
 
 #include "../include/Node.h"
 #include "../include/Edge.h"
+#include "../include/GLOBAL.h"
+
 class Node;
 class Edge;
 class NFA
@@ -28,6 +30,7 @@ public:
 protected:
 
 private:
+    GLOBAL *global = global->getInstance();
     Node* startNode;
     Node* endNode;
 };

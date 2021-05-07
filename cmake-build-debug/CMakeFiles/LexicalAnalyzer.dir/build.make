@@ -140,18 +140,18 @@ CMakeFiles/LexicalAnalyzer.dir/src/Edge.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LexicalAnalyzer.dir/src/Edge.cpp.s"
 	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\LexicalAnalyzer\src\Edge.cpp -o CMakeFiles\LexicalAnalyzer.dir\src\Edge.cpp.s
 
-CMakeFiles/LexicalAnalyzer.dir/src/naming.cpp.obj: CMakeFiles/LexicalAnalyzer.dir/flags.make
-CMakeFiles/LexicalAnalyzer.dir/src/naming.cpp.obj: ../src/naming.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\LexicalAnalyzer\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/LexicalAnalyzer.dir/src/naming.cpp.obj"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\LexicalAnalyzer.dir\src\naming.cpp.obj -c D:\LexicalAnalyzer\src\naming.cpp
+CMakeFiles/LexicalAnalyzer.dir/src/GLOBAL.cpp.obj: CMakeFiles/LexicalAnalyzer.dir/flags.make
+CMakeFiles/LexicalAnalyzer.dir/src/GLOBAL.cpp.obj: ../src/GLOBAL.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\LexicalAnalyzer\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/LexicalAnalyzer.dir/src/GLOBAL.cpp.obj"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\LexicalAnalyzer.dir\src\GLOBAL.cpp.obj -c D:\LexicalAnalyzer\src\GLOBAL.cpp
 
-CMakeFiles/LexicalAnalyzer.dir/src/naming.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LexicalAnalyzer.dir/src/naming.cpp.i"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\LexicalAnalyzer\src\naming.cpp > CMakeFiles\LexicalAnalyzer.dir\src\naming.cpp.i
+CMakeFiles/LexicalAnalyzer.dir/src/GLOBAL.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LexicalAnalyzer.dir/src/GLOBAL.cpp.i"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\LexicalAnalyzer\src\GLOBAL.cpp > CMakeFiles\LexicalAnalyzer.dir\src\GLOBAL.cpp.i
 
-CMakeFiles/LexicalAnalyzer.dir/src/naming.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LexicalAnalyzer.dir/src/naming.cpp.s"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\LexicalAnalyzer\src\naming.cpp -o CMakeFiles\LexicalAnalyzer.dir\src\naming.cpp.s
+CMakeFiles/LexicalAnalyzer.dir/src/GLOBAL.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LexicalAnalyzer.dir/src/GLOBAL.cpp.s"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\LexicalAnalyzer\src\GLOBAL.cpp -o CMakeFiles\LexicalAnalyzer.dir\src\GLOBAL.cpp.s
 
 # Object files for target LexicalAnalyzer
 LexicalAnalyzer_OBJECTS = \
@@ -160,7 +160,7 @@ LexicalAnalyzer_OBJECTS = \
 "CMakeFiles/LexicalAnalyzer.dir/src/NFA.cpp.obj" \
 "CMakeFiles/LexicalAnalyzer.dir/src/Node.cpp.obj" \
 "CMakeFiles/LexicalAnalyzer.dir/src/Edge.cpp.obj" \
-"CMakeFiles/LexicalAnalyzer.dir/src/naming.cpp.obj"
+"CMakeFiles/LexicalAnalyzer.dir/src/GLOBAL.cpp.obj"
 
 # External object files for target LexicalAnalyzer
 LexicalAnalyzer_EXTERNAL_OBJECTS =
@@ -170,7 +170,7 @@ LexicalAnalyzer.exe: CMakeFiles/LexicalAnalyzer.dir/src/Parser.cpp.obj
 LexicalAnalyzer.exe: CMakeFiles/LexicalAnalyzer.dir/src/NFA.cpp.obj
 LexicalAnalyzer.exe: CMakeFiles/LexicalAnalyzer.dir/src/Node.cpp.obj
 LexicalAnalyzer.exe: CMakeFiles/LexicalAnalyzer.dir/src/Edge.cpp.obj
-LexicalAnalyzer.exe: CMakeFiles/LexicalAnalyzer.dir/src/naming.cpp.obj
+LexicalAnalyzer.exe: CMakeFiles/LexicalAnalyzer.dir/src/GLOBAL.cpp.obj
 LexicalAnalyzer.exe: CMakeFiles/LexicalAnalyzer.dir/build.make
 LexicalAnalyzer.exe: CMakeFiles/LexicalAnalyzer.dir/linklibs.rsp
 LexicalAnalyzer.exe: CMakeFiles/LexicalAnalyzer.dir/objects1.rsp

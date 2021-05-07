@@ -20,9 +20,8 @@ class Parser
 {
 public:
     Parser() {}
-    const set<string> RE_SYMPOLS = { "-" ,"|" ,"+" ,"*" ,"(" ,")","$"};
-    vector<string> to_postfix(const vector<string>& exprVec);
-    void parse();
+    const set<string> RE_SYMPOLS = { "|" ,"+" ,"*" ,"(" ,")","$"};
+    map<string, vector<string>> parse();
 
 protected:
 
@@ -38,11 +37,13 @@ private:
 
     void read_file();
     void parse_Line(string line);
-    static void save_keyWords(string line);
     void save_puncs(const string& line);
     vector<string> divide_RE (string re);
+    map<string, vector<string>> postfixREs;
+    static void save_keyWords(string line);
     static void save_RE (const string& line , int sep_indx);
     static void save_RD (const string& line , int sep_indx);
+    vector<string> to_postfix(const vector<string>& exprVec);
     static bool sort_by_length(const string& s1, const string& s2);
 };
 

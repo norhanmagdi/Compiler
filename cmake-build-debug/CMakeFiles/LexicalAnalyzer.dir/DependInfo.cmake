@@ -6,10 +6,10 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "D:/LexicalAnalyzer/main.cpp" "D:/LexicalAnalyzer/cmake-build-debug/CMakeFiles/LexicalAnalyzer.dir/main.cpp.obj"
   "D:/LexicalAnalyzer/src/Edge.cpp" "D:/LexicalAnalyzer/cmake-build-debug/CMakeFiles/LexicalAnalyzer.dir/src/Edge.cpp.obj"
+  "D:/LexicalAnalyzer/src/GLOBAL.cpp" "D:/LexicalAnalyzer/cmake-build-debug/CMakeFiles/LexicalAnalyzer.dir/src/GLOBAL.cpp.obj"
   "D:/LexicalAnalyzer/src/NFA.cpp" "D:/LexicalAnalyzer/cmake-build-debug/CMakeFiles/LexicalAnalyzer.dir/src/NFA.cpp.obj"
   "D:/LexicalAnalyzer/src/Node.cpp" "D:/LexicalAnalyzer/cmake-build-debug/CMakeFiles/LexicalAnalyzer.dir/src/Node.cpp.obj"
   "D:/LexicalAnalyzer/src/Parser.cpp" "D:/LexicalAnalyzer/cmake-build-debug/CMakeFiles/LexicalAnalyzer.dir/src/Parser.cpp.obj"
-  "D:/LexicalAnalyzer/src/naming.cpp" "D:/LexicalAnalyzer/cmake-build-debug/CMakeFiles/LexicalAnalyzer.dir/src/naming.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

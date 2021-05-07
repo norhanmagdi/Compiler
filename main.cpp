@@ -18,31 +18,37 @@
 
 int main() {
     Parser pars;
-//    pars.parse();
-    stack<NFA*> stck;
-    vector<string> postfix = {"digit","digit","|"};
-    // Scan all characters one by one
-    for (auto token : postfix) {
-        if (pars.RE_SYMPOLS.find(token) == pars.RE_SYMPOLS.end()) {
-            stck.push(new NFA ("SINGLE", token));
-            continue;
-        }
+    map<string, vector<string>> REs = pars.parse();
+    for (auto postfixExpr : REs) {
+        stack<NFA *> stck;
+        vector<string> postfix = postfixExpr.sp;
+        cout << postfixExpr.fp << nLINE;
+        for (auto token : postfix) {
+            cout << token << nLINE;
+            if (pars.RE_SYMPOLS.find(token) == pars.RE_SYMPOLS.end()) {
+                stck.push(new NFA("SINGLE", token));
+                continue;
+            }
 
-        NFA* val1 = stck.top();
-        stck.pop();
-        if (token == "+")
-            stck.push(new NFA("PCLOSURE", val1));
-        else if (token == "*")
-            stck.push(new NFA("CClosure", val1));
-        else {
-            NFA* val2 = stck.top();
+            NFA *val1 = stck.top();
             stck.pop();
-            if (token == "$")
-                stck.push(new NFA ("AND", val1, val2));
-            if (token == "|")
-                stck.push(new NFA ("OR", val1, val2));
+            if (token == "+")
+                stck.push(new NFA("PCLOSURE", val1));
+            else if (token == "*")
+                stck.push(new NFA("CClosure", val1));
+            else {
+                NFA *val2 = stck.top();
+                stck.pop();
+                if (token == "$")
+                    stck.push(new NFA("AND", val1, val2));
+                if (token == "|")
+                    stck.push(new NFA("OR", val1, val2));
+            }
         }
+        cout << postfixExpr.fp << nLINE << SEPARATOR;
+        (stck.top())->printNFA();
+        cout << SEPARATOR;
     }
-    (stck.top())->printNFA();
     return 0;
 }
+
