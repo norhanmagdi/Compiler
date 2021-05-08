@@ -10,7 +10,6 @@ using namespace std;
 
 class GLOBAL {
 private:
-    static const int MAX_NUM = 1000;
     GLOBAL() { num = 0;}
     virtual ~GLOBAL() {}
     int num;
@@ -19,6 +18,7 @@ protected:
 
 public:
     static GLOBAL* getInstance();
+    static const int MAX_NUM = 1000;
     int getNumNow();
     int getNum();
     string transitionTable[MAX_NUM][MAX_NUM];
