@@ -18,6 +18,8 @@ class Node
         void setEndState(bool acceptingState);
         void addEdge(Edge* edge);
        // string getDestination(char c);
+        string getTokenName();
+        void setTokenName(string tokenName);
         vector<Edge*> getAllEdges();
         void setPriority(int priority);
         int getPriority();
@@ -29,6 +31,7 @@ class Node
         vector<Edge*>edges;
         int nodeName;
         bool endState;
+        string tokenName;
         int priority;
 
 };

@@ -1,12 +1,12 @@
 #include "../include/DFA.h"
 
-DFA::DFA (Node *startNode, vector <Node*> *endNode) {
+DFA::DFA (Node *startNode, vector <Node*> endNode) {
     this->startNode = startNode;
     this->endNode = endNode;
 }
 
 DFA::DFA (NFA *nfa) {
-    subsetConstruction(nfa.getStart(), nfa.getEnd());
+    subsetConstruction(nfa->getStart(), nfa->getEnd());
 }
 
 DFA::~DFA()
@@ -18,26 +18,66 @@ Node *DFA::getStart(){
     return startNode;
 }
 
-vector<Node*> *DFA::getEnd(){
+vector<Node*> DFA::getEnd(){
     return endNode;
 }
 
 DFA *DFA::subsetConstruction(Node* start, Node *finish) {
     vector<Node*> s0;
     s0.push_back(start);
-    vector<Node*> T = EPSClosure(s0);
-    DState startDState;
+    vector<Node*> T = EPSClosure(s0);  // Kda a5adt l start w kol ell epsilon transitions mnha
+    startDState = new DState;
     startDState->marked = false;
     startDState->DNode = new Node (global->getNum() ,false);
-    startDState->NNodes = T;
+    startDState->NNodes = T; // Deh hya l node osadha kol l EPS closure bta3ha
     startNode = startDState->DNode;
-    vector<DState> DStates;
+    vector<DState*> DStates;
     DStates.push_back(startDState);
-    while (AnyStateUnmarked(DStates)) {
-
+    DState* unMarked = AnyStateUnmarked(DStates);
+    while (unMarked != nullptr) {
+        unMarked->marked = true;
+        for (const auto& input : global->inputSymbols) {
+            vector<Node*> U = EPSClosure(move(unMarked, input));
+            DState* dd = find(U, DStates);
+            if (dd == nullptr) {
+                auto *d = new DState;
+                d->marked = false;
+                d->NNodes = U;
+                bool isEnd = false;
+                for (auto nde : U) {
+                    if (nde->isEndState()){
+                        isEnd = true;
+                        break;
+                    }
+                }
+                d->DNode = new Node (global->getNum() ,false);
+                d->DNode->setEndState(true);
+                DStates.push_back(d);
+                unMarked->DNode->addEdge(new Edge (d->DNode, input));
+            }
+            else
+                unMarked->DNode->addEdge(new Edge (dd->DNode, input));
+        }
         //TO BE CONTINUED ...
 
     }
+    return this;
+}
+
+DFA::DState* DFA::find (vector<Node*> U, const vector<DState*>& DStates){
+    sort (U.begin(), U.end());
+    for (auto state : DStates) {
+        sort (state->NNodes.begin(), state->NNodes.end());
+        if (state->NNodes == U) {
+            return state;
+        }
+    }
+    return nullptr;
+}
+
+vector<Node*> DFA::move (DState* s, string input){
+    vector<Node*> V;
+    return V;
 }
 
 vector<Node*> DFA::EPSClosure(vector<Node*> states) {
@@ -50,15 +90,15 @@ vector<Node*> DFA::EPSClosure(vector<Node*> states) {
     while (! (DStack.empty()) ) {
         Node* state = DStack.top();
         DStack.pop();
-        vector<Edge*> edges = state.getAllEdges();
+        vector<Edge*> edges = state->getAllEdges();
         for (auto edge : edges) {
-            Node* destination = edge.getCondition();
-            if (destination == EPS) {
+            Node* destination = edge->getDestination();
+            if (edge->getCondition() == EPS) {
                 for (auto node : closure) {
                     if (node == destination) {
                         break;
                     }
-                    if (node == closure.end()) {
+                    if (node == closure.back()) {
                         closure.push_back(destination);
                         DStack.push(destination);
                     }
@@ -70,12 +110,12 @@ vector<Node*> DFA::EPSClosure(vector<Node*> states) {
     return closure;
 }
 
-bool DFA::AnyStateUnmarked(vector<DState> DStates) {
+DFA::DState* DFA::AnyStateUnmarked(const vector<DState*>& DStates) {
     for (auto DState:DStates) {
         if (DState->marked == false) {
             DState->marked = true;
-            return true;
+            return DState;
         }
     }
-    return false;
+    return nullptr;
 }

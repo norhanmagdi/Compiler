@@ -1,23 +1,32 @@
 #include "../include/NFA.h"
 
+#include <utility>
+
 NFA::NFA (Node *startNode, Node *endNode) {
     this->startNode = startNode;
     this->endNode = endNode;
 }
-NFA::NFA (string operation, string condition) {
-    createAutomata(condition);
+NFA::NFA (const string& operation, string condition) {
+    createAutomata(std::move(condition));
 }
-NFA::NFA (string operation, NFA* a1) {
+NFA::NFA (const string& operation, NFA* a1) {
     if (operation == "PCLOSURE")
         PCLOSUREautomata(a1);
     if (operation == "CClosure")
         CLOSUREautomata(a1);
 }
-NFA::NFA (string operation, NFA* a1, NFA* a2) {
+NFA::NFA (const string& operation, NFA* a1, NFA* a2) {
     if (operation == "OR")
         ORautomata(a1, a2);
     if (operation == "AND")
         ANDautomata(a1, a2);
+}
+NFA::NFA (const string& operation, string s1, string s2) {
+    RANGEautomata(s1, s2);
+}
+
+NFA::NFA (vector<NFA*> to_be_merged){
+    mergingNFAs(std::move(to_be_merged));
 }
 
 NFA::~NFA()
@@ -80,6 +89,22 @@ NFA *NFA::CLOSUREautomata(NFA* a){
     return this;
 }
 
+NFA* NFA::mergingNFAs (vector<NFA*> to_be_merged) {
+    startNode = new Node(global->getNum() ,false);
+    for (auto RE : to_be_merged) {
+        startNode->addEdge(new Edge(RE->getStart(), EPS));
+        global->transitionTable[startNode->getName()][RE->getStart()->getName()] = EPS;
+    }
+    return this;
+}
+
+void NFA::setTokenName(string tokenName) {
+    endNode->setTokenName(tokenName);
+}
+string NFA::getTokenName() {
+    return endNode->getTokenName();
+}
+
 void NFA::printNFA () {
     int numOfNodes = global->getNumNow();
     for (int i = 0; i < numOfNodes; ++i) {
@@ -94,4 +119,16 @@ void NFA::printNFA () {
         cout << '\n';
     }
 }
+
+NFA *NFA::RANGEautomata(string a1, string a2) {
+    vector<NFA*> tb_merged;
+    for (char A = a1.at(0); A <= a2.at(0); ++A) {
+        std::string s(1, A);
+        NFA* TEMP = new NFA ("SINGLE", s);
+        TEMP->setTokenName(s);
+        tb_merged.push_back(TEMP);
+    }
+    return mergingNFAs(tb_merged);
+}
+
 

@@ -92,12 +92,12 @@ clean: CMakeFiles/LexicalAnalyzer.dir/clean
 CMakeFiles/LexicalAnalyzer.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\LexicalAnalyzer\cmake-build-debug\CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target LexicalAnalyzer"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\LexicalAnalyzer\cmake-build-debug\CMakeFiles --progress-num=1,2,3,4,5,6,7,8 "Built target LexicalAnalyzer"
 .PHONY : CMakeFiles/LexicalAnalyzer.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/LexicalAnalyzer.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\LexicalAnalyzer\cmake-build-debug\CMakeFiles 7
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\LexicalAnalyzer\cmake-build-debug\CMakeFiles 8
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/LexicalAnalyzer.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start D:\LexicalAnalyzer\cmake-build-debug\CMakeFiles 0
 .PHONY : CMakeFiles/LexicalAnalyzer.dir/rule

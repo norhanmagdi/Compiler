@@ -21,6 +21,7 @@ public:
     static const int MAX_NUM = 1000;
     int getNumNow();
     int getNum();
+    vector<string> inputSymbols;
     string transitionTable[MAX_NUM][MAX_NUM];
 };
 

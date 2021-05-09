@@ -7,11 +7,11 @@
 using namespace std;
 
 vector<string> RULES_SET;
-set<string> keyWords;
 set<char> puncs;
 map<string ,string> REs;
 map<string ,string> RDs;
 vector<string> RDKeys;
+set<string> keyWords;
 
 void Parser:: read_file(){
     freopen(RULES_FILE, "r", stdin);
@@ -51,6 +51,7 @@ void Parser:: save_RD (const string& line , int sep_indx){
     string expr = line.substr(sep_indx + 1, string::npos);
     name.erase(remove(name.begin(), name.end(), ' '), name.end());
     expr.erase(remove(expr.begin(), expr.end(), ' '), expr.end());
+    replace( expr.begin(), expr.end(), '-', '^' );
 
     RDKeys.push_back(name);
     RDs[name] = expr;
@@ -98,6 +99,7 @@ map<string, vector<string>> Parser:: parse() {
     cout << "Regular Definitions\n" << SEPARATOR;
     for (const auto& pr : RDs)
         cout << pr.fp << SPACE << SPACE << pr.sp << nLINE;
+    sort(RDKeys.begin(), RDKeys.end(), sort_by_length); // Sorting for dividing NOTE : (DIGIT VS DIGITS)
     cout << SEPARATOR;
     cout << "Regular Expressions\n" << SEPARATOR;
     for (const auto& pr : REs)
@@ -116,15 +118,28 @@ map<string, vector<string>> Parser:: parse() {
     cout << SEPARATOR;
     cout << SEPARATOR;
 
-    for (auto regExpr : REs) {
+
+    cout << "FOR EXPRESSIONS" << nLINE;
+    for (const auto& regExpr : REs) {
         vector<string> h = divide_RE(regExpr.sp);
         cout << regExpr.fp << nLINE;
         h = to_postfix(h);
-        for (auto hh : h) {
+        for (const auto& hh : h) {
             cout << hh << SPACE;
         }
         cout << nLINE;
         postfixREs[regExpr.fp] = h;
+    }
+    cout << "FOR DEFINITIONS" << nLINE;
+    for (const auto& regDef : RDs) {
+        vector<string> h = divide_RE(regDef.sp);
+        cout << regDef.fp << nLINE;
+        h = to_postfix(h);
+        for (const auto& hh : h) {
+            cout << hh << SPACE;
+        }
+        cout << nLINE;
+        postfixRDs[regDef.fp] = h;
     }
     cout << SEPARATOR;
     cout << SEPARATOR;
@@ -140,7 +155,6 @@ vector<string> Parser:: divide_RE (string re){
     vector<string> expressionTokens;
     vector<string> expression(re.size());
 
-    sort(RDKeys.begin(), RDKeys.end(), sort_by_length);
     for(const auto& def : RDKeys){
         std::size_t found = re.find(def);
         while (found != string::npos){
@@ -165,7 +179,7 @@ vector<string> Parser:: divide_RE (string re){
         }
         if (!expressionTokens.empty() &&
             expressionTokens[expressionTokens.size()-1] != "|" &&
-            expressionTokens[expressionTokens.size()-1] != "-" &&
+            expressionTokens[expressionTokens.size()-1] != "^" &&
             expressionTokens[expressionTokens.size()-1] != ")" &&
             expressionTokens[expressionTokens.size()-1] != "(" &&
             RE_SYMPOLS.find(s) == RE_SYMPOLS.end())

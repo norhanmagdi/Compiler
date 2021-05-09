@@ -12,24 +12,30 @@ class NFA;
 class DFA
 {
 public:
-    DFA (Node *startNode, Node *endNode);
+    DFA (Node *startNode, vector <Node*> endNode);
     DFA (NFA *nfa);
-    DFA();
+    DFA () {};
 
     virtual ~DFA();
     Node *getStart();
-    Node *getEnd();
+    vector<Node*> getEnd();
     struct DState {
         Node* DNode;
         bool marked;
-        vector<Node *> NNodes:
+        vector<Node *> NNodes;
     };
 
 protected:
 
 private:
     GLOBAL *global = global->getInstance();
+    DFA* subsetConstruction(Node* start, Node *finish);
+    vector<Node*> EPSClosure(vector<Node*> states);
     Node* startNode;
+    DState* startDState;
+    DState* AnyStateUnmarked(const vector<DState*>& DStates);
+    static DState* find (vector<Node*> U, const vector<DState*>& DStates);
+    vector<Node*> move (DState* s, string input);
     vector<Node*> endNode;
 };
 

@@ -168,6 +168,33 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+src/DFA.obj: src/DFA.cpp.obj
+
+.PHONY : src/DFA.obj
+
+# target to build an object file
+src/DFA.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/DFA.cpp.obj
+.PHONY : src/DFA.cpp.obj
+
+src/DFA.i: src/DFA.cpp.i
+
+.PHONY : src/DFA.i
+
+# target to preprocess a source file
+src/DFA.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/DFA.cpp.i
+.PHONY : src/DFA.cpp.i
+
+src/DFA.s: src/DFA.cpp.s
+
+.PHONY : src/DFA.s
+
+# target to generate assembly for a file
+src/DFA.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/DFA.cpp.s
+.PHONY : src/DFA.cpp.s
+
 src/Edge.obj: src/Edge.cpp.obj
 
 .PHONY : src/Edge.obj
@@ -315,6 +342,9 @@ help:
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... src/DFA.obj
+	@echo ... src/DFA.i
+	@echo ... src/DFA.s
 	@echo ... src/Edge.obj
 	@echo ... src/Edge.i
 	@echo ... src/Edge.s
