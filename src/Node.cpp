@@ -35,3 +35,10 @@ void Node::setPriority(int priority){
 int Node::getPriority(){
     return priority;
 }
+
+string Node::getTokenName() {
+    return tokenName;
+}
+void Node::setTokenName(string tokenName) {
+    Node::tokenName = tokenName;
+}

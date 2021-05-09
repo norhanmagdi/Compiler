@@ -19,8 +19,8 @@ using namespace std;
 class Parser
 {
 public:
-    Parser() {}
-    const set<string> RE_SYMPOLS = { "|" ,"+" ,"*" ,"(" ,")","$"};
+    Parser() {};
+    const set<string> RE_SYMPOLS = { "^" ,"|" ,"+" ,"*" ,"(" ,")","$"}; /* Where $ : equivilant to AND , ^ is equivilant to - */
     map<string, vector<string>> parse();
 
 protected:
@@ -28,10 +28,11 @@ protected:
 private:
     const char* RULES_FILE = "rules.in";
     const set<char> MAIN_PUNCS = { '{' ,'}' ,',' ,';' ,'(' ,')'};
-    map<string , int>PRECEDENCE = {{"|", 2},
+    map<string , int>PRECEDENCE = {{"^", 4},
+                                   {"|", 2},
                                    {"$", 3},
-                                   {"+", 4},
-                                   {"*", 5},
+                                   {"+", 5},
+                                   {"*", 6},
                                    {"(", 0},
                                    {")", 0}};
 
@@ -40,6 +41,7 @@ private:
     void save_puncs(const string& line);
     vector<string> divide_RE (string re);
     map<string, vector<string>> postfixREs;
+    map<string, vector<string>> postfixRDs;
     static void save_keyWords(string line);
     static void save_RE (const string& line , int sep_indx);
     static void save_RD (const string& line , int sep_indx);

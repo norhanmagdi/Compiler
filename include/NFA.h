@@ -10,17 +10,22 @@ class Edge;
 class NFA
 {
 public:
-    NFA(Node *startNode, Node *endNode);
-    NFA ();
-    NFA (string operation, NFA* a1);
-    NFA (string operation, NFA* a1, NFA* a2);
-    NFA (string operation, string condition);
+    NFA (Node *startNode, Node *endNode);
+    NFA (vector<NFA*> to_be_merged);
+    NFA (const string& operation, NFA* a1);
+    NFA (const string& operation, NFA* a1, NFA* a2);
+    NFA (const string& operation, string condition);
+    NFA (const string& operation, string s1, string s2);
 
     virtual ~NFA();
     void printNFA ();
     int numOfStates;
+    NFA* mergingNFAs (vector<NFA*> to_be_merged);
     Node *getStart();
     Node *getEnd();
+    void setTokenName(string tokenName);
+    string getTokenName();
+    NFA* RANGEautomata(string a1, string a2);
     NFA* createAutomata(string condition);
     NFA* ORautomata(NFA* a1, NFA* a2);
     NFA* ANDautomata(NFA* a1, NFA* a2);
@@ -31,6 +36,7 @@ protected:
 
 private:
     GLOBAL *global = global->getInstance();
+    string tokenName;
     Node* startNode;
     Node* endNode;
 };
