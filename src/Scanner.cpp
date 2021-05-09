@@ -1,4 +1,4 @@
-#include "Scanner.h"
+#include "../include/Scanner.h"
 
 Scanner::Scanner()
 {

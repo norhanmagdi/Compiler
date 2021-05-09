@@ -35,7 +35,7 @@ private:
     DState* startDState;
     DState* AnyStateUnmarked(const vector<DState*>& DStates);
     static DState* find (vector<Node*> U, const vector<DState*>& DStates);
-    vector<Node*> move (DState* s, string input);
+    vector<Node*> move (vector<Node*> T, string input);
     vector<Node*> endNode;
 };
 

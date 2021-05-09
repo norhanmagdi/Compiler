@@ -37,7 +37,7 @@ DFA *DFA::subsetConstruction(Node* start, Node *finish) {
     while (unMarked != nullptr) {
         unMarked->marked = true;
         for (const auto& input : global->inputSymbols) {
-            vector<Node*> U = EPSClosure(move(unMarked, input));
+            vector<Node*> U = EPSClosure(move(unMarked->NNodes, input));
             DState* dd = find(U, DStates);
             if (dd == nullptr) {
                 auto *d = new DState;
@@ -51,7 +51,7 @@ DFA *DFA::subsetConstruction(Node* start, Node *finish) {
                     }
                 }
                 d->DNode = new Node (global->getNum() ,false);
-                d->DNode->setEndState(true);
+                d->DNode->setEndState(isEnd);
                 DStates.push_back(d);
                 unMarked->DNode->addEdge(new Edge (d->DNode, input));
             }
@@ -65,9 +65,7 @@ DFA *DFA::subsetConstruction(Node* start, Node *finish) {
 }
 
 DFA::DState* DFA::find (vector<Node*> U, const vector<DState*>& DStates){
-    sort (U.begin(), U.end());
     for (auto state : DStates) {
-        sort (state->NNodes.begin(), state->NNodes.end());
         if (state->NNodes == U) {
             return state;
         }
@@ -75,9 +73,25 @@ DFA::DState* DFA::find (vector<Node*> U, const vector<DState*>& DStates){
     return nullptr;
 }
 
-vector<Node*> DFA::move (DState* s, string input){
-    vector<Node*> V;
-    return V;
+vector<Node*> DFA::move (vector<Node*> T, string a){
+    vector<Node*> ans;
+    for (auto node : T) {
+        vector<Edge*> edges = node->getAllEdges();
+        for (auto edge : edges) {
+            if (edge->getCondition() == a) {
+                Node* dest = edge->getDestination();
+                for (auto n : ans) {
+                    if (n == dest) {
+                        break;
+                    }
+                    if (n == ans.back()) {
+                        ans.push_back(dest);
+                    }
+                }
+            }
+        }
+    }
+    return ans;
 }
 
 vector<Node*> DFA::EPSClosure(vector<Node*> states) {
@@ -92,15 +106,15 @@ vector<Node*> DFA::EPSClosure(vector<Node*> states) {
         DStack.pop();
         vector<Edge*> edges = state->getAllEdges();
         for (auto edge : edges) {
-            Node* destination = edge->getDestination();
+            Node* dest = edge->getDestination();
             if (edge->getCondition() == EPS) {
                 for (auto node : closure) {
-                    if (node == destination) {
+                    if (node == dest) {
                         break;
                     }
                     if (node == closure.back()) {
-                        closure.push_back(destination);
-                        DStack.push(destination);
+                        closure.push_back(dest);
+                        DStack.push(dest);
                     }
                 }
             }
@@ -113,7 +127,6 @@ vector<Node*> DFA::EPSClosure(vector<Node*> states) {
 DFA::DState* DFA::AnyStateUnmarked(const vector<DState*>& DStates) {
     for (auto DState:DStates) {
         if (DState->marked == false) {
-            DState->marked = true;
             return DState;
         }
     }
