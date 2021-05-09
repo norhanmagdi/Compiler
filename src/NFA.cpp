@@ -63,10 +63,12 @@ NFA *NFA::ORautomata(NFA* a1, NFA* a2){
     return new NFA(startNode, endNode);
 }
 NFA *NFA::ANDautomata(NFA* a1, NFA* a2){
+    cout << "AND\n";
+    cout << a1->getStart()->getName() << " " << a2->getStart()->getName() << '\n';
     startNode = a1->getStart();
     endNode = a2->getEnd();
     global->transitionTable[a1->getEnd()->getName()][a2->getStart()->getName()] = EPS;
-    a1->getEnd()->setEndState(0);
+    a1->getEnd()->setEndState(false);
     a1->getEnd()->addEdge(new Edge(a2->getStart(), EPS));
     return new NFA(startNode, endNode);
 }

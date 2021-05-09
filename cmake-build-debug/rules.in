@@ -1,1 +1,1 @@
-letter : (a|b)*abb
+l:(a|b)*aab

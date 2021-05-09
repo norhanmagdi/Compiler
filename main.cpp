@@ -45,7 +45,7 @@ int main() {
                 NFA *val2 = stck.top();
                 stck.pop();
                 if (token == "$")
-                    stck.push(new NFA("AND", val1, val2));
+                    stck.push(new NFA("AND", val2, val1));
                 if (token == "|")
                     stck.push(new NFA("OR", val1, val2));
                 if (token == "^")
@@ -60,8 +60,6 @@ int main() {
     merged->printNFA();
     DFA* dfa = new DFA(merged);
     GLOBAL *global = global->getInstance();
-    cout << "JJJJJJJJJJJJ\n";
-    cout << global->getNumNow()<< nLINE;
     cout << SEPARATOR;
     int numOfNodes = global->getNumNow();
     for (int i = 0; i < numOfNodes; ++i) {
