@@ -89,6 +89,9 @@
 		<Unit filename="D:/LexicalAnalyzer/include/GLOBAL.h">
 			<Option target="LexicalAnalyzer"/>
 		</Unit>
+		<Unit filename="D:/LexicalAnalyzer/include/Minimizer.h">
+			<Option target="LexicalAnalyzer"/>
+		</Unit>
 		<Unit filename="D:/LexicalAnalyzer/include/NFA.h">
 			<Option target="LexicalAnalyzer"/>
 		</Unit>
@@ -108,6 +111,9 @@
 			<Option target="LexicalAnalyzer"/>
 		</Unit>
 		<Unit filename="D:/LexicalAnalyzer/src/GLOBAL.cpp">
+			<Option target="LexicalAnalyzer"/>
+		</Unit>
+		<Unit filename="D:/LexicalAnalyzer/src/Minimizer.cpp">
 			<Option target="LexicalAnalyzer"/>
 		</Unit>
 		<Unit filename="D:/LexicalAnalyzer/src/NFA.cpp">

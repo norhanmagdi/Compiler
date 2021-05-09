@@ -22,24 +22,26 @@ vector<Node*> DFA::getEnd(){
     return endNode;
 }
 
+DFA::DState *dNULL = new DFA::DState;
+
 DFA *DFA::subsetConstruction(Node* start, Node *finish) {
     vector<Node*> s0;
     s0.push_back(start);
-    vector<Node*> T = EPSClosure(s0);  // Kda a5adt l start w kol ell epsilon transitions mnha
+    vector<Node*> T = EPSClosure(s0);
     startDState = new DState;
     startDState->marked = false;
     startDState->DNode = new Node (global->getNum() ,false);
-    startDState->NNodes = T; // Deh hya l node osadha kol l EPS closure bta3ha
+    startDState->NNodes = T;
     startNode = startDState->DNode;
     vector<DState*> DStates;
     DStates.push_back(startDState);
     DState* unMarked = AnyStateUnmarked(DStates);
-    while (unMarked != nullptr) {
+    while (unMarked != dNULL) {
         unMarked->marked = true;
         for (const auto& input : global->inputSymbols) {
             vector<Node*> U = EPSClosure(move(unMarked->NNodes, input));
             DState* dd = find(U, DStates);
-            if (dd == nullptr) {
+            if (dd == dNULL) {
                 auto *d = new DState;
                 d->marked = false;
                 d->NNodes = U;
@@ -53,16 +55,20 @@ DFA *DFA::subsetConstruction(Node* start, Node *finish) {
                 d->DNode = new Node (global->getNum() ,false);
                 d->DNode->setEndState(isEnd);
                 DStates.push_back(d);
+                global->transitionTable[unMarked->DNode->getName()][d->DNode->getName()] = input;
                 unMarked->DNode->addEdge(new Edge (d->DNode, input));
             }
-            else
-                unMarked->DNode->addEdge(new Edge (dd->DNode, input));
+            else {
+                unMarked->DNode->addEdge(new Edge(dd->DNode, input));
+                global->transitionTable[unMarked->DNode->getName()][dd->DNode->getName()] = input;
+            }
         }
-        //TO BE CONTINUED ...
-
+        unMarked = AnyStateUnmarked(DStates);
     }
     return this;
 }
+
+
 
 DFA::DState* DFA::find (vector<Node*> U, const vector<DState*>& DStates){
     for (auto state : DStates) {
@@ -70,7 +76,7 @@ DFA::DState* DFA::find (vector<Node*> U, const vector<DState*>& DStates){
             return state;
         }
     }
-    return nullptr;
+    return dNULL;
 }
 
 vector<Node*> DFA::move (vector<Node*> T, string a){
@@ -124,11 +130,11 @@ vector<Node*> DFA::EPSClosure(vector<Node*> states) {
     return closure;
 }
 
-DFA::DState* DFA::AnyStateUnmarked(const vector<DState*>& DStates) {
-    for (auto DState:DStates) {
-        if (DState->marked == false) {
-            return DState;
+DFA::DState* DFA::AnyStateUnmarked(vector<DState*> DStates) {
+    for (auto state:DStates) {
+        if (state->marked == false) {
+            return state;
         }
     }
-    return nullptr;
+    return dNULL;
 }

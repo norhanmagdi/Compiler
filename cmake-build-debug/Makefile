@@ -249,6 +249,33 @@ src/GLOBAL.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/GLOBAL.cpp.s
 .PHONY : src/GLOBAL.cpp.s
 
+src/Minimizer.obj: src/Minimizer.cpp.obj
+
+.PHONY : src/Minimizer.obj
+
+# target to build an object file
+src/Minimizer.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/Minimizer.cpp.obj
+.PHONY : src/Minimizer.cpp.obj
+
+src/Minimizer.i: src/Minimizer.cpp.i
+
+.PHONY : src/Minimizer.i
+
+# target to preprocess a source file
+src/Minimizer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/Minimizer.cpp.i
+.PHONY : src/Minimizer.cpp.i
+
+src/Minimizer.s: src/Minimizer.cpp.s
+
+.PHONY : src/Minimizer.s
+
+# target to generate assembly for a file
+src/Minimizer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/Minimizer.cpp.s
+.PHONY : src/Minimizer.cpp.s
+
 src/NFA.obj: src/NFA.cpp.obj
 
 .PHONY : src/NFA.obj
@@ -351,6 +378,9 @@ help:
 	@echo ... src/GLOBAL.obj
 	@echo ... src/GLOBAL.i
 	@echo ... src/GLOBAL.s
+	@echo ... src/Minimizer.obj
+	@echo ... src/Minimizer.i
+	@echo ... src/Minimizer.s
 	@echo ... src/NFA.obj
 	@echo ... src/NFA.i
 	@echo ... src/NFA.s

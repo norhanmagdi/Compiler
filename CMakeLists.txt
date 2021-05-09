@@ -8,4 +8,4 @@ add_executable(LexicalAnalyzer main.cpp
         src/Parser.cpp include/Parser.h
         src/NFA.cpp include/NFA.h
         src/Node.cpp include/Node.h
-        src/Edge.cpp include/Edge.h src/GLOBAL.cpp include/GLOBAL.h)
+        src/Edge.cpp include/Edge.h src/GLOBAL.cpp include/GLOBAL.h src/Minimizer.cpp include/Minimizer.h)

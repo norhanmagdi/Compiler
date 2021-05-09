@@ -3,6 +3,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/LexicalAnalyzer.dir/src/DFA.cpp.obj"
   "CMakeFiles/LexicalAnalyzer.dir/src/Edge.cpp.obj"
   "CMakeFiles/LexicalAnalyzer.dir/src/GLOBAL.cpp.obj"
+  "CMakeFiles/LexicalAnalyzer.dir/src/Minimizer.cpp.obj"
   "CMakeFiles/LexicalAnalyzer.dir/src/NFA.cpp.obj"
   "CMakeFiles/LexicalAnalyzer.dir/src/Node.cpp.obj"
   "CMakeFiles/LexicalAnalyzer.dir/src/Parser.cpp.obj"

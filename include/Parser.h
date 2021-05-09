@@ -7,6 +7,7 @@
 
 #include <bits/stdc++.h>
 #include <regex>
+#include "../include/GLOBAL.h"
 
 #define SPACE " "
 #define nLINE '\n'
@@ -40,6 +41,7 @@ private:
     void parse_Line(string line);
     void save_puncs(const string& line);
     vector<string> divide_RE (string re);
+    GLOBAL *global = global->getInstance();
     map<string, vector<string>> postfixREs;
     map<string, vector<string>> postfixRDs;
     static void save_keyWords(string line);
@@ -47,6 +49,7 @@ private:
     static void save_RD (const string& line , int sep_indx);
     vector<string> to_postfix(const vector<string>& exprVec);
     static bool sort_by_length(const string& s1, const string& s2);
+    set<string> tokns;
 };
 
 #endif //MAIN_CPP_PARSER_H

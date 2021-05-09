@@ -23,6 +23,14 @@ CMakeFiles/LexicalAnalyzer.dir/src/Edge.cpp.obj
 CMakeFiles/LexicalAnalyzer.dir/src/GLOBAL.cpp.obj
  D:/LexicalAnalyzer/include/GLOBAL.h
  D:/LexicalAnalyzer/src/GLOBAL.cpp
+CMakeFiles/LexicalAnalyzer.dir/src/Minimizer.cpp.obj
+ D:/LexicalAnalyzer/include/DFA.h
+ D:/LexicalAnalyzer/include/Edge.h
+ D:/LexicalAnalyzer/include/GLOBAL.h
+ D:/LexicalAnalyzer/include/Minimizer.h
+ D:/LexicalAnalyzer/include/NFA.h
+ D:/LexicalAnalyzer/include/Node.h
+ D:/LexicalAnalyzer/src/Minimizer.cpp
 CMakeFiles/LexicalAnalyzer.dir/src/NFA.cpp.obj
  D:/LexicalAnalyzer/include/Edge.h
  D:/LexicalAnalyzer/include/GLOBAL.h
@@ -33,5 +41,6 @@ CMakeFiles/LexicalAnalyzer.dir/src/Node.cpp.obj
  D:/LexicalAnalyzer/include/Node.h
  D:/LexicalAnalyzer/src/Node.cpp
 CMakeFiles/LexicalAnalyzer.dir/src/Parser.cpp.obj
+ D:/LexicalAnalyzer/include/GLOBAL.h
  D:/LexicalAnalyzer/include/Parser.h
  D:/LexicalAnalyzer/src/Parser.cpp

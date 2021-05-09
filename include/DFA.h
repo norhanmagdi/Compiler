@@ -21,9 +21,10 @@ public:
     vector<Node*> getEnd();
     struct DState {
         Node* DNode;
-        bool marked;
+        bool marked = false;
         vector<Node *> NNodes;
     };
+    DState* startDState;
 
 protected:
 
@@ -32,8 +33,8 @@ private:
     DFA* subsetConstruction(Node* start, Node *finish);
     vector<Node*> EPSClosure(vector<Node*> states);
     Node* startNode;
-    DState* startDState;
-    DState* AnyStateUnmarked(const vector<DState*>& DStates);
+
+    DState* AnyStateUnmarked(vector<DState*> DStates);
     static DState* find (vector<Node*> U, const vector<DState*>& DStates);
     vector<Node*> move (vector<Node*> T, string input);
     vector<Node*> endNode;
