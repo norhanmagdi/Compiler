@@ -4,14 +4,14 @@
 #include <bits/stdc++.h>
 
 using namespace std;
-
+class Node;
 class Scanner
 {
     public:
         Scanner();
         virtual ~Scanner();
-        void scanInput(string &inputFile);
-        void scanWord(string word);
+        void scanInput(string &inputFile,DFA* dfa);
+        vector<pair<string,string>> scanWord(string word);
 
     protected:
 
