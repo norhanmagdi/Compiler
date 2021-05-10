@@ -7,6 +7,7 @@ CMakeFiles/LexicalAnalyzer.dir/main.cpp.obj: ../include/GLOBAL.h
 CMakeFiles/LexicalAnalyzer.dir/main.cpp.obj: ../include/NFA.h
 CMakeFiles/LexicalAnalyzer.dir/main.cpp.obj: ../include/Node.h
 CMakeFiles/LexicalAnalyzer.dir/main.cpp.obj: ../include/Parser.h
+CMakeFiles/LexicalAnalyzer.dir/main.cpp.obj: ../include/Scanner.h
 CMakeFiles/LexicalAnalyzer.dir/main.cpp.obj: ../main.cpp
 
 CMakeFiles/LexicalAnalyzer.dir/src/DFA.cpp.obj: ../include/DFA.h

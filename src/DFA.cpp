@@ -6,6 +6,8 @@ DFA::DFA (Node *startNode, vector <Node*> endNode) {
 }
 
 DFA::DFA (NFA *nfa) {
+    cout << "From DFA merged name \n";
+    cout << nfa->getStart()->getName() << '\n';
     subsetConstruction(nfa->getStart(), nfa->getEnd());
 }
 

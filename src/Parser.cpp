@@ -60,13 +60,15 @@ void Parser:: save_RD (const string& line , int sep_indx){
 
 void Parser:: parse_Line(string line){
     if (line[0] == '[') {
-        cout << "Punctuations" << nLINE;
+//        cout << "Punctuations" << nLINE;
         save_puncs(line);
+        global->puncs = puncs;
         return;
     }
     if (line[0] == '{') {
-        cout << "KeyWord" << nLINE;
+//        cout << "KeyWord" << nLINE;
         save_keyWords(line);
+        global->keyWords = keyWords;
         return;
     }
     int indx = 0;
@@ -75,12 +77,12 @@ void Parser:: parse_Line(string line){
              (line[indx] >= 'A' && line[indx] <= 'Z')) ) indx ++;
     while (indx < line.size() && line[indx] == ' ') indx++;
     if (indx < line.size() && line[indx] == ':'){
-        cout << "Regular Expression" << nLINE;
+//        cout << "Regular Expression" << nLINE;
         save_RE (line, indx);
         return;
     }
     if (indx < line.size() && line[indx] == '='){
-        cout << "Regular Definition" << nLINE;
+//        cout << "Regular Definition" << nLINE;
         save_RD(line, indx);
         return;
     }
@@ -91,16 +93,16 @@ void Parser:: parse_Line(string line){
 map<string, vector<string>> Parser:: parse() {
     read_file();
     for (const auto &line : RULES_SET) {
-        cout << line << nLINE;
+//        cout << line << nLINE;
         parse_Line(line);
-        cout << nLINE;
+//        cout << nLINE;
     }
-    cout << "READ DONE AND MAIN PARSING DONE" << nLINE;
+    /* cout << "READ DONE AND MAIN PARSING DONE" << nLINE;
     cout << "Regular Definitions\n" << SEPARATOR;
     for (const auto& pr : RDs)
-        cout << pr.fp << SPACE << SPACE << pr.sp << nLINE;
+        cout << pr.fp << SPACE << SPACE << pr.sp << nLINE;*/
     sort(RDKeys.begin(), RDKeys.end(), sort_by_length); // Sorting for dividing NOTE : (DIGIT VS DIGITS)
-    cout << SEPARATOR;
+    /*cout << SEPARATOR;
     cout << "Regular Expressions\n" << SEPARATOR;
     for (const auto& pr : REs)
         cout << pr.fp << SPACE << SPACE << pr.sp << nLINE;
@@ -109,14 +111,14 @@ map<string, vector<string>> Parser:: parse() {
     for (auto keyWord : keyWords)
         cout << keyWord << SPACE;
     cout << SEPARATOR;
-    cout << "Symbols\n" << SEPARATOR;
+    cout << "\nSymbols\n" << SEPARATOR;
     for (auto punc : puncs)
         cout << punc << SPACE;
 
     cout << nLINE << SEPARATOR;
     cout << SEPARATOR;
     cout << SEPARATOR;
-    cout << SEPARATOR;
+    cout << SEPARATOR;*/
 
 
     cout << "FOR EXPRESSIONS" << nLINE;
@@ -131,10 +133,11 @@ map<string, vector<string>> Parser:: parse() {
         postfixREs[regExpr.fp] = h;
     }
     cout << SEPARATOR << nLINE;
+    cout << "input Symbols \n";
     global->inputSymbols = set<string>(tokns);
-//    for (auto g : global->inputSymbols)
-//        cout << g << nLINE;
-//    cout << nLINE;
+    for (auto g : global->inputSymbols)
+        cout << g << nLINE;
+    cout << nLINE;
 
     cout << "FOR DEFINITIONS" << nLINE;
     for (const auto& regDef : RDs) {

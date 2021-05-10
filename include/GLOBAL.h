@@ -19,6 +19,8 @@ protected:
 
 public:
     static GLOBAL* getInstance();
+    set<string> keyWords;
+    set<char> puncs;
     static const int MAX_NUM = 1000;
     int getNumNow();
     int getNum();
