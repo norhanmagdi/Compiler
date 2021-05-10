@@ -80,6 +80,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="D:/LexicalAnalyzer/include/Convertor.h">
+			<Option target="LexicalAnalyzer"/>
+		</Unit>
 		<Unit filename="D:/LexicalAnalyzer/include/DFA.h">
 			<Option target="LexicalAnalyzer"/>
 		</Unit>
@@ -105,6 +108,9 @@
 			<Option target="LexicalAnalyzer"/>
 		</Unit>
 		<Unit filename="D:/LexicalAnalyzer/main.cpp">
+			<Option target="LexicalAnalyzer"/>
+		</Unit>
+		<Unit filename="D:/LexicalAnalyzer/src/Convertor.cpp">
 			<Option target="LexicalAnalyzer"/>
 		</Unit>
 		<Unit filename="D:/LexicalAnalyzer/src/DFA.cpp">

@@ -135,10 +135,10 @@ map<string, vector<string>> Parser:: parse() {
     cout << SEPARATOR << nLINE;
     cout << "input Symbols \n";
     global->inputSymbols = set<string>(tokns);
-    for (auto g : global->inputSymbols)
+    for (const auto& g : global->inputSymbols)
         cout << g << nLINE;
     cout << nLINE;
-
+    tokns.clear();
     cout << "FOR DEFINITIONS" << nLINE;
     for (const auto& regDef : RDs) {
         vector<string> h = divide_RE(regDef.sp);
@@ -150,12 +150,14 @@ map<string, vector<string>> Parser:: parse() {
         cout << nLINE;
         postfixRDs[regDef.fp] = h;
     }
+    global->RDs = postfixRDs;
+    global->RDinputSymbols = set<string>(tokns);
+    cout << "input Symbols \n";
+    for (const auto& g : global->RDinputSymbols)
+        cout << g << nLINE;
+    cout << nLINE;
     cout << SEPARATOR;
-    cout << SEPARATOR;
-    cout << SEPARATOR;
-//    for (auto g : global->inputSymbols)
-//        cout << g << nLINE;
-//    cout << nLINE;
+
     return postfixREs;
 }
 

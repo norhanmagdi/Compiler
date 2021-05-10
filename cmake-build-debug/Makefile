@@ -168,6 +168,33 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+src/Convertor.obj: src/Convertor.cpp.obj
+
+.PHONY : src/Convertor.obj
+
+# target to build an object file
+src/Convertor.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/Convertor.cpp.obj
+.PHONY : src/Convertor.cpp.obj
+
+src/Convertor.i: src/Convertor.cpp.i
+
+.PHONY : src/Convertor.i
+
+# target to preprocess a source file
+src/Convertor.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/Convertor.cpp.i
+.PHONY : src/Convertor.cpp.i
+
+src/Convertor.s: src/Convertor.cpp.s
+
+.PHONY : src/Convertor.s
+
+# target to generate assembly for a file
+src/Convertor.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/Convertor.cpp.s
+.PHONY : src/Convertor.cpp.s
+
 src/DFA.obj: src/DFA.cpp.obj
 
 .PHONY : src/DFA.obj
@@ -396,6 +423,9 @@ help:
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... src/Convertor.obj
+	@echo ... src/Convertor.i
+	@echo ... src/Convertor.s
 	@echo ... src/DFA.obj
 	@echo ... src/DFA.i
 	@echo ... src/DFA.s

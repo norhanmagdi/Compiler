@@ -19,13 +19,18 @@ protected:
 
 public:
     static GLOBAL* getInstance();
+    const set<string> RE_SYMPOLS = { "^" ,"|" ,"+" ,"*" ,"(" ,")","$"}; /* Where $ : equivilant to AND , ^ is equivilant to - */
+    /* From Parser */
     set<string> keyWords;
     set<char> puncs;
+    map<string, vector<string>> RDs;
+
     static const int MAX_NUM = 1000;
     int getNumNow();
     int getNum();
     int NFAStates;
     set<string> inputSymbols;
+    set<string> RDinputSymbols;
     string transitionTable[MAX_NUM][MAX_NUM];
 //    map <Node* , map<string , vector<Node*>>> NFATable;
 };

@@ -23,7 +23,6 @@ public:
     Parser() {};
     const set<string> RE_SYMPOLS = { "^" ,"|" ,"+" ,"*" ,"(" ,")","$"}; /* Where $ : equivilant to AND , ^ is equivilant to - */
     map<string, vector<string>> parse();
-    map<string, vector<string>> postfixRDs;
 
 protected:
 
@@ -39,6 +38,7 @@ private:
                                    {")", 0}};
 
     void read_file();
+    map<string, vector<string>> postfixRDs;
     void parse_Line(string line);
     void save_puncs(const string& line);
     vector<string> divide_RE (string re);

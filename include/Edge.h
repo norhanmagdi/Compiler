@@ -12,8 +12,11 @@ class Node;
 class Edge
 {
     public:
-        Edge(Node* destination, string condition);
-        virtual ~Edge();
+    Edge(Node* destination, string condition);
+
+    Edge(Node *destination, char start, char end, string condition);
+
+    virtual ~Edge();
         Node *getDestination();
         void setDestination(Node *destination);
         string getCondition();
@@ -24,6 +27,8 @@ class Edge
     private:
         Node* destination;
         string condition;
+        char end;
+        char start;
 };
 
 #endif // EDGE_H
