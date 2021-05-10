@@ -7,14 +7,14 @@
 #IncludeRegexTransform: 
 
 D:/LexicalAnalyzer/include/DFA.h
-../include/Node.h
-D:/LexicalAnalyzer/include/Node.h
 ../include/Edge.h
 D:/LexicalAnalyzer/include/Edge.h
 ../include/GLOBAL.h
 D:/LexicalAnalyzer/include/GLOBAL.h
 ../include/NFA.h
 D:/LexicalAnalyzer/include/NFA.h
+../include/Node.h
+D:/LexicalAnalyzer/include/Node.h
 
 D:/LexicalAnalyzer/include/Edge.h
 iostream
@@ -41,30 +41,10 @@ iostream
 -
 bits/stdc++.h
 -
+../include/DFA.h
+D:/LexicalAnalyzer/include/DFA.h
 
-D:/LexicalAnalyzer/include/Parser.h
-bits/stdc++.h
--
-regex
--
-../include/GLOBAL.h
-D:/LexicalAnalyzer/include/GLOBAL.h
-
-D:/LexicalAnalyzer/main.cpp
-bits/stdc++.h
--
-regex
--
-include/Parser.h
-D:/LexicalAnalyzer/include/Parser.h
-include/Edge.h
-D:/LexicalAnalyzer/include/Edge.h
-include/Node.h
-D:/LexicalAnalyzer/include/Node.h
-include/GLOBAL.h
-D:/LexicalAnalyzer/include/GLOBAL.h
-include/NFA.h
-D:/LexicalAnalyzer/include/NFA.h
-include/DFA.h
+D:/LexicalAnalyzer/src/DFA.cpp
+../include/DFA.h
 D:/LexicalAnalyzer/include/DFA.h
 

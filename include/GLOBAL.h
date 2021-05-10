@@ -5,9 +5,10 @@
 #ifndef MAIN_CPP_GLOBAL_H
 #define MAIN_CPP_GLOBAL_H
 #include <bits/stdc++.h>
+//#include "Node.h"
 
 using namespace std;
-
+//class Node;
 class GLOBAL {
 private:
     GLOBAL() { num = 0;}
@@ -21,8 +22,10 @@ public:
     static const int MAX_NUM = 1000;
     int getNumNow();
     int getNum();
+    int NFAStates;
     set<string> inputSymbols;
     string transitionTable[MAX_NUM][MAX_NUM];
+//    map <Node* , map<string , vector<Node*>>> NFATable;
 };
 
 

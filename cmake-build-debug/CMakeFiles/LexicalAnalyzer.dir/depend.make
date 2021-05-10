@@ -16,7 +16,10 @@ CMakeFiles/LexicalAnalyzer.dir/src/DFA.cpp.obj: ../include/NFA.h
 CMakeFiles/LexicalAnalyzer.dir/src/DFA.cpp.obj: ../include/Node.h
 CMakeFiles/LexicalAnalyzer.dir/src/DFA.cpp.obj: ../src/DFA.cpp
 
+CMakeFiles/LexicalAnalyzer.dir/src/Edge.cpp.obj: ../include/DFA.h
 CMakeFiles/LexicalAnalyzer.dir/src/Edge.cpp.obj: ../include/Edge.h
+CMakeFiles/LexicalAnalyzer.dir/src/Edge.cpp.obj: ../include/GLOBAL.h
+CMakeFiles/LexicalAnalyzer.dir/src/Edge.cpp.obj: ../include/NFA.h
 CMakeFiles/LexicalAnalyzer.dir/src/Edge.cpp.obj: ../include/Node.h
 CMakeFiles/LexicalAnalyzer.dir/src/Edge.cpp.obj: ../src/Edge.cpp
 
@@ -31,16 +34,29 @@ CMakeFiles/LexicalAnalyzer.dir/src/Minimizer.cpp.obj: ../include/NFA.h
 CMakeFiles/LexicalAnalyzer.dir/src/Minimizer.cpp.obj: ../include/Node.h
 CMakeFiles/LexicalAnalyzer.dir/src/Minimizer.cpp.obj: ../src/Minimizer.cpp
 
+CMakeFiles/LexicalAnalyzer.dir/src/NFA.cpp.obj: ../include/DFA.h
 CMakeFiles/LexicalAnalyzer.dir/src/NFA.cpp.obj: ../include/Edge.h
 CMakeFiles/LexicalAnalyzer.dir/src/NFA.cpp.obj: ../include/GLOBAL.h
 CMakeFiles/LexicalAnalyzer.dir/src/NFA.cpp.obj: ../include/NFA.h
 CMakeFiles/LexicalAnalyzer.dir/src/NFA.cpp.obj: ../include/Node.h
 CMakeFiles/LexicalAnalyzer.dir/src/NFA.cpp.obj: ../src/NFA.cpp
 
+CMakeFiles/LexicalAnalyzer.dir/src/Node.cpp.obj: ../include/DFA.h
+CMakeFiles/LexicalAnalyzer.dir/src/Node.cpp.obj: ../include/Edge.h
+CMakeFiles/LexicalAnalyzer.dir/src/Node.cpp.obj: ../include/GLOBAL.h
+CMakeFiles/LexicalAnalyzer.dir/src/Node.cpp.obj: ../include/NFA.h
 CMakeFiles/LexicalAnalyzer.dir/src/Node.cpp.obj: ../include/Node.h
 CMakeFiles/LexicalAnalyzer.dir/src/Node.cpp.obj: ../src/Node.cpp
 
 CMakeFiles/LexicalAnalyzer.dir/src/Parser.cpp.obj: ../include/GLOBAL.h
 CMakeFiles/LexicalAnalyzer.dir/src/Parser.cpp.obj: ../include/Parser.h
 CMakeFiles/LexicalAnalyzer.dir/src/Parser.cpp.obj: ../src/Parser.cpp
+
+CMakeFiles/LexicalAnalyzer.dir/src/Scanner.cpp.obj: ../include/DFA.h
+CMakeFiles/LexicalAnalyzer.dir/src/Scanner.cpp.obj: ../include/Edge.h
+CMakeFiles/LexicalAnalyzer.dir/src/Scanner.cpp.obj: ../include/GLOBAL.h
+CMakeFiles/LexicalAnalyzer.dir/src/Scanner.cpp.obj: ../include/NFA.h
+CMakeFiles/LexicalAnalyzer.dir/src/Scanner.cpp.obj: ../include/Node.h
+CMakeFiles/LexicalAnalyzer.dir/src/Scanner.cpp.obj: ../include/Scanner.h
+CMakeFiles/LexicalAnalyzer.dir/src/Scanner.cpp.obj: ../src/Scanner.cpp
 

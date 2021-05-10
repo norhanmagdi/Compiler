@@ -7,6 +7,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/LexicalAnalyzer.dir/src/NFA.cpp.obj"
   "CMakeFiles/LexicalAnalyzer.dir/src/Node.cpp.obj"
   "CMakeFiles/LexicalAnalyzer.dir/src/Parser.cpp.obj"
+  "CMakeFiles/LexicalAnalyzer.dir/src/Scanner.cpp.obj"
   "LexicalAnalyzer.exe"
   "LexicalAnalyzer.exe.manifest"
   "LexicalAnalyzer.pdb"

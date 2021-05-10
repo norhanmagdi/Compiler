@@ -23,6 +23,7 @@ public:
     Parser() {};
     const set<string> RE_SYMPOLS = { "^" ,"|" ,"+" ,"*" ,"(" ,")","$"}; /* Where $ : equivilant to AND , ^ is equivilant to - */
     map<string, vector<string>> parse();
+    map<string, vector<string>> postfixRDs;
 
 protected:
 
@@ -43,7 +44,6 @@ private:
     vector<string> divide_RE (string re);
     GLOBAL *global = global->getInstance();
     map<string, vector<string>> postfixREs;
-    map<string, vector<string>> postfixRDs;
     static void save_keyWords(string line);
     static void save_RE (const string& line , int sep_indx);
     static void save_RD (const string& line , int sep_indx);

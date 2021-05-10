@@ -4,12 +4,12 @@
 #include "../include/Minimizer.h"
 
 void Minimizer::minimize() {
-    vector <vector <DFA::DState*>> partitions;
-    vector<DFA::DState*> finalStates;
-    vector<DFA::DState*> nonFinalStates;
+    vector <vector <Node*>> partitions;
+    vector<Node*> finalStates;
+    vector<Node*> nonFinalStates;
 
     for (const auto& state : DFATable) {
-        if (state.first->DNode->isEndState())
+        if (state.first->isEndState())
             finalStates.push_back(state.first);
         else nonFinalStates.push_back(state.first);
     }
@@ -20,29 +20,29 @@ void Minimizer::minimize() {
     minimizePartition (partitions);
 }
 
-vector<vector<DFA::DState *>> Minimizer::minimizePartition(vector<vector<DFA::DState *>> partitions) {
-    vector<vector<DFA::DState*>> ret;
+vector<vector<Node *>> Minimizer::minimizePartition(vector<vector<Node *>> partitions) {
+    vector<vector<Node*>> ret;
     for (auto partition : partitions){
         if (partition.size() > 1) {
             for (int i = 0; i < partition.size(); ++i){
                 if (findState(ret, partition[i])){
                     continue;
                 }
-                vector<DFA::DState*> temp_partition;
+                vector<Node*> temp_partition;
                 temp_partition.push_back(partition[i]);
 
                 for (int j = i + 1; j < partition.size(); j++){
-                    DFA::DState* s1 = partition.at(i);
-                    DFA::DState* s2 = partition.at(j);
+                    Node* s1 = partition.at(i);
+                    Node* s2 = partition.at(j);
 
                     if ((!canBeCombined(partitions, s1, s2)) &&
                         DFATable.find(s1) != DFATable.end() &&
                         DFATable.find(s2) != DFATable.end()) {
 
                         if(DFATable[s1] == DFATable[s2]){
-                            if(!s1->DNode->isEndState()) {
+                            if(!s1->isEndState()) {
                                 temp_partition.push_back(s2);
-                            } else if(s1->DNode->getName() == s2->DNode->getName()){
+                            } else if(s1->getName() == s2->getName()){
                                 temp_partition.push_back(s2);
                             }
                         }
@@ -62,13 +62,13 @@ vector<vector<DFA::DState *>> Minimizer::minimizePartition(vector<vector<DFA::DS
     return minimizePartition(ret);
 }
 
-void Minimizer::updateTable(vector<DFA::DState *> temp) {
+void Minimizer::updateTable(vector<Node *> temp) {
         if (temp.size() > 1){
-        DFA::DState* state = temp.at(0);
+            Node* state = temp.at(0);
         for (int i = 1; i < temp.size(); i++){
             DFATable.erase(temp.at(i));
         }
-        for (pair<DFA::DState *, map<string , DFA::DState *>> row:DFATable){
+        for (pair<Node*, map<string , Node *>> row:DFATable){
             for (const auto& c : row.second){
                 for(int i = 1; i < temp.size(); i++){
                     if (temp.at(i) == c.second){
@@ -80,7 +80,7 @@ void Minimizer::updateTable(vector<DFA::DState *> temp) {
     }
 }
 
-bool Minimizer::canBeCombined(vector<vector<DFA::DState *>> &partitions, DFA::DState *state1, DFA::DState *state2) {
+bool Minimizer::canBeCombined(vector<vector<Node *>> &partitions, Node *state1, Node *state2) {
     for (auto partition : partitions) {
         if (!(find(partition.begin(), partition.end(), state1) != partition.end() &&
               find(partition.begin(), partition.end(), state2) != partition.end()))
@@ -89,7 +89,7 @@ bool Minimizer::canBeCombined(vector<vector<DFA::DState *>> &partitions, DFA::DS
     return false;
 }
 
-bool Minimizer::findState(const vector<vector<DFA::DState *>>& pp, DFA::DState *state) {
+bool Minimizer::findState(const vector<vector<Node*>>& pp, Node *state) {
     for (auto partition : pp) {
         if (find(partition.begin(), partition.end(), state) != partition.end())
             return true;

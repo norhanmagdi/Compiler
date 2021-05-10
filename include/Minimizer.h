@@ -14,11 +14,11 @@ public:
     void minimize();
 protected:
 private:
-    bool findState (const vector<vector<DFA::DState*>>& pp, DFA::DState* state);
-    bool canBeCombined (vector<vector<DFA::DState*>>& partitions, DFA::DState *state1, DFA::DState *state2);
-    void updateTable(vector<DFA::DState *> temp);
-    map <DFA::DState* , map<string , DFA::DState*>> DFATable;
-    vector<vector<DFA::DState*>> minimizePartition (vector<vector<DFA::DState*>> partitions);
+    bool findState (const vector<vector<Node*>>& pp, Node* state);
+    bool canBeCombined (vector<vector<Node*>>& partitions, Node *state1, Node *state2);
+    void updateTable(vector<Node *> temp);
+    map <Node* , map<string , Node*>> DFATable;
+    vector<vector<Node*>> minimizePartition (vector<vector<Node*>> partitions);
 };
 
 #endif //MAIN_CPP_MINIMIZER_H

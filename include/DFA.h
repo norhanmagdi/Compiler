@@ -1,14 +1,14 @@
 #ifndef DFA_H
 #define DFA_H
 
-#include "../include/Node.h"
 #include "../include/Edge.h"
 #include "../include/GLOBAL.h"
 #include "../include/NFA.h"
+#include "../include/Node.h"
 
-class Node;
 class Edge;
 class NFA;
+class Node;
 class DFA
 {
 public:
@@ -18,13 +18,16 @@ public:
 
     virtual ~DFA();
     Node *getStart();
+    map <Node* , map<string , Node*>> DFATable;
     vector<Node*> getEnd();
-    struct DState {
-        Node* DNode;
-        bool marked = false;
-        vector<Node *> NNodes;
-    };
-    DState* startDState;
+//    struct DState {
+//        Node* DNode;
+//        bool marked = false;
+//        vector<Node *> NNodes;
+//    };
+//    DState* startDState;
+    Node* startDState;
+    void printDFATable();
 
 protected:
 
@@ -34,8 +37,8 @@ private:
     vector<Node*> EPSClosure(vector<Node*> states);
     Node* startNode;
 
-    DState* AnyStateUnmarked(vector<DState*> DStates);
-    static DState* find (vector<Node*> U, const vector<DState*>& DStates);
+    Node* AnyStateUnmarked(vector<Node*> DStates);
+    static Node* find (vector<Node*> U, const vector<Node*>& DStates);
     vector<Node*> move (vector<Node*> T, string input);
     vector<Node*> endNode;
 };

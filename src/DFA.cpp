@@ -22,27 +22,26 @@ vector<Node*> DFA::getEnd(){
     return endNode;
 }
 
-DFA::DState *dNULL = new DFA::DState;
+Node *dNULL = new Node (-1, false);
 
 DFA *DFA::subsetConstruction(Node* start, Node *finish) {
     vector<Node*> s0;
     s0.push_back(start);
     vector<Node*> T = EPSClosure(s0);
-    startDState = new DState;
+    startDState = new Node (global->getNum() ,false);
     startDState->marked = false;
-    startDState->DNode = new Node (global->getNum() ,false);
     startDState->NNodes = T;
-    startNode = startDState->DNode;
-    vector<DState*> DStates;
+//    startNode = startDState->DNode;
+    vector<Node*> DStates;
     DStates.push_back(startDState);
-    DState* unMarked = AnyStateUnmarked(DStates);
+    Node* unMarked = AnyStateUnmarked(DStates);
     while (unMarked != dNULL) {
         unMarked->marked = true;
         for (const auto& input : global->inputSymbols) {
             vector<Node*> U = EPSClosure(move(unMarked->NNodes, input));
-            DState* dd = find(U, DStates);
+            Node* dd = find(U, DStates);
             if (dd == dNULL) {
-                auto *d = new DState;
+                auto *d = new Node (global->getNum() ,false) ;
                 d->marked = false;
                 d->NNodes = U;
                 bool isEnd = false;
@@ -52,15 +51,18 @@ DFA *DFA::subsetConstruction(Node* start, Node *finish) {
                         break;
                     }
                 }
-                d->DNode = new Node (global->getNum() ,false);
-                d->DNode->setEndState(isEnd);
+//                d->DNode = new Node (global->getNum() ,false);
+                cout << isEnd << " is END \n";
+                d->setEndState(isEnd);
                 DStates.push_back(d);
-                global->transitionTable[unMarked->DNode->getName()][d->DNode->getName()] = input;
-                unMarked->DNode->addEdge(new Edge (d->DNode, input));
+                global->transitionTable[unMarked->getName()][d->getName()] = input;
+                DFATable[unMarked][input] = d;
+                unMarked->addEdge(new Edge (d, input));
             }
             else {
-                unMarked->DNode->addEdge(new Edge(dd->DNode, input));
-                global->transitionTable[unMarked->DNode->getName()][dd->DNode->getName()] = input;
+                unMarked->addEdge(new Edge(dd, input));
+                DFATable[unMarked][input] = dd;
+                global->transitionTable[unMarked->getName()][dd->getName()] = input;
             }
         }
         unMarked = AnyStateUnmarked(DStates);
@@ -70,7 +72,7 @@ DFA *DFA::subsetConstruction(Node* start, Node *finish) {
 
 
 
-DFA::DState* DFA::find (vector<Node*> U, const vector<DState*>& DStates){
+Node* DFA::find (vector<Node*> U, const vector<Node*>& DStates){
     for (auto state : DStates) {
         if (state->NNodes == U) {
             return state;
@@ -130,11 +132,23 @@ vector<Node*> DFA::EPSClosure(vector<Node*> states) {
     return closure;
 }
 
-DFA::DState* DFA::AnyStateUnmarked(vector<DState*> DStates) {
+Node* DFA::AnyStateUnmarked(vector<Node*> DStates) {
     for (auto state:DStates) {
         if (state->marked == false) {
             return state;
         }
     }
     return dNULL;
+}
+
+
+void DFA::printDFATable () {
+    for (auto mp : DFATable) {
+        cout << mp.first->getName() << " is End  : " << mp.first->isEndState() << '\n';
+        for (auto m : mp.second) {
+            cout << m.first << " ";
+            cout << m.second->getName() << '\n';
+        }
+        cout << '\n';
+    }
 }

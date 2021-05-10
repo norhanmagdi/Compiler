@@ -357,6 +357,33 @@ src/Parser.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/Parser.cpp.s
 .PHONY : src/Parser.cpp.s
 
+src/Scanner.obj: src/Scanner.cpp.obj
+
+.PHONY : src/Scanner.obj
+
+# target to build an object file
+src/Scanner.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/Scanner.cpp.obj
+.PHONY : src/Scanner.cpp.obj
+
+src/Scanner.i: src/Scanner.cpp.i
+
+.PHONY : src/Scanner.i
+
+# target to preprocess a source file
+src/Scanner.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/Scanner.cpp.i
+.PHONY : src/Scanner.cpp.i
+
+src/Scanner.s: src/Scanner.cpp.s
+
+.PHONY : src/Scanner.s
+
+# target to generate assembly for a file
+src/Scanner.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/Scanner.cpp.s
+.PHONY : src/Scanner.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -390,6 +417,9 @@ help:
 	@echo ... src/Parser.obj
 	@echo ... src/Parser.i
 	@echo ... src/Parser.s
+	@echo ... src/Scanner.obj
+	@echo ... src/Scanner.i
+	@echo ... src/Scanner.s
 .PHONY : help
 
 

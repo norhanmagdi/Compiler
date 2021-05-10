@@ -1,7 +1,10 @@
-#include "../include/Scanner.h"
 
-Scanner::Scanner()
+
+#include "..\include\Scanner.h"
+
+Scanner::Scanner(DFA* dfa)
 {
+    finalDFA = dfa;
     //ctor
 }
 
@@ -19,35 +22,41 @@ void Scanner::scanInput(string &inputFile){
         words.insert(words.end(), results.begin(), results.end());
     }
     for(string s : words){
-       scanWord(s);
+        scanWord(s);
     }
-
 }
-void Scanner::scanWord(string word){
-    Node* startNode = dfa->getStartState();
+
+vector<pair<string,string>> Scanner::scanWord(string word){
+    Node* startNode = finalDFA->getStart();
     Node* currentNode = startNode;
     Node* nullNode = new Node(global->getNum(), false);
     Node* finalNode = nullNode;
     string maxToken;
-    vector<string>tokens;
+    vector<pair<string,string>>tokens{};
     bool findToken=false;
     int first=0,last=0;
+    string inputChar;
     for(int i=0;i<word.size();i++){
-        currentNode = dfa(currentNode, word[i]);
+        inputChar.push_back(word[i]);
+        currentNode = finalDFA->DFATable[currentNode][inputChar];
         if(currentNode->isEndState()){
             maxToken=currentNode->getTokenName();
             last=i;
             findToken=true;
             finalNode = currentNode;
-            if(i== word.size()- 1)
-                tokens.push_back(maxToken);
+            if(i == word.size()- 1){
+                string newString  =word.substr(first,last-first+1);
+                tokens.push_back(make_pair(newString ,maxToken));
+            }
+
         }else if(currentNode->getTokenName() == "null" && findToken ){
             string newString = word.substr(first,last-first+1);
-            tokens.push_back(maxToken);
+            tokens.push_back(make_pair(newString ,maxToken));
             first = last + 1;
             i = last;
             finalNode = nullNode;
             currentNode = startNode;
         }
     }
+    return tokens;
 }
