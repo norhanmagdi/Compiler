@@ -51,6 +51,11 @@ void Parser:: save_RD (const string& line , int sep_indx){
     string expr = line.substr(sep_indx + 1, string::npos);
     name.erase(remove(name.begin(), name.end(), ' '), name.end());
     expr.erase(remove(expr.begin(), expr.end(), ' '), expr.end());
+    //cout<<"expr is"<<nLINE;
+   // cout<<expr<<nLINE;
+  //  string newExpr = Parser.convertRegularDefinition(expr);
+   // cout<<"new expr is"<<nLINE;
+   // cout<<newExpr<<nLINE;
     replace( expr.begin(), expr.end(), '-', '^' );
 
     RDKeys.push_back(name);
@@ -82,11 +87,14 @@ void Parser:: parse_Line(string line){
         return;
     }
     if (indx < line.size() && line[indx] == '='){
-//        cout << "Regular Definition" << nLINE;
+    //string rd =convertRegularDefinition(line.substr(indx + 1));
+
+  //  cout << "Regular Definition" << nLINE;
+  //  cout<<rd<<nLINE;
+
         save_RD(line, indx);
         return;
     }
-
     cout << "NON-VALID RULE" << nLINE;
 }
 
@@ -120,6 +128,14 @@ map<string, vector<string>> Parser:: parse() {
     cout << SEPARATOR;
     cout << SEPARATOR;*/
 
+
+    for(auto i:RDs){
+       // cout<<"converting old is"<<nLINE;
+       // cout<<i.second<<nLINE;
+        RDs[i.first]=convertRegularDefinition(i.second);
+       // cout<<"new is"<<nLINE;
+       // cout<<i.second<<nLINE;
+    }
 
     cout << "FOR EXPRESSIONS" << nLINE;
     for (const auto& regExpr : REs) {
@@ -253,4 +269,23 @@ vector<string> Parser:: to_postfix(const vector<string>& exprVec){
         tokns.insert(s);
     }
     return postfix;
+}
+string Parser:: convertRegularDefinition(const string str) {
+    map<string, string>::iterator it;
+    string rd;
+    string ans;
+    for (auto i : str){
+        if (!ans.empty() && (i == '|' || i == '+' || i == '*' || i == '(' || i == ')')){
+
+            it = RDs.find(ans);
+            if(it != RDs.end()){
+               ans='('+it->second+')';
+            }
+
+            ans+=i;
+        } else {
+            ans += i;
+        }
+    }
+    return ans;
 }
