@@ -5,6 +5,7 @@ CMakeFiles/LexicalAnalyzer.dir/main.cpp.obj: ../include/Convertor.h
 CMakeFiles/LexicalAnalyzer.dir/main.cpp.obj: ../include/DFA.h
 CMakeFiles/LexicalAnalyzer.dir/main.cpp.obj: ../include/Edge.h
 CMakeFiles/LexicalAnalyzer.dir/main.cpp.obj: ../include/GLOBAL.h
+CMakeFiles/LexicalAnalyzer.dir/main.cpp.obj: ../include/Minimizer.h
 CMakeFiles/LexicalAnalyzer.dir/main.cpp.obj: ../include/NFA.h
 CMakeFiles/LexicalAnalyzer.dir/main.cpp.obj: ../include/Node.h
 CMakeFiles/LexicalAnalyzer.dir/main.cpp.obj: ../include/Parser.h

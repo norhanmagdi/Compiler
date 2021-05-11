@@ -120,6 +120,14 @@ map<string, vector<string>> Parser:: parse() {
     cout << SEPARATOR;
     cout << SEPARATOR;*/
 
+    for(auto i:RDs){
+         cout<<"converting old is"<<nLINE;
+         cout<<i.second<<nLINE;
+        RDs[i.first] = convertRegularDefinition(i.second);
+         cout<<"new is"<<nLINE;
+         cout<<i.second<<nLINE;
+    }
+
 
     cout << "FOR EXPRESSIONS" << nLINE;
     for (const auto& regExpr : REs) {
@@ -240,17 +248,40 @@ vector<string> Parser:: to_postfix(const vector<string>& exprVec){
         postfix.push_back(stk.top());
         stk.pop();
     }
-    auto it = find(postfix.begin(), postfix.end(), "^");
-    if (it != postfix.end()) {
-        it--;
-        string s = *it;
-        tokns.erase(*it);
-        it--;
-        s += "-";
-        s += (*it);
-        tokns.erase(*it);
-        reverse(s.begin(), s.end());
-        tokns.insert(s);
+    for (auto it = postfix.begin(); it < postfix.end(); ++it) {
+        cout << *it << nLINE;
+        if (*it == "^") {
+            it--;
+            string s = *it;
+            tokns.erase(*it);
+            it--;
+            s += "-";
+            s += (*it);
+            tokns.erase(*it);
+            reverse(s.begin(), s.end());
+            tokns.insert(s);
+            it += 2;
+        }
     }
     return postfix;
+}
+
+string Parser:: convertRegularDefinition(const string str) {
+    map<string, string>::iterator it;
+    string rd;
+    string ans;
+    for (auto i : str){
+        if (!ans.empty() && (i == '|' || i == '+' || i == '*' || i == '(' || i == ')')){
+
+            it = RDs.find(ans);
+            if(it != RDs.end()){
+                ans='('+it->second+')';
+            }
+
+            ans+=i;
+        } else {
+            ans += i;
+        }
+    }
+    return ans;
 }

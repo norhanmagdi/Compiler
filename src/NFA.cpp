@@ -7,6 +7,7 @@ NFA::NFA (Node *startNode, Node *endNode) {
     this->endNode = endNode;
 }
 NFA::NFA (const string& operation, string condition) {
+    condition.erase(remove(condition.begin(), condition.end(), '\\'), condition.end());
     createAutomata(std::move(condition));
 }
 NFA::NFA (const string& operation, NFA* a1) {

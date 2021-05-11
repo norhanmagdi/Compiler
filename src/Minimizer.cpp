@@ -3,7 +3,7 @@
 //
 #include "../include/Minimizer.h"
 
-void Minimizer::minimize() {
+map <Node* , map<string , Node*>> Minimizer::minimize() {
     vector <vector <Node*>> partitions;
     vector<Node*> finalStates;
     vector<Node*> nonFinalStates;
@@ -18,6 +18,7 @@ void Minimizer::minimize() {
     partitions.push_back(nonFinalStates);
 
     minimizePartition (partitions);
+    return DFATable;
 }
 
 vector<vector<Node *>> Minimizer::minimizePartition(vector<vector<Node *>> partitions) {

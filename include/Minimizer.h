@@ -10,8 +10,10 @@
 class DFA;
 class Minimizer {
 public:
-    Minimizer () {};
-    void minimize();
+    Minimizer (map <Node* , map<string , Node*>> mp) {
+        DFATable = mp;
+    };
+    map <Node* , map<string , Node*>> minimize();
 protected:
 private:
     bool findState (const vector<vector<Node*>>& pp, Node* state);

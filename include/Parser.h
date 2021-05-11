@@ -50,6 +50,7 @@ private:
     vector<string> to_postfix(const vector<string>& exprVec);
     static bool sort_by_length(const string& s1, const string& s2);
     set<string> tokns;
+    string convertRegularDefinition(const string str);
 };
 
 #endif //MAIN_CPP_PARSER_H

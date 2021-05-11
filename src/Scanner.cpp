@@ -5,12 +5,9 @@
 Scanner::Scanner(DFA* rulesDFA, DFA* RDDFA)
 {
     Scanner::rulesDFA = rulesDFA;
-    Scanner::rulesDFA->printDFATable();
     Scanner::rulesDFATable = rulesDFA->DFATable;
     Scanner::RDDFA = RDDFA;
-    cout << "RD DFA \n";
-    Scanner::RDDFA->printDFATable();
-    cout << "RD DFA DONE \n";
+    Scanner::RDDFATable = RDDFA->DFATable;
     //ctor
 }
 
@@ -40,6 +37,7 @@ vector<bool> visitedNode(1000, false);
 pair<Node*, int> acceptingRE = NULLACCEPTING;
 
 vector<pair<string,string>> Scanner::scanWord(string word){
+
     word.erase(remove(word.begin(), word.end(), ' '), word.end());
     if (word.empty()) return vector<pair<string,string>>();
     vector<pair<string,string>> V;
@@ -59,7 +57,7 @@ vector<pair<string,string>> Scanner::scanWord(string word){
         int w = word.find(pun);
         if (w != string::npos) {
             string h;
-            if (0 < w-1) {
+            if (0 < w) {
                 h = word.substr(0, w);
                 if (!h.empty())
                     scanWord(h);
@@ -76,10 +74,14 @@ vector<pair<string,string>> Scanner::scanWord(string word){
 
     inputString.clear();
     toStrinsVector(word);
+//    for (auto in : inputString) {
+//        cout << in << '\n';
+//    }
     if (!inputString.empty()) {
 //        for (auto hh : inputString)
 //            cout << hh << " ";
 //        cout << '\n';
+        visitedNode = vector<bool> (1000,false);
         acceptingRE = NULLACCEPTING;
         pair<Node *, int> accepted = checkRE(rulesDFA->getStart(), 0);
         if (accepted != NULLACCEPTING) {
@@ -91,13 +93,33 @@ vector<pair<string,string>> Scanner::scanWord(string word){
 }
 // Maximal munch
 pair<Node*, int> Scanner::checkRE (Node* current, int inputIndx) {
-    if (inputIndx >= inputString.size()) return acceptingRE;
-    Node* to = rulesDFATable[current][inputString[inputIndx]];
-//    cout << "TO " << to->getName() << " indx " << inputIndx << '\n';
-    if (to->isEndState())
-        acceptingRE = {to, inputIndx};
-    if (to != nullptr)// Not end
-        return checkRE(to, ++inputIndx);
+//    if (inputIndx >= inputString.size()) return acceptingRE;
+//    Node* to = rulesDFATable[current][inputString[inputIndx]];
+////    cout << "TO " << to->getName() << " indx " << inputIndx << '\n';
+//    if (to == nullptr) {
+////        cout << "NULL\n";
+//        return acceptingRE;
+//    }
+//    if (to->isEndState())
+//        acceptingRE = {to, inputIndx};
+//    if (to != nullptr)// Not end
+//        return checkRE(to, ++inputIndx);
+//    return acceptingRE;
+    if (current == nullptr) return acceptingRE;
+//    cout << "TO " << current->getName() << " indx " << inputIndx << '\n';
+    if (current->isEndState()) acceptingRE = {current, inputIndx};
+    if (inputIndx >= inputString.size()) {
+        if (rulesDFATable[current]["L"] != nullptr)
+            if (rulesDFATable[current]["L"]->isEndState())
+                return acceptingRE = {rulesDFATable[current]["L"], inputIndx};
+        return acceptingRE;
+    }
+    visitedNode[current->getName()] = true;
+    for(auto edge : current->getAllEdges()) {
+        if (!visitedNode[edge->getDestination()->getName()] && inputString[inputIndx] == edge->getCondition() ) {
+                return checkRE(edge->getDestination(), ++inputIndx);
+            }
+        }
     return acceptingRE;
 }
 
@@ -123,9 +145,9 @@ void Scanner::toStrinsVector (string word) {
 }
 
 pair<Node*, int> Scanner::checkRD (Node* current, int chrIndx, string word) {
+    if (current == nullptr) return acceptRD;
     if (current->isEndState()) acceptRD = {current, chrIndx};
     if (chrIndx >= word.length()) return acceptRD;
-    if (current == nullptr) return acceptRD;
     visitedNode[current->getName()] = true;
     for(auto edge : current->getAllEdges()) {
         if (!visitedNode[edge->getDestination()->getName()] && edge->getStartChar() != '+') {

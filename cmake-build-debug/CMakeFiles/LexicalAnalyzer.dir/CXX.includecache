@@ -6,6 +6,18 @@
 
 #IncludeRegexTransform: 
 
+D:/LexicalAnalyzer/include/Convertor.h
+Edge.h
+D:/LexicalAnalyzer/include/Edge.h
+GLOBAL.h
+D:/LexicalAnalyzer/include/GLOBAL.h
+NFA.h
+D:/LexicalAnalyzer/include/NFA.h
+Node.h
+D:/LexicalAnalyzer/include/Node.h
+Convertor.h
+D:/LexicalAnalyzer/include/Convertor.h
+
 D:/LexicalAnalyzer/include/DFA.h
 ../include/Edge.h
 D:/LexicalAnalyzer/include/Edge.h
@@ -28,6 +40,10 @@ D:/LexicalAnalyzer/include/GLOBAL.h
 bits/stdc++.h
 -
 
+D:/LexicalAnalyzer/include/Minimizer.h
+../include/DFA.h
+D:/LexicalAnalyzer/include/DFA.h
+
 D:/LexicalAnalyzer/include/NFA.h
 ../include/Node.h
 D:/LexicalAnalyzer/include/Node.h
@@ -44,6 +60,14 @@ bits/stdc++.h
 ../include/DFA.h
 D:/LexicalAnalyzer/include/DFA.h
 
+D:/LexicalAnalyzer/include/Parser.h
+bits/stdc++.h
+-
+regex
+-
+../include/GLOBAL.h
+D:/LexicalAnalyzer/include/GLOBAL.h
+
 D:/LexicalAnalyzer/include/Scanner.h
 iostream
 -
@@ -52,7 +76,27 @@ bits/stdc++.h
 DFA.h
 D:/LexicalAnalyzer/include/DFA.h
 
-D:/LexicalAnalyzer/src/Scanner.cpp
-../include/Scanner.h
+D:/LexicalAnalyzer/main.cpp
+bits/stdc++.h
+-
+regex
+-
+include/Parser.h
+D:/LexicalAnalyzer/include/Parser.h
+include/Edge.h
+D:/LexicalAnalyzer/include/Edge.h
+include/Node.h
+D:/LexicalAnalyzer/include/Node.h
+include/GLOBAL.h
+D:/LexicalAnalyzer/include/GLOBAL.h
+include/NFA.h
+D:/LexicalAnalyzer/include/NFA.h
+include/Scanner.h
 D:/LexicalAnalyzer/include/Scanner.h
+include/DFA.h
+D:/LexicalAnalyzer/include/DFA.h
+include/Convertor.h
+D:/LexicalAnalyzer/include/Convertor.h
+include/Minimizer.h
+D:/LexicalAnalyzer/include/Minimizer.h
 
