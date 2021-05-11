@@ -2,9 +2,15 @@
 
 #include "..\include\Scanner.h"
 
-Scanner::Scanner(DFA* dfa)
+Scanner::Scanner(DFA* rulesDFA, DFA* RDDFA)
 {
-    finalDFA = dfa;
+    Scanner::rulesDFA = rulesDFA;
+    Scanner::rulesDFA->printDFATable();
+    Scanner::rulesDFATable = rulesDFA->DFATable;
+    Scanner::RDDFA = RDDFA;
+    cout << "RD DFA \n";
+    Scanner::RDDFA->printDFATable();
+    cout << "RD DFA DONE \n";
     //ctor
 }
 
@@ -23,15 +29,21 @@ void Scanner::scanInput(string &inputFile){
         // Replace eahc
     }
     for(string s : words){
+        s.erase(remove(s.begin(), s.end(), ' '), s.end());
         scanWord(s);
     }
 }
+vector<string> inputString;
+const pair<Node*, int> NULLACCEPTING = {nullptr, -1};
+pair<Node*, int> acceptRD = NULLACCEPTING;
+vector<bool> visitedNode(1000, false);
+pair<Node*, int> acceptingRE = NULLACCEPTING;
 
 vector<pair<string,string>> Scanner::scanWord(string word){
-//    cout << "IN " << word << '\n';
+    word.erase(remove(word.begin(), word.end(), ' '), word.end());
+    if (word.empty()) return vector<pair<string,string>>();
     vector<pair<string,string>> V;
     for (const auto& keyWord : global->keyWords) {
-        int i =0;
         if (word.find(keyWord) == 0) {
             if (word.length() == keyWord.length() ||
                 (word.length() > keyWord.length() &&
@@ -62,39 +74,65 @@ vector<pair<string,string>> Scanner::scanWord(string word){
         }
     }
 
+    inputString.clear();
+    toStrinsVector(word);
+    if (!inputString.empty()) {
+//        for (auto hh : inputString)
+//            cout << hh << " ";
+//        cout << '\n';
+        acceptingRE = NULLACCEPTING;
+        pair<Node *, int> accepted = checkRE(rulesDFA->getStart(), 0);
+        if (accepted != NULLACCEPTING) {
+            cout << "Found " << accepted.first->getTokenName() << '\n';
+        }
+    }
 
-
-
-//    Node* startNode = finalDFA->getStart();
-//    Node* currentNode = startNode;
-//    Node* nullNode = new Node(global->getNum(), false);
-//    Node* finalNode = nullNode;
-//    string maxToken;
-//    vector<pair<string,string>>tokens{};
-//    bool findToken=false;
-//    int first=0,last=0;
-//    string inputChar;
-//    for(int i=0;i<word.size();i++){
-//        inputChar.push_back(word[i]);
-//        currentNode = finalDFA->DFATable[currentNode][inputChar];
-//        if(currentNode->isEndState()){
-//            maxToken=currentNode->getTokenName();
-//            last=i;
-//            findToken=true;
-//            finalNode = currentNode;
-//            if(i == word.size()- 1){
-//                string newString  =word.substr(first,last-first+1);
-//                tokens.push_back(make_pair(newString ,maxToken));
-//            }
-//
-//        }else if(currentNode->getTokenName() == "null" && findToken ){
-//            string newString = word.substr(first,last-first+1);
-//            tokens.push_back(make_pair(newString ,maxToken));
-//            first = last + 1;
-//            i = last;
-//            finalNode = nullNode;
-//            currentNode = startNode;
-//        }
-//    }
     return tokens;
+}
+// Maximal munch
+pair<Node*, int> Scanner::checkRE (Node* current, int inputIndx) {
+    if (inputIndx >= inputString.size()) return acceptingRE;
+    Node* to = rulesDFATable[current][inputString[inputIndx]];
+//    cout << "TO " << to->getName() << " indx " << inputIndx << '\n';
+    if (to->isEndState())
+        acceptingRE = {to, inputIndx};
+    if (to != nullptr)// Not end
+        return checkRE(to, ++inputIndx);
+    return acceptingRE;
+}
+
+
+void Scanner::toStrinsVector (string word) {
+    if  (word.empty()) return;
+    for (const auto& rdinput : global->inputSymbols) {
+        if (word.find(rdinput) == 0) {
+            inputString.push_back(rdinput);
+            toStrinsVector(word.substr(rdinput.length() ,string::npos));
+            return;
+        }
+    }
+    acceptRD = NULLACCEPTING;
+    visitedNode = vector<bool> (1000,false);
+    pair<Node*, int> accept = checkRD(RDDFA->getStart(), 0, word);
+    if (accept != NULLACCEPTING) {
+//        cout << "Found from str vec gen " << accept.first->getTokenName() << '\n';
+        inputString.push_back(accept.first->getTokenName());
+    }
+    if (accept.second < word.length())
+        toStrinsVector(word.substr(accept.second, string::npos));
+}
+
+pair<Node*, int> Scanner::checkRD (Node* current, int chrIndx, string word) {
+    if (current->isEndState()) acceptRD = {current, chrIndx};
+    if (chrIndx >= word.length()) return acceptRD;
+    if (current == nullptr) return acceptRD;
+    visitedNode[current->getName()] = true;
+    for(auto edge : current->getAllEdges()) {
+        if (!visitedNode[edge->getDestination()->getName()] && edge->getStartChar() != '+') {
+            if (word[chrIndx] >= edge->getStartChar() && word[chrIndx] <= edge->getEndChar()) {
+                return checkRD(edge->getDestination(), ++chrIndx, word);
+            }
+        }
+    }
+    return acceptRD;
 }

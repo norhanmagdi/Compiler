@@ -21,6 +21,8 @@ class Edge
         void setDestination(Node *destination);
         string getCondition();
         void setCondition(string condition);
+        char getStartChar();
+        char getEndChar();
 
     protected:
 
@@ -28,7 +30,7 @@ class Edge
         Node* destination;
         string condition;
         char end;
-        char start;
+        char start = '+';
 };
 
 #endif // EDGE_H

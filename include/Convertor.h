@@ -17,12 +17,11 @@ class Node;
 class Convertor
 {
 public:
-    Convertor () {}
+    Convertor () {};
 
     virtual ~Convertor();
     GLOBAL *global = global->getInstance();
     NFA* toNFA (const map<string, vector<string>>& RR);
-    NFA* RD_toNFA ();
 protected:
 
 private:

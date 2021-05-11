@@ -22,101 +22,51 @@
 
 
 int main() {
+    cout << "TO Parser\n";
     Parser pars;
     GLOBAL *global = global->getInstance();
     map<string, vector<string>> REs = pars.parse();
     map<string, vector<string>> RDs = global->RDs;
-    cout << "Parsing done \n";
-    Convertor conv;
-    NFA* merged = conv.toNFA(RDs);
-    merged->printNFA();
-    DFA* dfa = new DFA(merged);
-    dfa->printDFATable();
+    cout << "Parsing done \n\n";
+//    for (auto s : global->inputSymbols) {
+//        if (s[0] == '\\') {
+//            global->inputSymbols.erase(s);
+//            s = s.substr(1, string::npos);
+//            cout << s << '\n'
+//            global->inputSymbols.insert(s);
+//        }
+//    }
+//    for (auto s : global->inputSymbols) {
+//        cout << s << '\n';
+//    }
+    cout << "RULES NFA\n";
+    Convertor* conv = new Convertor();
+    NFA* rulesNFA = conv->toNFA(REs);
+    rulesNFA->printNFA();
+    cout << "RULES NFA DONE\n\n";
 
-//    Scanner* sc = new Scanner (new DFA());
-//    cout << "From scanner\n";
-//    string inp = "k";
-//    sc->scanInput((string &) inp);
+    cout << "RD NFA\n";
+    Convertor* conv2 = new Convertor();
+    NFA*  RDNFA = conv2->toNFA(RDs);
+    RDNFA->printNFA();
+    cout << "RD NFA DONE\n\n";
 
-    vector<NFA*> mergedNFAS;
-    /*
-    for (auto postfixExpr : REs) {
-        stack<NFA *> stck;
-        vector<string> postfix = postfixExpr.sp;
-        cout << postfixExpr.fp << nLINE;
-        for (auto token : postfix) {
-            cout << token;
-            if (pars.RE_SYMPOLS.find(token) == pars.RE_SYMPOLS.end()) {
-                stck.push(new NFA("SINGLE", token));
-                continue;
-            }
+    cout << "RD DFA\n";
+    DFA* RDDFA = new DFA(RDNFA, global->RDinputSymbols);
+    RDDFA->printDFATable();
+    cout << "RD DFA DONE\n\n";
 
-            NFA *val1 = stck.top();
-            stck.pop();
-            if (token == "+")
-                stck.push(new NFA("PCLOSURE", val1));
-            else if (token == "*")
-                stck.push(new NFA("CClosure", val1));
-            else {
-                NFA *val2 = stck.top();
-                stck.pop();
-                if (token == "$")
-                    stck.push(new NFA("AND", val2, val1));
-                if (token == "|")
-                    stck.push(new NFA("OR", val1, val2));
-                if (token == "^")
-                    stck.push(new NFA ("RANGE", val1, val2));
-            }
-        }
-        cout << nLINE;
-        (stck.top())->setTokenName(postfixExpr.fp);
-        mergedNFAS.push_back(stck.top());
-        stck.pop();
-    }
-    NFA* merged = new NFA(mergedNFAS);
-//    merged->printNFA();
+    cout << "RULES DFA\n";
+    DFA* rulesDFA = new DFA(rulesNFA, global->inputSymbols);
+    rulesDFA->printDFATable();
+    cout << "RULES DFA DONE\n\n";
 
-    DFA* dfa = new DFA(merged);
-    dfa->printDFATable();
-     */
-   /* for (auto postfixExpr : RDs) {
-        stack<NFA *> stck;
-        vector<string> postfix = postfixExpr.sp;
-        cout << postfixExpr.fp << nLINE;
-        for (auto token : postfix) {
-            cout << token;
-            if (pars.RE_SYMPOLS.find(token) == pars.RE_SYMPOLS.end()) {
-                stck.push(new NFA("SINGLE", token));
-                continue;
-            }
 
-            NFA *val1 = stck.top();
-            stck.pop();
-            if (token == "+")
-                stck.push(new NFA("PCLOSURE", val1));
-            else if (token == "*")
-                stck.push(new NFA("CClosure", val1));
-            else {
-                NFA *val2 = stck.top();
-                stck.pop();
-                if (token == "$")
-                    stck.push(new NFA("AND", val2, val1));
-                if (token == "|")
-                    stck.push(new NFA("OR", val1, val2));
-                if (token == "^")
-                    stck.push(new NFA ("RANGE", val2, val1));
-            }
-        }
-        cout << nLINE;
-        (stck.top())->setTokenName(postfixExpr.fp);
-        mergedNFAS.push_back(stck.top());
-        stck.top()->printNFA();
-        stck.pop();
-    }*/
-//    NFA* merged = new NFA(mergedNFAS);
-//    merged->printNFA();
-//    DFA* dfa = new DFA(merged);
-//    dfa->printDFATable();
+    cout << "TO Scanner\n";
+    Scanner* sc = new Scanner (rulesDFA, RDDFA);
+    string inp = "k";
+    sc->scanInput((string &) inp);
+    cout << "Scanning done \n\n";
     return 0;
 }
 

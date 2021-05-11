@@ -13,7 +13,7 @@ class DFA
 {
 public:
     DFA (Node *startNode, vector <Node*> endNode);
-    DFA (NFA *nfa);
+    DFA (NFA *nfa, set<string> inputSymbols);
     DFA () {};
 
     virtual ~DFA();
@@ -32,6 +32,7 @@ public:
 protected:
 
 private:
+    set<string> inputSymbols;
     GLOBAL *global = global->getInstance();
     DFA* subsetConstruction(Node* start, Node *finish);
     vector<Node*> EPSClosure(vector<Node*> states);

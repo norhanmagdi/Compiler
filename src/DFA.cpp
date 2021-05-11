@@ -5,9 +5,10 @@ DFA::DFA (Node *startNode, vector <Node*> endNode) {
     this->endNode = endNode;
 }
 
-DFA::DFA (NFA *nfa) {
-    //cout << "From DFA merged name \n";
-    //cout << nfa->getStart()->getName() << '\n';
+DFA::DFA (NFA *nfa, set<string> inputSymbols) {
+//    cout << "From DFA merged name \n";
+//    cout << nfa->getStart()->getName() << '\n';
+    DFA::inputSymbols = inputSymbols;
     subsetConstruction(nfa->getStart(), nfa->getEnd());
 }
 
@@ -17,7 +18,7 @@ DFA::~DFA()
 }
 
 Node *DFA::getStart(){
-    return startNode;
+    return startDState;
 }
 
 vector<Node*> DFA::getEnd(){
@@ -39,7 +40,7 @@ DFA *DFA::subsetConstruction(Node* start, Node *finish) {
     Node* unMarked = AnyStateUnmarked(DStates);
     while (unMarked != dNULL) {
         unMarked->marked = true;
-        for (const auto& input : global->inputSymbols) {
+        for (const auto& input :inputSymbols) {
             //cout << "HERE \n";
             //cout << unMarked->getName() << '\n';
             vector<Node*> U = EPSClosure(move(unMarked->NNodes, input));
@@ -66,7 +67,7 @@ DFA *DFA::subsetConstruction(Node* start, Node *finish) {
                 }
                 if (isEnd) {
                     d->setTokenName(tkn);
-                    cout << tkn << '\n';
+//                    cout << tkn << '\n';
                 }
 //                d->DNode = new Node (global->getNum() ,false);
                 //cout << isEnd << " is END \n";
@@ -76,7 +77,11 @@ DFA *DFA::subsetConstruction(Node* start, Node *finish) {
                 global->transitionTable[unMarked->getName()][d->getName()] = input;
                 DFATable[unMarked][input] = d;
                 DFATable[d][input] = nullptr ;
-                unMarked->addEdge(new Edge (d, input));
+                if (input.find('-') != string::npos) {
+                    unMarked->addEdge(new Edge (d, input[0], input[2] ,input));
+                }
+                else
+                    unMarked->addEdge(new Edge (d, input));
             }
             else {
                 unMarked->addEdge(new Edge(dd, input));

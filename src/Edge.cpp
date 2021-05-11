@@ -32,3 +32,11 @@ void Edge::setCondition(string condition) {
 string Edge::getCondition(){
     return this->condition;
 }
+
+char Edge::getStartChar() {
+    return start;
+}
+
+char Edge::getEndChar() {
+    return end;
+}

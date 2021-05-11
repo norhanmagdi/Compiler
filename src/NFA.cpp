@@ -115,6 +115,7 @@ string NFA::getTokenName() {
 vector<bool> visited(1000, false);
 
 void NFA::printNFA () {
+    visited = vector<bool>(1000, false);
     cout << "Start Node " << startNode->getName() << " End Node ";
     if (endNode != nullptr)
         cout << endNode->getName() << " at " << endNode->getTokenName();
@@ -128,7 +129,9 @@ void NFA::printNFA () {
         visited[stt->getName()] = true;
         cout << stt->getName() << " ";
         for (auto st : stt->getAllEdges()) {
-            cout << "\t" << st->getDestination()->getName() << "\t" << st->getCondition() << '\n';
+            cout << "\t" << st->getDestination()->getName() << "\t" << st->getCondition();
+            if (st->getDestination()->isEndState()) cout << " " << st->getDestination()->getTokenName();
+            cout << '\n';
             if (!visited[st->getDestination()->getName()]) {
                 stck.push(st->getDestination());
             }

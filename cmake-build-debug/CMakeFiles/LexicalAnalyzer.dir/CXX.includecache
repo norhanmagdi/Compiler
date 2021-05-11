@@ -44,9 +44,15 @@ bits/stdc++.h
 ../include/DFA.h
 D:/LexicalAnalyzer/include/DFA.h
 
-D:/LexicalAnalyzer/src/NFA.cpp
-../include/NFA.h
-D:/LexicalAnalyzer/include/NFA.h
-utility
+D:/LexicalAnalyzer/include/Scanner.h
+iostream
 -
+bits/stdc++.h
+-
+DFA.h
+D:/LexicalAnalyzer/include/DFA.h
+
+D:/LexicalAnalyzer/src/Scanner.cpp
+../include/Scanner.h
+D:/LexicalAnalyzer/include/Scanner.h
 

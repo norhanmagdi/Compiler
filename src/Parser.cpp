@@ -240,5 +240,17 @@ vector<string> Parser:: to_postfix(const vector<string>& exprVec){
         postfix.push_back(stk.top());
         stk.pop();
     }
+    auto it = find(postfix.begin(), postfix.end(), "^");
+    if (it != postfix.end()) {
+        it--;
+        string s = *it;
+        tokns.erase(*it);
+        it--;
+        s += "-";
+        s += (*it);
+        tokns.erase(*it);
+        reverse(s.begin(), s.end());
+        tokns.insert(s);
+    }
     return postfix;
 }

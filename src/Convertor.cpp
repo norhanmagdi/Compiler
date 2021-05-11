@@ -14,9 +14,9 @@ NFA *Convertor::toNFA(const map<string, vector<string>>& RR) {
     for (const auto& postfixExpr : RR) {
         stack<NFA *> stck;
         vector<string> postfix = postfixExpr.second;
-        cout << postfixExpr.first << '\n';
+//        cout << postfixExpr.first << '\n';
         for (const auto& token : postfix) {
-            cout << token;
+//            cout << token;
             if (global->RE_SYMPOLS.find(token) == global->RE_SYMPOLS.end()) {
                 stck.push(new NFA("SINGLE", token));
                 continue;
@@ -42,7 +42,7 @@ NFA *Convertor::toNFA(const map<string, vector<string>>& RR) {
         cout << '\n';
         (stck.top())->setTokenName(postfixExpr.first);
         mergedNFAS.push_back(stck.top());
-        stck.top()->printNFA();
+//        stck.top()->printNFA();
         stck.pop();
     }
     NFA* merged = new NFA(mergedNFAS);

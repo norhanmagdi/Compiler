@@ -9,7 +9,7 @@ using namespace std;
 class Scanner
 {
     public:
-        Scanner(DFA* dfa);
+        Scanner(DFA* rulesDFA, DFA* RDDFA);
         virtual ~Scanner();
         void scanInput(string &inputFile);
         vector<pair<string,string>> scanWord(string word);
@@ -17,9 +17,17 @@ class Scanner
     protected:
 
     private:
+        pair<Node*, int> checkRE (Node* current, int inputIndx);
         vector<pair<string, string>> tokens;
         GLOBAL *global = global->getInstance();
-        DFA* finalDFA;
+        map <Node* , map<string , Node*>> rulesDFATable;
+        map <Node* , map<string , Node*>> RDDFATable;
+        DFA* rulesDFA;
+        DFA* RDDFA;
+
+    void toStrinsVector(string word);
+
+    pair<Node *, int> checkRD(Node *current, int chrIndx, string word);
 };
 
 #endif // SCANNER_H
