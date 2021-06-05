@@ -6,15 +6,6 @@
 #define SEPARATOR "--------------------------------------\n"
 #define sp second
 #define fp first
-
-#include "include/Parser.h"
-#include "include/Edge.h"
-#include "include/Node.h"
-#include "include/GLOBAL.h"
-#include "include/NFA.h"
-#include "include/Scanner.h"
-#include "include/DFA.h"
-#include "include/Convertor.h"
 #include "include/readGrammar.h"
 
 
@@ -57,6 +48,17 @@ int main() {
      for (const auto &t : ter) {
        cout<<t<<endl;
     }
+    cout<<"after modification"<<endl;
+     vector<pair<string,vector<string>>> leftFacGrammar=rg.leftFactoring(leftRecGrammar);
+      for(const auto &g : leftFacGrammar){
+            cout<<g.first<<"::";
+            for(const auto &k : g.second)
+                cout<<k<<" | ";
+            cout<<endl;
+
+   }
+   rg.writeFile(leftFacGrammar);
+
     /*cout << "TO Parser\n";
     Parser pars;
     GLOBAL *global = global->getInstance();
