@@ -40,7 +40,7 @@ void readGrammar:: parseLine(string line) {
         non_terminals.insert(trim(temp.first));
         grammar_set.push_back(temp);
     }else{
-        grammar_set.back().second=grammar_set.back().second+" "+line.substr(1, string::npos);
+        grammar_set.back().second=grammar_set.back().second+" "+line.substr(0, string::npos);
     }
 
 }
@@ -82,14 +82,6 @@ void readGrammar:: splitGrammar() {
             rhs.push_back(trim(str));
          temp.second=rhs;
          splited_grammar_set.push_back(temp);
-        /* cout<<endl;
-         for(const auto &g : splited_grammar_set){
-            cout<<g.first<<endl;
-            for(const auto &k : g.second)
-                cout<<k<<endl;
-
-         }
-*/
 
     }
 }
@@ -115,7 +107,20 @@ void readGrammar:: parseGrammar() {
 }
 
 
-void readGrammar:: print(){
+void readGrammar:: writeFile(vector<pair<string,vector<string>>> finalGrammar){
+    ofstream myfile;
+    myfile.open ("modified grammar.txt");
+    for(const auto &g : finalGrammar){
+            myfile<<g.first<<" = ";
+            for(const auto &k : g.second){
+                if(k==g.second.back())
+                    myfile<<k<<"\n";
+                else
+                    myfile<<k<<" | ";
+            }
+
+    }
+    myfile.close();
 }
 vector<pair<string,vector<string>>>readGrammar::solveLeftRecursion(pair<string,vector<string>> term) {
     vector<pair<string,vector<string>>>ans;
@@ -153,7 +158,7 @@ bool readGrammar::containLeftRecursion(pair<string,vector<string>> term) {
     }
     return false;
 }
-pair<string,vector<string>> replaceProductionWith(pair<string,vector<string>> termi,pair<string,vector<string>> termj) {
+pair<string,vector<string>> readGrammar::indirectLeftRec(pair<string,vector<string>> termi,pair<string,vector<string>> termj) {
     cout<<"replacement"<<termi.first<<termj.first<<endl;
     pair<string,vector<string>> newTerm,modifiedTerm;
     newTerm.first=termi.first;
@@ -186,19 +191,79 @@ vector<pair<string,vector<string>>> readGrammar::leftRecursion( vector<pair<stri
             cout<<i<<j<<endl;
             cout<<terms[i].first<<endl;
             cout<<terms[j].first<<endl;
-            newTerm=replaceProductionWith(terms[i],terms[j]);
-            cout<<"new"<<newTerm.second[1]<<endl;
+            newTerm=indirectLeftRec(terms[i],terms[j]);
+            //cout<<"new"<<newTerm.second[1]<<endl;
         }
         //result.push_back(terms[i]);
         if(containLeftRecursion(newTerm)){
             cout<<"find the recursion"<<endl;
             vector<pair<string,vector<string>>>ans=solveLeftRecursion(newTerm);
 
-        result.push_back(ans[0]);
-        result.push_back(ans[1]);
+
+        result.insert(result.end(), ans.begin(), ans.end());
         }else{
             result.push_back(newTerm);
         }
     }
+    return result;
+}
+vector<pair<string,vector<string>>>readGrammar::solveLeftFactoring(pair<string,vector<string>> term) {
+    vector<pair<string,vector<string>>>ans;
+    map<string,vector<string>> repeatedTerms;
+    set<string> firstTerms;
+    pair<string,vector<string>> modifiedTerm,extraTerm;
+    modifiedTerm.first=term.first;
+    vector<string> modifiedRHS;
+
+    for(auto p: term.second){
+        string t=p.substr(0, p.find(' '));
+        if(firstTerms.find(t)!= firstTerms.end()){
+            p=trim(p.erase(0,p.find(' ')));
+            repeatedTerms[t].push_back(p);
+
+        }else {
+            firstTerms.insert(t);
+            string np=trim(p.erase(0,p.find(' ')));
+            if(np=="")
+                np="eps";
+            vector<string> temp={np};
+            repeatedTerms.insert({t,temp});
+        }
+
+    }
+    for(auto i: repeatedTerms){
+            if(i.second.size()==1){
+                if(i.second[0]=="eps")
+                    modifiedRHS.push_back(i.first);
+                else
+                    modifiedRHS.push_back(i.first+" "+i.second[0]);
+
+            }else{
+                vector<string>extraRHS;
+                extraTerm.first=term.first+"'";
+                for(int i=0;i<ans.size();i++)
+                    extraTerm.first=extraTerm.first+"'";
+                for(auto j: i.second)
+                    extraRHS.push_back(j);
+                modifiedRHS.push_back(i.first+" "+extraTerm.first);
+                extraTerm.second=extraRHS;
+                ans.push_back(extraTerm);
+
+            }
+
+
+        }
+    modifiedTerm.second=modifiedRHS;
+    ans.push_back(modifiedTerm);
+    return ans;
+}
+vector<pair<string,vector<string>>> readGrammar::leftFactoring( vector<pair<string,vector<string>>> terms) {
+    vector<pair<string,vector<string>>>result{};
+    for(int i = 0; i < terms.size();i++){
+
+       vector<pair<string,vector<string>>>ans=solveLeftFactoring(terms[i]);
+        result.insert(result.end(), ans.begin(), ans.end());
+    }
+
     return result;
 }
