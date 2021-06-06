@@ -26,8 +26,8 @@ void readGrammar:: readFile(){
      string input;
      while (getline(std::cin,input))
         lines.push_back(trim(input));
-     for(int i=0;i<lines.size();i++)
-        cout<<lines[i]<<endl;
+    /* for(int i=0;i<lines.size();i++)
+        cout<<lines[i]<<endl;*/
 }
 void readGrammar:: parseLine(string line) {
     if (line[0]=='#'){
@@ -45,19 +45,19 @@ void readGrammar:: parseLine(string line) {
 
 }
 void readGrammar:: splitGrammar() {
-    cout<<endl;
-    cout<<"new grammar"<<endl;
+   // cout<<endl;
+  //  cout<<"new grammar"<<endl;
     for (const auto &g : grammar_set) {
-         cout<<g.first<<" "<<g.second<<endl;
+       //  cout<<g.first<<" "<<g.second<<endl;
          pair <string,vector<string>> temp;
          temp.first=trim(g.first);
          string str="",terminal="";
          bool first=false;
          vector<string>rhs;
          string r=std::move(g.second);
-         cout<<r<<endl;
+        // cout<<r<<endl;
          for (auto i : r){
-            cout<<i<<",";
+         //   cout<<i<<",";
             if(i=='\''&&!first){
                // cout<<"find ' at "<<i<<endl;
                 first=true;
@@ -129,7 +129,7 @@ vector<pair<string,vector<string>>>readGrammar::solveLeftRecursion(pair<string,v
     modifiedTerm.first=term.first;
     vector<string> newRHS,modifiedRHS;
     for(auto p: term.second){
-        cout<<"solving "<<p<<endl;
+//        cout<<"solving "<<p<<endl;
         if(p.substr(0, p.find(' '))== term.first){
             p=trim(p.erase(0,p.find(' ')));
             newRHS.push_back(p+" "+newTerm.first);
@@ -151,7 +151,7 @@ vector<pair<string,vector<string>>>readGrammar::solveLeftRecursion(pair<string,v
 
 bool readGrammar::containLeftRecursion(pair<string,vector<string>> term) {
     for(auto p: term.second){
-        cout<<term.first<<",,"<<p<<endl;
+//        cout<<term.first<<",,"<<p<<endl;
         if(p.substr(0, p.find(' '))== term.first){
             return true;
         }
@@ -167,22 +167,22 @@ pair<string,vector<string>> readGrammar::indirectLeftRec(pair<string,vector<stri
     for(auto p : temp){
         if(p.substr(0, p.find(' '))== termj.first){
             p=trim(p.erase(0,p.find(' ')));
-            cout<<"p"<<p<<endl;
+          //  cout<<"p"<<p<<endl;
            // newRHS.push_back(p+" "+newTerm.first);
             for(auto pr : termj.second){
-                cout<<pr+" "+p<<endl;
+              //  cout<<pr+" "+p<<endl;
                 newRHS.push_back(pr+" "+p);
             }
 
         }else{
             newRHS.push_back(p);
-            cout<<p<<endl;
+           // cout<<p<<endl;
         }
     }
     newTerm.second=newRHS;
     return newTerm;
 }
-vector<pair<string,vector<string>>> readGrammar::leftRecursion( vector<pair<string,vector<string>>> terms) {
+void readGrammar::leftRecursion( vector<pair<string,vector<string>>> terms) {
     vector<pair<string,vector<string>>>result{};
     pair<string,vector<string>> newTerm;
     for(int i = 0; i < terms.size();i++){
@@ -205,7 +205,7 @@ vector<pair<string,vector<string>>> readGrammar::leftRecursion( vector<pair<stri
             result.push_back(newTerm);
         }
     }
-    return result;
+    setLeftRecGrammar(result);
 }
 bool readGrammar::containLeftFactoring(pair<string,vector<string>> term){
     set<string> firstTerms;
@@ -306,7 +306,7 @@ vector<pair<string,vector<string>>>readGrammar::solveLeftFactoring(pair<string,v
     ans.insert(ans.begin(),modifiedTerm);
     return ans;
 }
-vector<pair<string,vector<string>>> readGrammar::leftFactoring( vector<pair<string,vector<string>>> terms) {
+void readGrammar::leftFactoring( vector<pair<string,vector<string>>> terms) {
 
     vector<pair<string,vector<string>>>result{};
     for(int i = 0; i < terms.size();i++){
@@ -320,5 +320,25 @@ vector<pair<string,vector<string>>> readGrammar::leftFactoring( vector<pair<stri
 
     }
 
-    return result;
+   setModifiedGrammar(result);
+   setFirstNonTerminal(result.front().first);
+}
+vector<pair<string,vector<string>>>readGrammar::getLeftRecGrammar(){
+    return this->leftRecGrammar;
+}
+void readGrammar::setLeftRecGrammar(vector<pair<string,vector<string>>> leftRecGrammar){
+    this->leftRecGrammar=leftRecGrammar;
+}
+vector<pair<string,vector<string>>>readGrammar::getModifiedGrammar(){
+    return this->modifiedGrammar;
+}
+
+void readGrammar::setModifiedGrammar(vector<pair<string,vector<string>>> modifiedGrammar){
+    this->modifiedGrammar=modifiedGrammar;
+}
+string readGrammar::getFirstNonTerminal(){
+    return this->firstNonTerminal;
+}
+void readGrammar::setFirstNonTerminal(string fnt){
+    this->firstNonTerminal=fnt;
 }
