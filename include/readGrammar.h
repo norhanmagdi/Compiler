@@ -10,12 +10,16 @@ class readGrammar
         void parseGrammar();
         unordered_set<string> getTerminals();
         unordered_set<string> getNonTerminals();
-        unordered_set<string> terminals;
-        unordered_set<string> non_terminals;
+        vector<pair<string,vector<string>>> getLeftRecGrammar();
+        vector<pair<string,vector<string>>> getModifiedGrammar();
+        void setLeftRecGrammar(vector<pair<string,vector<string>>> leftRecGrammar);
+        void setModifiedGrammar(vector<pair<string,vector<string>>> modifiedGrammar);
         void setNonTerminals(unordered_set<string> t);
+        string getFirstNonTerminal();
+        void setFirstNonTerminal(string fnt);
         vector<pair<string,vector<string>>> get_splited_grammar_set();
-        vector<pair<string,vector<string>>> leftRecursion(const vector<pair<string,vector<string>>> terms);
-        vector<pair<string,vector<string>>> leftFactoring(const vector<pair<string,vector<string>>> terms);
+        void leftRecursion(const vector<pair<string,vector<string>>> terms);
+        void leftFactoring(const vector<pair<string,vector<string>>> terms);
         bool containLeftRecursion(pair<string,vector<string>> term);
         vector<pair<string,vector<string>>> solveLeftRecursion(pair<string,vector<string>> term);
         pair<string,vector<string>>indirectLeftRec(pair<string,vector<string>> termi,pair<string,vector<string>> termj);
@@ -34,6 +38,11 @@ class readGrammar
         void parseLine(string line);
         void readFile();
         void splitGrammar();
+        unordered_set<string> terminals;
+        unordered_set<string> non_terminals;
+        vector<pair<string,vector<string>>> leftRecGrammar;
+        vector<pair<string,vector<string>>> modifiedGrammar;
+        string firstNonTerminal;
 
 };
 
