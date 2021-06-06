@@ -30,7 +30,7 @@ int main() {
 
    }
    vector<pair<string,vector<string>>> leftRecGrammar=rg.leftRecursion(newgrammar);
-    cout<<"recursion"<<endl;
+    cout<<"after left recursion"<<endl;
     for(const auto &g : leftRecGrammar){
             cout<<g.first<<"::";
             for(const auto &k : g.second)
@@ -38,17 +38,23 @@ int main() {
             cout<<endl;
 
    }
-   set<string> nter=rg.getNonTerminals();
+
+    cout<<"after modification"<<endl;
+     unordered_set<string> nter=rg.getNonTerminals();
     cout<<"non terminals are"<<endl;
      for (const auto &t : nter) {
        cout<<t<<endl;
     }
-    set<string> ter=rg.getTerminals();
+    unordered_set<string> ter=rg.getTerminals();
     cout<<"terminals are"<<endl;
      for (const auto &t : ter) {
        cout<<t<<endl;
     }
-    cout<<"after modification"<<endl;
+    /*for rule:: STATEMENT_LIST = STATEMENT | STATEMENT_LIST STATEMENT
+    pair is <STATEMENT_LIST,{STATEMENT,STATEMENT_LIST STATEMENT}>
+    */
+
+    cout<<"grammar"<<endl;
      vector<pair<string,vector<string>>> leftFacGrammar=rg.leftFactoring(leftRecGrammar);
       for(const auto &g : leftFacGrammar){
             cout<<g.first<<"::";
