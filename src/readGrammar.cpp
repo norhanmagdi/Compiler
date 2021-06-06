@@ -85,13 +85,13 @@ void readGrammar:: splitGrammar() {
 
     }
 }
-set<string> readGrammar::getTerminals(){
+unordered_set<string> readGrammar::getTerminals(){
     return this->terminals;
 }
-set<string> readGrammar::getNonTerminals(){
+unordered_set<string> readGrammar::getNonTerminals(){
     return this->non_terminals;
 }
-void readGrammar::setNonTerminals(set<string> t){
+void readGrammar::setNonTerminals(unordered_set<string> t){
     this->non_terminals =t;
 }
 vector<pair<string,vector<string>>> readGrammar::get_splited_grammar_set(){
@@ -159,7 +159,7 @@ bool readGrammar::containLeftRecursion(pair<string,vector<string>> term) {
     return false;
 }
 pair<string,vector<string>> readGrammar::indirectLeftRec(pair<string,vector<string>> termi,pair<string,vector<string>> termj) {
-    cout<<"replacement"<<termi.first<<termj.first<<endl;
+   // cout<<"replacement"<<termi.first<<termj.first<<endl;
     pair<string,vector<string>> newTerm,modifiedTerm;
     newTerm.first=termi.first;
     vector<string> newRHS;
@@ -188,28 +188,40 @@ vector<pair<string,vector<string>>> readGrammar::leftRecursion( vector<pair<stri
     for(int i = 0; i < terms.size();i++){
         newTerm=terms[i];
         for(int j = 0; j < i;j++){
-            cout<<i<<j<<endl;
-            cout<<terms[i].first<<endl;
-            cout<<terms[j].first<<endl;
-            newTerm=indirectLeftRec(terms[i],terms[j]);
-            //cout<<"new"<<newTerm.second[1]<<endl;
+            if(containLeftRecursion(terms[j])){
+                vector<pair<string,vector<string>>>ans=solveLeftRecursion(terms[j]);
+                newTerm=indirectLeftRec(newTerm,ans[0]);
+
+            }else{
+                newTerm=indirectLeftRec(newTerm,terms[j]);
+            }
+
         }
         //result.push_back(terms[i]);
         if(containLeftRecursion(newTerm)){
-            cout<<"find the recursion"<<endl;
             vector<pair<string,vector<string>>>ans=solveLeftRecursion(newTerm);
-
-
-        result.insert(result.end(), ans.begin(), ans.end());
+            result.insert(result.end(), ans.begin(), ans.end());
         }else{
             result.push_back(newTerm);
         }
     }
     return result;
 }
+bool readGrammar::containLeftFactoring(pair<string,vector<string>> term){
+    set<string> firstTerms;
+    for(auto p: term.second){
+        string t=p.substr(0, p.find(' '));
+        if(firstTerms.find(t)!= firstTerms.end()){
+            return true;
+        }else {
+            firstTerms.insert(t);
+        }
+    }
+    return false;
+}
 vector<pair<string,vector<string>>>readGrammar::solveLeftFactoring(pair<string,vector<string>> term) {
     vector<pair<string,vector<string>>>ans;
-    map<string,vector<string>> repeatedTerms;
+    unordered_map<string,vector<string>> repeatedTerms;
     set<string> firstTerms;
     pair<string,vector<string>> modifiedTerm,extraTerm;
     modifiedTerm.first=term.first;
@@ -218,19 +230,37 @@ vector<pair<string,vector<string>>>readGrammar::solveLeftFactoring(pair<string,v
     for(auto p: term.second){
         string t=p.substr(0, p.find(' '));
         if(firstTerms.find(t)!= firstTerms.end()){
-            p=trim(p.erase(0,p.find(' ')));
+            if(trim(p)==t)
+                p="eps";
+            else
+                p=trim(p.erase(0,p.find(' ')));
             repeatedTerms[t].push_back(p);
 
         }else {
             firstTerms.insert(t);
-            string np=trim(p.erase(0,p.find(' ')));
-            if(np=="")
+            string np;
+            if(trim(p)==t)
                 np="eps";
+            else
+                np=trim(p.erase(0,p.find(' ')));
             vector<string> temp={np};
             repeatedTerms.insert({t,temp});
         }
 
     }
+ /*   cout<<"first terms:"<<endl;
+    for(auto i: firstTerms){
+        cout<<i<<",,";
+    }
+     cout<<"repeat terms:"<<endl;
+    for(auto i: repeatedTerms){
+        cout<<i.first<<"::";
+
+        for(auto j: i.second){
+            cout<<j<<",,";
+        }
+        cout<<endl;
+    }*/
     for(auto i: repeatedTerms){
             if(i.second.size()==1){
                 if(i.second[0]=="eps")
@@ -239,30 +269,55 @@ vector<pair<string,vector<string>>>readGrammar::solveLeftFactoring(pair<string,v
                     modifiedRHS.push_back(i.first+" "+i.second[0]);
 
             }else{
+                string temp=trim(i.second[0].substr(0, i.second[0].find(' ')));
+                int c=0;
+                for(auto j:i.second){
+                    if(trim(j.substr(0, j.find(' ')))==temp)
+                        c++;
+                }
+                if(c==i.second.size()){
+                    vector<string> ve;
+                    for(auto j :i.second)
+                        ve.push_back(trim(j.erase(0,j.find(' '))));
+                    i.second=ve;
+                    temp=" "+temp+" ";
+                }else
+                    temp=" ";
                 vector<string>extraRHS;
                 extraTerm.first=term.first+"'";
                 for(int i=0;i<ans.size();i++)
                     extraTerm.first=extraTerm.first+"'";
                 for(auto j: i.second)
                     extraRHS.push_back(j);
-                modifiedRHS.push_back(i.first+" "+extraTerm.first);
+                modifiedRHS.push_back(i.first+temp+extraTerm.first);
                 extraTerm.second=extraRHS;
-                ans.push_back(extraTerm);
+
+                if(containLeftFactoring(extraTerm)){
+                    vector<pair<string,vector<string>>> extraAns=solveLeftFactoring(extraTerm);
+                    ans.insert(ans.end(), extraAns.begin(), extraAns.end());
+                }else
+                    ans.push_back(extraTerm);
 
             }
 
 
-        }
+    }
     modifiedTerm.second=modifiedRHS;
-    ans.push_back(modifiedTerm);
+    ans.insert(ans.begin(),modifiedTerm);
     return ans;
 }
 vector<pair<string,vector<string>>> readGrammar::leftFactoring( vector<pair<string,vector<string>>> terms) {
+
     vector<pair<string,vector<string>>>result{};
     for(int i = 0; i < terms.size();i++){
+        if(containLeftFactoring(terms[i])){
+            vector<pair<string,vector<string>>>ans=solveLeftFactoring(terms[i]);
+            result.insert(result.end(), ans.begin(), ans.end());
 
-       vector<pair<string,vector<string>>>ans=solveLeftFactoring(terms[i]);
-        result.insert(result.end(), ans.begin(), ans.end());
+        }else{
+            result.push_back(terms[i]);
+        }
+
     }
 
     return result;
