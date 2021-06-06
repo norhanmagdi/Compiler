@@ -19,17 +19,17 @@ int main() {
     readGrammar rg;
     rg.parseGrammar();
 
-
     vector<pair<string,vector<string>>> newgrammar =rg.get_splited_grammar_set();
-    cout<<"split grammar is"<<endl;
+/*    cout<<"split grammar is"<<endl;
     for(const auto &g : newgrammar){
             cout<<g.first<<"::";
             for(const auto &k : g.second)
                 cout<<k<<",,";
             cout<<endl;
 
-   }
-   vector<pair<string,vector<string>>> leftRecGrammar=rg.leftRecursion(newgrammar);
+   }*/
+   rg.leftRecursion(newgrammar);
+   vector<pair<string,vector<string>>> leftRecGrammar=rg.getLeftRecGrammar();
     cout<<"after left recursion"<<endl;
     for(const auto &g : leftRecGrammar){
             cout<<g.first<<"::";
@@ -40,12 +40,24 @@ int main() {
    }
 
     cout<<"after modification"<<endl;
-     unordered_set<string> nter=rg.getNonTerminals();
+    rg.leftFactoring(leftRecGrammar);
+    unordered_set<string> nter=rg.getNonTerminals();
+    unordered_set<string> ter=rg.getTerminals();
+    vector<pair<string,vector<string>>> leftFacGrammar=rg.getModifiedGrammar();
+    cout<<"grammar"<<endl;
+    for(const auto &g : leftFacGrammar){
+            cout<<g.first<<"::";
+            for(const auto &k : g.second)
+                cout<<k<<" | ";
+            cout<<endl;
+
+    }
+
     cout<<"non terminals are"<<endl;
-     for (const auto &t : nter) {
+    for (const auto &t : nter) {
        cout<<t<<endl;
     }
-    unordered_set<string> ter=rg.getTerminals();
+
     cout<<"terminals are"<<endl;
      for (const auto &t : ter) {
        cout<<t<<endl;
@@ -54,15 +66,10 @@ int main() {
     pair is <STATEMENT_LIST,{STATEMENT,STATEMENT_LIST STATEMENT}>
     */
 
-    cout<<"grammar"<<endl;
-     vector<pair<string,vector<string>>> leftFacGrammar=rg.leftFactoring(leftRecGrammar);
-      for(const auto &g : leftFacGrammar){
-            cout<<g.first<<"::";
-            for(const auto &k : g.second)
-                cout<<k<<" | ";
-            cout<<endl;
 
-   }
+
+   string firstNonTerminal=rg.getFirstNonTerminal();
+   cout<<"first non terminal is : "<<firstNonTerminal<<endl;
    rg.writeFile(leftFacGrammar);
 
     /*cout << "TO Parser\n";
