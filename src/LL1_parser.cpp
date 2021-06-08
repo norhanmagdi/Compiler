@@ -12,7 +12,9 @@ LL1_parser:: LL1_parser(string first_NonTerminal, unordered_map<string, unordere
             table * created_table = new table(first_set,follow_set,Grammar,Terminals);
             this->parseing_table = created_table;
             if(!this->parseing_table->is_valid()){
-                cout<<"ERROR";
+                cout<<"ERROR"<<endl;
+                this->parseing_table->delete_table();
+                delete(this->parseing_table);
                 /*
                 *
                 *
@@ -30,12 +32,14 @@ LL1_parser:: LL1_parser(string first_NonTerminal, unordered_map<string, unordere
 
 bool LL1_parser:: validate_syntax(vector<string> input){
     
+    //Garantees that at the end of input stream there is a '$'
     int input_size = input.size();
     if(input.at(input_size-1) != "$"){
         input.push_back("$");
         input_size++;
     }
 
+    //Initialize stack
     stack<string> parsing_stack;
     parsing_stack.push("$");
     parsing_stack.push(frist_nonterminal);
@@ -55,16 +59,24 @@ bool LL1_parser:: validate_syntax(vector<string> input){
         }
         //if top of the stack is a non terminal
         else if(nonterminals->find(parsing_stack.top()) != nonterminals->end()){
+            //get from the table the equavilent production of this nonterminal with the given terminal as input
             string production = parseing_table->get_production(parsing_stack.top(),input.at(current_token));
             if(production == "ERROR"){
                 return false;
             }
-            
+            cout<< parsing_stack.top()<<" --> "<<production<<endl;
+            //pop non terminal
+            parsing_stack.pop();
+            //add to the stack its possible production terms
+            vector<string>* terms_of_production = split_string(production);
+            for(auto term: *terms_of_production){
+                parsing_stack.push(term);
+            }
         }
         else{
             return false;
         }
     }
-
-
+    cout<<"Process terminated successfully"<<endl;
+    return true;
 }

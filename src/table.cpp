@@ -84,7 +84,7 @@ string table:: get_production(string nonterminal, string terminal){
     return parse_table.find(pair)->second;
 }
 
-vector<string>* table:: split_string(string production){
+vector<string>* split_string(string production){
     int index = 0;
     int size = production.size();
     vector<string>* array_of_terms = new vector<string>();
@@ -99,4 +99,22 @@ vector<string>* table:: split_string(string production){
         index++;
     }
     return array_of_terms;
+}
+
+void table:: print_table(){
+    if(!this->valid_table){
+        cout<< "Invalid table"<<endl;
+        return;
+    }
+
+    for(auto entry: this->parse_table){
+        cout << "[" << entry.first.first << "]" << "[" << entry.first.second << "]" << "-->" << entry.second << endl;
+    }
+
+}
+
+void table:: delete_table(){
+    delete(&this->parse_table);
+    delete(&this->valid_table);
+    delete(this);
 }
