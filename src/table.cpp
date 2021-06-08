@@ -15,10 +15,11 @@ table::table(unordered_map<string, unordered_set<string>*>* first_set, unordered
         for(auto entry_in_first_set: *first_set){
             if(gram->find(entry_in_first_set.first) == gram->end()){
                 cout << "ERROR" << endl;
-                this->valid_table = true;
+                this->valid_table = false;
                 break;
             }
             vector<string>* vector_of_productions = (gram->find(entry_in_first_set.first))->second;
+            bool has_epsilon = false;
             for(auto terminal: *entry_in_first_set.second){
                 for(auto production: *vector_of_productions){
                     //if terminal comes from this production add them to the table
@@ -29,26 +30,39 @@ table::table(unordered_map<string, unordered_set<string>*>* first_set, unordered
                             This cell in the table already has a value, hence ambiguous grammar -Not LL(1)-.
                             */
                            cout<< "ERROR" << endl;
-                           this->valid_table = true;
+                           this->valid_table = false;
                            break;
                         }
                         this->parse_table[pair] = production;
                     }
                     //if terminal t is epsilon,then for each terminal in follow set combine it with nonterminal n and give them this production in the table  
                     if(terminal == "eps"){
-                        for(auto terminal_in_follow_set : *(follow_set->find(entry_in_first_set.first))->second){
-                            pair pair = make_pair(entry_in_first_set.first,terminal_in_follow_set);
-                            if(parse_table.find(pair) != parse_table.end()){
-                                /*
-                                This cell in the table already has a value, hence ambiguous grammar -Not LL(1)-.
-                                */
-                                cout<< "ERROR" << endl;
-                                this->valid_table = true;
-                                break;
-                            }
-                            this->parse_table[pair] = "eps";
-                        }
+                        has_epsilon = true;
                     }
+                }
+            }
+            if(has_epsilon){
+                for(auto terminal_in_follow_set : *(follow_set->find(entry_in_first_set.first))->second){
+                    pair pair = make_pair(entry_in_first_set.first,terminal_in_follow_set);
+                    if(parse_table.find(pair) != parse_table.end()){
+                        /*
+                        This cell in the table already has a value, hence ambiguous grammar -Not LL(1)-.
+                        */
+                        cout<< "ERROR" << endl;
+                        this->valid_table = false;
+                        break;
+                    }
+                    this->parse_table[pair] = "eps";
+                }
+            }
+            else{
+                //for synchronization in case of error
+                for(auto terminal_in_follow_set : *(follow_set->find(entry_in_first_set.first))->second){
+                    pair pair = make_pair(entry_in_first_set.first,terminal_in_follow_set);
+                    if(parse_table.find(pair) != parse_table.end()){
+                        continue;
+                    }
+                    this->parse_table[pair] = "synch";
                 }
             }
         }
