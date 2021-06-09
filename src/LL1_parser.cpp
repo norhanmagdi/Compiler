@@ -8,6 +8,8 @@ LL1_parser:: LL1_parser(string first_NonTerminal, unordered_map<string, unordere
             //initialize pointer to first non terminal
             this->frist_nonterminal = first_NonTerminal;
 
+            this->valid_parser = true;
+
             //create parsing table and using first and follow sets, and the grammar. Then initialize a pointer to the created table.
             table * created_table = new table(first_set,follow_set,Grammar,Terminals);
             this->parseing_table = created_table;
@@ -15,13 +17,8 @@ LL1_parser:: LL1_parser(string first_NonTerminal, unordered_map<string, unordere
                 cout<<"ERROR"<<endl;
                 this->parseing_table->delete_table();
                 delete(this->parseing_table);
-                /*
-                *
-                *
-                * Error handeling
-                * 
-                * 
-                */
+                this->valid_parser = false;
+                cout<<"Error: Grammar is not LL1, please modify grammar by removing any ambiguity from grammar."<<endl;
             }
 
             //initialize pointers to sets of terminals and nonterminals
@@ -30,8 +27,14 @@ LL1_parser:: LL1_parser(string first_NonTerminal, unordered_map<string, unordere
 
 }
 
+
+
 bool LL1_parser:: validate_syntax(vector<string> input){
     
+    //if grammar has ambiguity, the table is invalid and also the parser
+    if(!valid_parser)
+        return false;
+
     //Garantees that at the end of input stream there is a '$'
     int input_size = input.size();
     if(input.at(input_size-1) != "$"){
@@ -46,6 +49,8 @@ bool LL1_parser:: validate_syntax(vector<string> input){
 
     int current_token = 0;
 
+    bool error = false;
+
     while(parsing_stack.top() != "$" && current_token < input_size){
         //if top of the stack is a terminal
         if(terminals->find(parsing_stack.top()) != terminals->end()){
@@ -54,15 +59,31 @@ bool LL1_parser:: validate_syntax(vector<string> input){
                 parsing_stack.pop();
             }
             else{
-                return false; 
+                error = true;
+                /*
+                *
+                *
+                * 
+                [*******\\\\\error handeling\\\\\****] 
+                * 
+                * 
+                * 
+                */ 
             }
         }
         //if top of the stack is a non terminal
         else if(nonterminals->find(parsing_stack.top()) != nonterminals->end()){
             //get from the table the equavilent production of this nonterminal with the given terminal as input
             string production = parseing_table->get_production(parsing_stack.top(),input.at(current_token));
-            if(production == "ERROR"){
-                return false;
+            if(production == "ERROR" || production == "synch"){
+                error  = true;
+                /*
+                *
+                *
+                [******\\Error handeling\\********]
+                * 
+                * 
+                */
             }
             cout<< parsing_stack.top()<<" --> "<<production<<endl;
             //pop non terminal
@@ -74,9 +95,22 @@ bool LL1_parser:: validate_syntax(vector<string> input){
             }
         }
         else{
+            cout<<"Error: Undefined term!"<<endl;
             return false;
         }
     }
+
+    if(error){
+        cout<<"Error: Could not match input."<<endl;
+        return false;
+    }
+
     cout<<"Process terminated successfully"<<endl;
     return true;
+}
+
+bool LL1_parser::is_valid_input(vector<string> input){
+    /*
+    To be done
+    */
 }
