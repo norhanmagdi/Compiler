@@ -1,85 +1,85 @@
 #include <vector>
-#include "table.h"
+#include "../include/table.h"
 
 /* The creation of the table happens in the constructor of this class. */
-table::table(unordered_map<string, unordered_set<string>*>* first_set, unordered_map<string, unordered_set<string>*>* follow_set,
-    vector<pair<string,vector<string>*>>* Grammar, unordered_set<string>* Terminals){
+table::table(unordered_map<string, unordered_set<string>> first_set, unordered_map<string, unordered_set<string>> follow_set,
+    vector<pair<string,vector<string>>> Grammar, unordered_set<string> Terminals){
         this->valid_table = true;
         //First step: transform Grammar into a map in ordered to make it easier to search for keys
-        unordered_map<string,vector<string>*>* gram = new unordered_map<string,vector<string>*>();
-        for(auto grammar_rule: *Grammar){
+        unordered_map<string,vector<string>> * gram = new unordered_map<string,vector<string>>();
+        for(auto grammar_rule: Grammar){
             gram->insert(grammar_rule);
         }
 
         //Second step: we need to go through all the elements of the first_set and fill the table with the suitable production rule
-        for(auto entry_in_first_set: *first_set){
+        for(auto entry_in_first_set: first_set){
             if(gram->find(entry_in_first_set.first) == gram->end()){
-                cout << "ERROR" << endl;
+                cout << "ERROR1: Invalid term to grammar." << endl;
                 this->valid_table = false;
                 break;
             }
-            vector<string>* vector_of_productions = (gram->find(entry_in_first_set.first))->second;
+            vector<string> vector_of_productions = (gram->find(entry_in_first_set.first))->second;
             bool has_epsilon = false;
-            for(auto terminal: *entry_in_first_set.second){
-                for(auto production: *vector_of_productions){
+            for(auto terminal: entry_in_first_set.second){
+                for(auto production: vector_of_productions){
                     //if terminal comes from this production add them to the table
-                    if(terminal != "eps" && check_terminal_production(terminal,production,entry_in_first_set.first,Terminals,first_set)){
-                        pair pair = make_pair(entry_in_first_set.first,terminal);
-                        if(parse_table.find(pair) != parse_table.end()){
+                    if(terminal.compare("eps") && production.compare("eps") && check_terminal_production(terminal,production,entry_in_first_set.first,Terminals,first_set)){
+                        pair<string,string> p = make_pair(entry_in_first_set.first,terminal);
+                        if(parse_table.find(p) != parse_table.end()){
                             /*
                             This cell in the table already has a value, hence ambiguous grammar -Not LL(1)-.
                             */
-                           cout<< "ERROR" << endl;
+                           cout<< "ERROR2: Multiple parsing paths detected. Not LL1." << endl;
                            this->valid_table = false;
                            break;
                         }
-                        this->parse_table[pair] = production;
+                        this->parse_table[p] = production;
                     }
                     //if terminal t is epsilon,then for each terminal in follow set combine it with nonterminal n and give them this production in the table  
-                    if(terminal == "eps"){
+                    if(!production.compare("eps")){
                         has_epsilon = true;
                     }
                 }
             }
             if(has_epsilon){
-                for(auto terminal_in_follow_set : *(follow_set->find(entry_in_first_set.first))->second){
-                    pair pair = make_pair(entry_in_first_set.first,terminal_in_follow_set);
-                    if(parse_table.find(pair) != parse_table.end()){
+                for(auto terminal_in_follow_set : (follow_set.find(entry_in_first_set.first))->second){
+                    pair<string,string> p = make_pair(entry_in_first_set.first,terminal_in_follow_set);
+                    if(parse_table.find(p) != parse_table.end()){
                         /*
                         This cell in the table already has a value, hence ambiguous grammar -Not LL(1)-.
                         */
-                        cout<< "ERROR" << endl;
+                        cout<< "ERROR3: Multiple parsing paths detected. Not LL1." << endl;
                         this->valid_table = false;
                         break;
                     }
-                    this->parse_table[pair] = "eps";
+                    this->parse_table[p] = "eps";
                 }
             }
             else{
                 //for synchronization in case of error
-                for(auto terminal_in_follow_set : *(follow_set->find(entry_in_first_set.first))->second){
-                    pair pair = make_pair(entry_in_first_set.first,terminal_in_follow_set);
-                    if(parse_table.find(pair) != parse_table.end()){
+                for(auto terminal_in_follow_set : (follow_set.find(entry_in_first_set.first))->second){
+                    pair<string,string> p = make_pair(entry_in_first_set.first,terminal_in_follow_set);
+                    if(parse_table.find(p) != parse_table.end()){
                         continue;
                     }
-                    this->parse_table[pair] = "synch";
+                    this->parse_table[p] = "synch";
                 }
             }
         }
 }
 
-bool table:: check_terminal_production(string terminal, string production,string nonterminal, unordered_set<string>* Terminals, unordered_map<string, unordered_set<string>*>* first_set){
+bool table:: check_terminal_production(string terminal, string production,string nonterminal, unordered_set<string> Terminals, unordered_map<string, unordered_set<string>> first_set){
    int terminal_index = 0;
    int production_index = 0;
    vector<string>* terms_of_production = split_string(production);
-   if(Terminals->find(terms_of_production->at(0)) != Terminals->end()){
+   if(Terminals.find(terms_of_production->at(0)) != Terminals.end()){
         if(terminal == terms_of_production->at(0))
             return true;
         else 
             return false;
    }
-   unordered_set<string>* nonTerminal_first_set = (first_set->find(nonterminal))->second;
-   for(auto entry: *nonTerminal_first_set){
+   unordered_set<string> nonTerminal_first_set = (first_set.find(nonterminal))->second;
+   for(auto entry: nonTerminal_first_set){
        if(entry == terminal)
         return true;
    }
@@ -91,11 +91,11 @@ bool table:: is_valid(){
 }
 
 string table:: get_production(string nonterminal, string terminal){
-    pair pair = make_pair(nonterminal,terminal);
-    if(parse_table.find(pair) == parse_table.end()){
-        return "ERROR";
+    pair<string,string> p = make_pair(nonterminal,terminal);
+    if(parse_table.find(p) == parse_table.end()){
+        return "ERROR: Empty cell in the table.";
     }
-    return parse_table.find(pair)->second;
+    return parse_table.find(p)->second;
 }
 
 vector<string>* split_string(string production){

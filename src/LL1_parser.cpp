@@ -1,8 +1,7 @@
-#include "LL1_parser.h"
+#include "../include/LL1_parser.h"
 #include <stack>
 
-LL1_parser:: LL1_parser(string first_NonTerminal, unordered_map<string, unordered_set<string>*>* first_set,
-        unordered_map<string, unordered_set<string>*>* follow_set,vector<pair<string,vector<string>*>>* Grammar,
+LL1_parser:: LL1_parser(string first_NonTerminal, vector<pair<string,vector<string>>>* Grammar,
         unordered_set<string>* Terminals, unordered_set<string>* Nonterminals){
 
             //initialize pointer to first non terminal
@@ -10,8 +9,15 @@ LL1_parser:: LL1_parser(string first_NonTerminal, unordered_map<string, unordere
 
             this->valid_parser = true;
 
+            //Initialize the object that creates first and follow sets used in the creation of the table
+            ParseTable * foundation_of_table = new ParseTable(*Terminals,*Nonterminals,*Grammar,first_NonTerminal);
+                    
+            unordered_map<string,unordered_set<string>> first_set = foundation_of_table->getFirstSet();
+
+            unordered_map<string,unordered_set<string>> follow_set = foundation_of_table->getFollowSet();
+
             //create parsing table and using first and follow sets, and the grammar. Then initialize a pointer to the created table.
-            table * created_table = new table(first_set,follow_set,Grammar,Terminals);
+            table * created_table = new table(&first_set,&follow_set,Grammar,Terminals);
             this->parseing_table = created_table;
             if(!this->parseing_table->is_valid()){
                 cout<<"ERROR"<<endl;
