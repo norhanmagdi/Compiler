@@ -1,6 +1,7 @@
 #include <iostream>
 #include "../include/ParseTable.h"
 #include "../include/table.h"
+#include "../include/LL1_parser.h"
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -84,8 +85,12 @@ int main() {
 
     cout << "*************" <<endl;
 
-    table * t = new table(first_set,follow_set,split_grammar_set,terminals);
+    LL1_parser * parser = new LL1_parser("E",&split_grammar_set,&terminals,&non_terminals);
 
-    t->print_table();
+    vector<string> input;
+    input.push_back("id + id"); 
+
+    parser->is_valid_input(input);
+
 
 }

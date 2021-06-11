@@ -17,7 +17,7 @@ LL1_parser:: LL1_parser(string first_NonTerminal, vector<pair<string,vector<stri
             unordered_map<string,unordered_set<string>> follow_set = foundation_of_table->getFollowSet();
 
             //create parsing table and using first and follow sets, and the grammar. Then initialize a pointer to the created table.
-            table * created_table = new table(&first_set,&follow_set,Grammar,Terminals);
+            table * created_table = new table(first_set,follow_set,*Grammar,*Terminals);
             this->parseing_table = created_table;
             if(!this->parseing_table->is_valid()){
                 cout<<"ERROR"<<endl;
@@ -94,10 +94,14 @@ bool LL1_parser:: validate_syntax(vector<string> input){
             cout<< parsing_stack.top()<<" --> "<<production<<endl;
             //pop non terminal
             parsing_stack.pop();
-            //add to the stack its possible production terms
-            vector<string>* terms_of_production = split_string(production);
-            for(auto term: *terms_of_production){
-                parsing_stack.push(term);
+
+            //check that production is not epsilon, and add it to the stack
+            if(production.compare("eps")){
+                //add to the stack its possible production terms
+                vector<string>* terms_of_production = split_string(production);
+                for( int i = terms_of_production->size()-1 ; i >= 0 ; i-- ){
+                    parsing_stack.push(terms_of_production->at(i));
+                }
             }
         }
         else{
@@ -115,8 +119,20 @@ bool LL1_parser:: validate_syntax(vector<string> input){
     return true;
 }
 
-bool LL1_parser::is_valid_input(vector<string> input){
-    /*
-    To be done
-    */
+void LL1_parser::is_valid_input(vector<string> input){
+    int i = 0;
+    cout << "***** STARTING SYNTAX CHECKING BY TOKEN *****" << endl;
+    for(auto token: input){
+
+        i++;
+        vector<string>* input_vector = split_string(token);
+        cout << "TOKEN #" << i << " :- " << token << endl;
+        bool passed = validate_syntax(*input_vector);
+        if(!passed){
+            cout << "PROCESS INTERRUPTED DUE TO INVALID INPUT" << endl;
+            break;
+        }
+
+    }
+    cout << "***** PROCESS TERMINATED *****" << endl;      
 }
