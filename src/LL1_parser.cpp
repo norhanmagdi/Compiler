@@ -136,3 +136,9 @@ void LL1_parser::is_valid_input(vector<string> input){
     }
     cout << "***** PROCESS TERMINATED *****" << endl;      
 }
+
+void LL1_parser:: print_table(){
+    if(this->valid_parser){
+        this->parseing_table->print_table();
+    }
+}

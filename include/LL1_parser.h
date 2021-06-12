@@ -11,6 +11,7 @@ class LL1_parser{
         LL1_parser(string first_NonTerminal,vector<pair<string,vector<string>>>* Grammar,
             unordered_set<string>* Terminals, unordered_set<string>* Nonterminals);
         void is_valid_input(vector<string> input);
+        void print_table();
 
     private:
         table * parseing_table;
