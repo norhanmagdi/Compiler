@@ -285,6 +285,7 @@ vector<pair<string,vector<string>>>readGrammar::solveLeftFactoring(pair<string,v
                     temp=" ";
                 vector<string>extraRHS;
                 extraTerm.first=term.first+"'";
+                non_terminals.insert(extraTerm.first);
                 for(int i=0;i<ans.size();i++)
                     extraTerm.first=extraTerm.first+"'";
                 for(auto j: i.second)
