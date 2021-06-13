@@ -3,12 +3,13 @@
 #include <iostream>
 #include <bits/stdc++.h>
 #include <unordered_set>
+
 using namespace std;
 
 class ParseTable{
 public:
-    ParseTable(unordered_set<string> terminals, unordered_set<string> non_terminals, 
-    vector<pair<string, vector<string>>> split_grammar_set, string first_Nonterminal);
+    ParseTable(unordered_set<string> terminals, unordered_set<string> non_terminals,
+               vector<pair<string, vector<string>>> split_grammar_set, string first_Nonterminal);
 
     unordered_map<string, unordered_set<string>> getFirstSet();
     unordered_map<string, unordered_set<string>> getFollowSet();

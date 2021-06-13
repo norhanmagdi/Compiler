@@ -22,26 +22,27 @@ struct hash_pair {
 };
 
 class table{
-    public: 
-        table(unordered_map<string,unordered_set<string>> first_set, unordered_map<string,unordered_set<string>> follow_set,
-            vector<pair<string,vector<string>>> Grammar, unordered_set<string> Terminals);
-        
-         /*      To indicate whether the creation of the table was successful or not.    */
-        bool is_valid();
-        /*      Returns the production in the cell given as [nonterminal, terminal]. if the cell is empty returns "ERROR".  */
-        string get_production(string nonterminal, string terminal);
+public:
+    table(unordered_map<string,unordered_set<string>> first_set, unordered_map<string,unordered_set<string>> follow_set,
+          vector<pair<string,vector<string>>> Grammar, unordered_set<string> Terminals);
 
-        void print_table();
+    /*      To indicate whether the creation of the table was successful or not.    */
+    bool is_valid();
+    /*      Returns the production in the cell given as [nonterminal, terminal]. if the cell is empty returns "ERROR".  */
+    string get_production(string nonterminal, string terminal);
 
-        void delete_table();
+    void print_table();
 
-    
-    private:
-        bool check_terminal_production(string terminal, string production, string nonterminal, 
-            unordered_set<string> Terminals, unordered_map<string, unordered_set<string>> first_set);
-        bool valid_table;
-        /*      [Non_Terminal][Terminal] -->    production      */
-        unordered_map<pair<string,string>, string, hash_pair> parse_table;
+    void delete_table();
+
+
+private:
+    bool check_terminal_production(string terminal, string production, string nonterminal,
+                                   unordered_set<string> Terminals, unordered_map<string, unordered_set<string>> first_set);
+    bool valid_table;
+    /*      [Non_Terminal][Terminal] -->    production      */
+    unordered_map<pair<string,string>, string, hash_pair> parse_table;
+    bool error_flag = false;
 
 };
 

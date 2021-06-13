@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <bits/stdc++.h>
+#include "../include/DFA.h"
 
 using namespace std;
 
@@ -23,7 +24,8 @@ class Node
         vector<Edge*> getAllEdges();
         void setPriority(int priority);
         int getPriority();
-
+        bool marked = false;
+        vector<Node *> NNodes;
 
     protected:
 

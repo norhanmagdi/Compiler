@@ -168,6 +168,33 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+src/Convertor.obj: src/Convertor.cpp.obj
+
+.PHONY : src/Convertor.obj
+
+# target to build an object file
+src/Convertor.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/Convertor.cpp.obj
+.PHONY : src/Convertor.cpp.obj
+
+src/Convertor.i: src/Convertor.cpp.i
+
+.PHONY : src/Convertor.i
+
+# target to preprocess a source file
+src/Convertor.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/Convertor.cpp.i
+.PHONY : src/Convertor.cpp.i
+
+src/Convertor.s: src/Convertor.cpp.s
+
+.PHONY : src/Convertor.s
+
+# target to generate assembly for a file
+src/Convertor.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/Convertor.cpp.s
+.PHONY : src/Convertor.cpp.s
+
 src/DFA.obj: src/DFA.cpp.obj
 
 .PHONY : src/DFA.obj
@@ -249,6 +276,60 @@ src/GLOBAL.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/GLOBAL.cpp.s
 .PHONY : src/GLOBAL.cpp.s
 
+src/LL1_parser.obj: src/LL1_parser.cpp.obj
+
+.PHONY : src/LL1_parser.obj
+
+# target to build an object file
+src/LL1_parser.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/LL1_parser.cpp.obj
+.PHONY : src/LL1_parser.cpp.obj
+
+src/LL1_parser.i: src/LL1_parser.cpp.i
+
+.PHONY : src/LL1_parser.i
+
+# target to preprocess a source file
+src/LL1_parser.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/LL1_parser.cpp.i
+.PHONY : src/LL1_parser.cpp.i
+
+src/LL1_parser.s: src/LL1_parser.cpp.s
+
+.PHONY : src/LL1_parser.s
+
+# target to generate assembly for a file
+src/LL1_parser.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/LL1_parser.cpp.s
+.PHONY : src/LL1_parser.cpp.s
+
+src/Minimizer.obj: src/Minimizer.cpp.obj
+
+.PHONY : src/Minimizer.obj
+
+# target to build an object file
+src/Minimizer.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/Minimizer.cpp.obj
+.PHONY : src/Minimizer.cpp.obj
+
+src/Minimizer.i: src/Minimizer.cpp.i
+
+.PHONY : src/Minimizer.i
+
+# target to preprocess a source file
+src/Minimizer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/Minimizer.cpp.i
+.PHONY : src/Minimizer.cpp.i
+
+src/Minimizer.s: src/Minimizer.cpp.s
+
+.PHONY : src/Minimizer.s
+
+# target to generate assembly for a file
+src/Minimizer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/Minimizer.cpp.s
+.PHONY : src/Minimizer.cpp.s
+
 src/NFA.obj: src/NFA.cpp.obj
 
 .PHONY : src/NFA.obj
@@ -303,6 +384,33 @@ src/Node.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/Node.cpp.s
 .PHONY : src/Node.cpp.s
 
+src/ParseTable.obj: src/ParseTable.cpp.obj
+
+.PHONY : src/ParseTable.obj
+
+# target to build an object file
+src/ParseTable.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/ParseTable.cpp.obj
+.PHONY : src/ParseTable.cpp.obj
+
+src/ParseTable.i: src/ParseTable.cpp.i
+
+.PHONY : src/ParseTable.i
+
+# target to preprocess a source file
+src/ParseTable.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/ParseTable.cpp.i
+.PHONY : src/ParseTable.cpp.i
+
+src/ParseTable.s: src/ParseTable.cpp.s
+
+.PHONY : src/ParseTable.s
+
+# target to generate assembly for a file
+src/ParseTable.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/ParseTable.cpp.s
+.PHONY : src/ParseTable.cpp.s
+
 src/Parser.obj: src/Parser.cpp.obj
 
 .PHONY : src/Parser.obj
@@ -330,6 +438,87 @@ src/Parser.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/Parser.cpp.s
 .PHONY : src/Parser.cpp.s
 
+src/Scanner.obj: src/Scanner.cpp.obj
+
+.PHONY : src/Scanner.obj
+
+# target to build an object file
+src/Scanner.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/Scanner.cpp.obj
+.PHONY : src/Scanner.cpp.obj
+
+src/Scanner.i: src/Scanner.cpp.i
+
+.PHONY : src/Scanner.i
+
+# target to preprocess a source file
+src/Scanner.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/Scanner.cpp.i
+.PHONY : src/Scanner.cpp.i
+
+src/Scanner.s: src/Scanner.cpp.s
+
+.PHONY : src/Scanner.s
+
+# target to generate assembly for a file
+src/Scanner.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/Scanner.cpp.s
+.PHONY : src/Scanner.cpp.s
+
+src/readGrammar.obj: src/readGrammar.cpp.obj
+
+.PHONY : src/readGrammar.obj
+
+# target to build an object file
+src/readGrammar.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/readGrammar.cpp.obj
+.PHONY : src/readGrammar.cpp.obj
+
+src/readGrammar.i: src/readGrammar.cpp.i
+
+.PHONY : src/readGrammar.i
+
+# target to preprocess a source file
+src/readGrammar.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/readGrammar.cpp.i
+.PHONY : src/readGrammar.cpp.i
+
+src/readGrammar.s: src/readGrammar.cpp.s
+
+.PHONY : src/readGrammar.s
+
+# target to generate assembly for a file
+src/readGrammar.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/readGrammar.cpp.s
+.PHONY : src/readGrammar.cpp.s
+
+src/table.obj: src/table.cpp.obj
+
+.PHONY : src/table.obj
+
+# target to build an object file
+src/table.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/table.cpp.obj
+.PHONY : src/table.cpp.obj
+
+src/table.i: src/table.cpp.i
+
+.PHONY : src/table.i
+
+# target to preprocess a source file
+src/table.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/table.cpp.i
+.PHONY : src/table.cpp.i
+
+src/table.s: src/table.cpp.s
+
+.PHONY : src/table.s
+
+# target to generate assembly for a file
+src/table.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LexicalAnalyzer.dir\build.make CMakeFiles/LexicalAnalyzer.dir/src/table.cpp.s
+.PHONY : src/table.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -342,6 +531,9 @@ help:
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... src/Convertor.obj
+	@echo ... src/Convertor.i
+	@echo ... src/Convertor.s
 	@echo ... src/DFA.obj
 	@echo ... src/DFA.i
 	@echo ... src/DFA.s
@@ -351,15 +543,33 @@ help:
 	@echo ... src/GLOBAL.obj
 	@echo ... src/GLOBAL.i
 	@echo ... src/GLOBAL.s
+	@echo ... src/LL1_parser.obj
+	@echo ... src/LL1_parser.i
+	@echo ... src/LL1_parser.s
+	@echo ... src/Minimizer.obj
+	@echo ... src/Minimizer.i
+	@echo ... src/Minimizer.s
 	@echo ... src/NFA.obj
 	@echo ... src/NFA.i
 	@echo ... src/NFA.s
 	@echo ... src/Node.obj
 	@echo ... src/Node.i
 	@echo ... src/Node.s
+	@echo ... src/ParseTable.obj
+	@echo ... src/ParseTable.i
+	@echo ... src/ParseTable.s
 	@echo ... src/Parser.obj
 	@echo ... src/Parser.i
 	@echo ... src/Parser.s
+	@echo ... src/Scanner.obj
+	@echo ... src/Scanner.i
+	@echo ... src/Scanner.s
+	@echo ... src/readGrammar.obj
+	@echo ... src/readGrammar.i
+	@echo ... src/readGrammar.s
+	@echo ... src/table.obj
+	@echo ... src/table.i
+	@echo ... src/table.s
 .PHONY : help
 
 

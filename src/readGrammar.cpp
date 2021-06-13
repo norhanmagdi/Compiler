@@ -1,4 +1,4 @@
-#include "readGrammar.h"
+#include "../include/readGrammar.h"
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -9,6 +9,7 @@ vector<pair<string,string>> grammar_set;
 int i=0;
 std::string trim(const std::string &s)
 {
+    cout << s << '\n';
     auto start = s.begin();
     while (start != s.end() && std::isspace(*start)) {
         start++;
@@ -22,12 +23,31 @@ std::string trim(const std::string &s)
     return std::string(start, end + 1);
 }
 void readGrammar:: readFile(){
-     freopen ("grammar.txt","r",stdin);
-     string input;
-     while (getline(std::cin,input))
-        lines.push_back(trim(input));
-    /* for(int i=0;i<lines.size();i++)
-        cout<<lines[i]<<endl;*/
+    freopen ("grammar.in", "r", stdin);
+    vector<string> grammar = {
+        "# METHOD_BODY = STATEMENT_LIST",
+        "# STATEMENT_LIST = STATEMENT | STATEMENT_LIST STATEMENT",
+        "# STATEMENT = DECLARATION | IF | WHILE | ASSIGNMENT",
+        "# DECLARATION = PRIMITIVE_TYPE 'id' ';'",
+        "# PRIMITIVE_TYPE = 'int' | 'float'",
+        "# IF = 'if' '(' EXPRESSION ')' '{' STATEMENT '}' 'else' '{' STATEMENT '}'",
+        "# WHILE = 'while' '(' EXPRESSION ')' '{' STATEMENT '}'",
+        "# ASSIGNMENT = 'id' '=' EXPRESSION ';'",
+        "# EXPRESSION = SIMPLE_EXPRESSION EXPRESSION~",
+        "# EXPRESSION~ = 'relop' SIMPLE_EXPRESSION | \L",
+        "# SIMPLE_EXPRESSION = TERM | SIGN TERM | SIMPLE_EXPRESSION 'addop' TERM",
+        "# TERM = FACTOR | TERM 'mulop' FACTOR",
+        "# FACTOR = 'id' | 'num' | '(' EXPRESSION ')'",
+        "# SIGN = '+' | '-'" };
+    string input;
+//    while (getline(std::cin,input)) {
+//        lines.push_back(trim(input));
+//    }
+    for (auto j : grammar) {
+        lines.push_back(trim(j));
+    }
+    /*for(int i=0;i<lines.size();i++)
+        cout<<lines[i]<<endl; */
 }
 void readGrammar:: parseLine(string line) {
     if (line[0]=='#'){
@@ -45,21 +65,21 @@ void readGrammar:: parseLine(string line) {
 
 }
 void readGrammar:: splitGrammar() {
-   // cout<<endl;
-  //  cout<<"new grammar"<<endl;
+    // cout<<endl;
+    //  cout<<"new grammar"<<endl;
     for (const auto &g : grammar_set) {
-       //  cout<<g.first<<" "<<g.second<<endl;
-         pair <string,vector<string>> temp;
-         temp.first=trim(g.first);
-         string str="",terminal="";
-         bool first=false;
-         vector<string>rhs;
-         string r=std::move(g.second);
+        //  cout<<g.first<<" "<<g.second<<endl;
+        pair <string,vector<string>> temp;
+        temp.first=trim(g.first);
+        string str="",terminal="";
+        bool first=false;
+        vector<string>rhs;
+        string r=std::move(g.second);
         // cout<<r<<endl;
-         for (auto i : r){
-         //   cout<<i<<",";
+        for (auto i : r){
+            //   cout<<i<<",";
             if(i=='\''&&!first){
-               // cout<<"find ' at "<<i<<endl;
+                // cout<<"find ' at "<<i<<endl;
                 first=true;
             }else if(i=='\''&&first){
                 terminals.insert(trim(terminal));
@@ -77,11 +97,11 @@ void readGrammar:: splitGrammar() {
                     terminal+=i;
                 str+=i;
             }
-         }
-         if(!str.empty())
+        }
+        if(!str.empty())
             rhs.push_back(trim(str));
-         temp.second=rhs;
-         splited_grammar_set.push_back(temp);
+        temp.second=rhs;
+        splited_grammar_set.push_back(temp);
 
     }
 }
@@ -111,13 +131,13 @@ void readGrammar:: writeFile(vector<pair<string,vector<string>>> finalGrammar){
     ofstream myfile;
     myfile.open ("modified grammar.txt");
     for(const auto &g : finalGrammar){
-            myfile<<g.first<<" = ";
-            for(const auto &k : g.second){
-                if(k==g.second.back())
-                    myfile<<k<<"\n";
-                else
-                    myfile<<k<<" | ";
-            }
+        myfile<<g.first<<" = ";
+        for(const auto &k : g.second){
+            if(k==g.second.back())
+                myfile<<k<<"\n";
+            else
+                myfile<<k<<" | ";
+        }
 
     }
     myfile.close();
@@ -159,7 +179,7 @@ bool readGrammar::containLeftRecursion(pair<string,vector<string>> term) {
     return false;
 }
 pair<string,vector<string>> readGrammar::indirectLeftRec(pair<string,vector<string>> termi,pair<string,vector<string>> termj) {
-   // cout<<"replacement"<<termi.first<<termj.first<<endl;
+    // cout<<"replacement"<<termi.first<<termj.first<<endl;
     pair<string,vector<string>> newTerm,modifiedTerm;
     newTerm.first=termi.first;
     vector<string> newRHS;
@@ -167,16 +187,16 @@ pair<string,vector<string>> readGrammar::indirectLeftRec(pair<string,vector<stri
     for(auto p : temp){
         if(p.substr(0, p.find(' '))== termj.first){
             p=trim(p.erase(0,p.find(' ')));
-          //  cout<<"p"<<p<<endl;
-           // newRHS.push_back(p+" "+newTerm.first);
+            //  cout<<"p"<<p<<endl;
+            // newRHS.push_back(p+" "+newTerm.first);
             for(auto pr : termj.second){
-              //  cout<<pr+" "+p<<endl;
+                //  cout<<pr+" "+p<<endl;
                 newRHS.push_back(pr+" "+p);
             }
 
         }else{
             newRHS.push_back(p);
-           // cout<<p<<endl;
+            // cout<<p<<endl;
         }
     }
     newTerm.second=newRHS;
@@ -248,57 +268,58 @@ vector<pair<string,vector<string>>>readGrammar::solveLeftFactoring(pair<string,v
         }
 
     }
- /*   cout<<"first terms:"<<endl;
-    for(auto i: firstTerms){
-        cout<<i<<",,";
-    }
-     cout<<"repeat terms:"<<endl;
+    /*   cout<<"first terms:"<<endl;
+       for(auto i: firstTerms){
+           cout<<i<<",,";
+       }
+        cout<<"repeat terms:"<<endl;
+       for(auto i: repeatedTerms){
+           cout<<i.first<<"::";
+
+           for(auto j: i.second){
+               cout<<j<<",,";
+           }
+           cout<<endl;
+       }*/
     for(auto i: repeatedTerms){
-        cout<<i.first<<"::";
+        if(i.second.size()==1){
+            if(i.second[0]=="eps")
+                modifiedRHS.push_back(i.first);
+            else
+                modifiedRHS.push_back(i.first+" "+i.second[0]);
 
-        for(auto j: i.second){
-            cout<<j<<",,";
-        }
-        cout<<endl;
-    }*/
-    for(auto i: repeatedTerms){
-            if(i.second.size()==1){
-                if(i.second[0]=="eps")
-                    modifiedRHS.push_back(i.first);
-                else
-                    modifiedRHS.push_back(i.first+" "+i.second[0]);
-
-            }else{
-                string temp=trim(i.second[0].substr(0, i.second[0].find(' ')));
-                int c=0;
-                for(auto j:i.second){
-                    if(trim(j.substr(0, j.find(' ')))==temp)
-                        c++;
-                }
-                if(c==i.second.size()){
-                    vector<string> ve;
-                    for(auto j :i.second)
-                        ve.push_back(trim(j.erase(0,j.find(' '))));
-                    i.second=ve;
-                    temp=" "+temp+" ";
-                }else
-                    temp=" ";
-                vector<string>extraRHS;
-                extraTerm.first=term.first+"'";
-                for(int i=0;i<ans.size();i++)
-                    extraTerm.first=extraTerm.first+"'";
-                for(auto j: i.second)
-                    extraRHS.push_back(j);
-                modifiedRHS.push_back(i.first+temp+extraTerm.first);
-                extraTerm.second=extraRHS;
-
-                if(containLeftFactoring(extraTerm)){
-                    vector<pair<string,vector<string>>> extraAns=solveLeftFactoring(extraTerm);
-                    ans.insert(ans.end(), extraAns.begin(), extraAns.end());
-                }else
-                    ans.push_back(extraTerm);
-
+        }else{
+            string temp=trim(i.second[0].substr(0, i.second[0].find(' ')));
+            int c=0;
+            for(auto j:i.second){
+                if(trim(j.substr(0, j.find(' ')))==temp)
+                    c++;
             }
+            if(c==i.second.size()){
+                vector<string> ve;
+                for(auto j :i.second)
+                    ve.push_back(trim(j.erase(0,j.find(' '))));
+                i.second=ve;
+                temp=" "+temp+" ";
+            }else
+                temp=" ";
+            vector<string>extraRHS;
+            extraTerm.first=term.first+"'";
+            non_terminals.insert(extraTerm.first);
+            for(int i=0;i<ans.size();i++)
+                extraTerm.first=extraTerm.first+"'";
+            for(auto j: i.second)
+                extraRHS.push_back(j);
+            modifiedRHS.push_back(i.first+temp+extraTerm.first);
+            extraTerm.second=extraRHS;
+
+            if(containLeftFactoring(extraTerm)){
+                vector<pair<string,vector<string>>> extraAns=solveLeftFactoring(extraTerm);
+                ans.insert(ans.end(), extraAns.begin(), extraAns.end());
+            }else
+                ans.push_back(extraTerm);
+
+        }
 
 
     }
@@ -307,9 +328,10 @@ vector<pair<string,vector<string>>>readGrammar::solveLeftFactoring(pair<string,v
     return ans;
 }
 void readGrammar::leftFactoring( vector<pair<string,vector<string>>> terms) {
-
+    cout << "HNA\n";
     vector<pair<string,vector<string>>>result{};
     for(int i = 0; i < terms.size();i++){
+        cout << terms[i].first << '\n';
         if(containLeftFactoring(terms[i])){
             vector<pair<string,vector<string>>>ans=solveLeftFactoring(terms[i]);
             result.insert(result.end(), ans.begin(), ans.end());
@@ -319,9 +341,11 @@ void readGrammar::leftFactoring( vector<pair<string,vector<string>>> terms) {
         }
 
     }
-
-   setModifiedGrammar(result);
-   setFirstNonTerminal(result.front().first);
+    cout << "HNA\n";
+    setModifiedGrammar(result);
+    cout << "HNA\n";
+    setFirstNonTerminal(result.front().first);
+    cout << "HNA\n";
 }
 vector<pair<string,vector<string>>>readGrammar::getLeftRecGrammar(){
     return this->leftRecGrammar;

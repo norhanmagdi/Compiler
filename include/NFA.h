@@ -25,12 +25,14 @@ public:
     Node *getEnd();
     void setTokenName(string tokenName);
     string getTokenName();
-    NFA* RANGEautomata(string a1, string a2);
+    NFA* RANGEautomata(NFA* a11, NFA* a22);
     NFA* createAutomata(string condition);
     NFA* ORautomata(NFA* a1, NFA* a2);
     NFA* ANDautomata(NFA* a1, NFA* a2);
     NFA* CLOSUREautomata(NFA* a1);
     NFA* PCLOSUREautomata(NFA* a1);
+    map <Node* , map<string , vector<Node*>>> NFATable;
+//    static OpMap NFATable;
 
 protected:
 

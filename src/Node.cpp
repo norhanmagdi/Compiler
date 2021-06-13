@@ -19,7 +19,7 @@ void Node::setName(int nodeName) {
 bool Node::isEndState(){
     return endState;
 }
-void Node::setEndState(bool aendState) {
+void Node::setEndState(bool endState) {
     this->endState = endState;
 }
 void Node::addEdge(Edge* edge){

@@ -6,6 +6,13 @@ Edge::Edge(Node* destination, string condition) {
     this->condition = condition;
 }
 
+Edge::Edge(Node* destination, char start, char end, string condition) {
+    this->destination = destination;
+    this->start = start;
+    this->end = end;
+    this->condition = condition;
+}
+
 Edge::~Edge()
 {
     //dtor
@@ -24,4 +31,12 @@ void Edge::setCondition(string condition) {
 
 string Edge::getCondition(){
     return this->condition;
+}
+
+char Edge::getStartChar() {
+    return start;
+}
+
+char Edge::getEndChar() {
+    return end;
 }

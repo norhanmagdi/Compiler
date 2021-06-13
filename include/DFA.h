@@ -1,40 +1,45 @@
 #ifndef DFA_H
 #define DFA_H
 
-#include "../include/Node.h"
 #include "../include/Edge.h"
 #include "../include/GLOBAL.h"
 #include "../include/NFA.h"
+#include "../include/Node.h"
 
-class Node;
 class Edge;
 class NFA;
+class Node;
 class DFA
 {
 public:
     DFA (Node *startNode, vector <Node*> endNode);
-    DFA (NFA *nfa);
+    DFA (NFA *nfa, set<string> inputSymbols);
     DFA () {};
 
     virtual ~DFA();
     Node *getStart();
+    map <Node* , map<string , Node*>> DFATable;
     vector<Node*> getEnd();
-    struct DState {
-        Node* DNode;
-        bool marked;
-        vector<Node *> NNodes;
-    };
+//    struct DState {
+//        Node* DNode;
+//        bool marked = false;
+//        vector<Node *> NNodes;
+//    };
+//    DState* startDState;
+    Node* startDState;
+    void printDFATable();
 
 protected:
 
 private:
+    set<string> inputSymbols;
     GLOBAL *global = global->getInstance();
     DFA* subsetConstruction(Node* start, Node *finish);
     vector<Node*> EPSClosure(vector<Node*> states);
     Node* startNode;
-    DState* startDState;
-    DState* AnyStateUnmarked(const vector<DState*>& DStates);
-    static DState* find (vector<Node*> U, const vector<DState*>& DStates);
+
+    Node* AnyStateUnmarked(vector<Node*> DStates);
+    static Node* find (vector<Node*> U, const vector<Node*>& DStates);
     vector<Node*> move (vector<Node*> T, string input);
     vector<Node*> endNode;
 };
