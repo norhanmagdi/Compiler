@@ -80,6 +80,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="D:/LexicalAnalyzer/include/Convertor.h">
+			<Option target="LexicalAnalyzer"/>
+		</Unit>
 		<Unit filename="D:/LexicalAnalyzer/include/DFA.h">
 			<Option target="LexicalAnalyzer"/>
 		</Unit>
@@ -89,16 +92,37 @@
 		<Unit filename="D:/LexicalAnalyzer/include/GLOBAL.h">
 			<Option target="LexicalAnalyzer"/>
 		</Unit>
+		<Unit filename="D:/LexicalAnalyzer/include/LL1_parser.h">
+			<Option target="LexicalAnalyzer"/>
+		</Unit>
+		<Unit filename="D:/LexicalAnalyzer/include/Minimizer.h">
+			<Option target="LexicalAnalyzer"/>
+		</Unit>
 		<Unit filename="D:/LexicalAnalyzer/include/NFA.h">
 			<Option target="LexicalAnalyzer"/>
 		</Unit>
 		<Unit filename="D:/LexicalAnalyzer/include/Node.h">
 			<Option target="LexicalAnalyzer"/>
 		</Unit>
+		<Unit filename="D:/LexicalAnalyzer/include/ParseTable.h">
+			<Option target="LexicalAnalyzer"/>
+		</Unit>
 		<Unit filename="D:/LexicalAnalyzer/include/Parser.h">
 			<Option target="LexicalAnalyzer"/>
 		</Unit>
+		<Unit filename="D:/LexicalAnalyzer/include/Scanner.h">
+			<Option target="LexicalAnalyzer"/>
+		</Unit>
+		<Unit filename="D:/LexicalAnalyzer/include/readGrammar.h">
+			<Option target="LexicalAnalyzer"/>
+		</Unit>
+		<Unit filename="D:/LexicalAnalyzer/include/table.h">
+			<Option target="LexicalAnalyzer"/>
+		</Unit>
 		<Unit filename="D:/LexicalAnalyzer/main.cpp">
+			<Option target="LexicalAnalyzer"/>
+		</Unit>
+		<Unit filename="D:/LexicalAnalyzer/src/Convertor.cpp">
 			<Option target="LexicalAnalyzer"/>
 		</Unit>
 		<Unit filename="D:/LexicalAnalyzer/src/DFA.cpp">
@@ -110,13 +134,31 @@
 		<Unit filename="D:/LexicalAnalyzer/src/GLOBAL.cpp">
 			<Option target="LexicalAnalyzer"/>
 		</Unit>
+		<Unit filename="D:/LexicalAnalyzer/src/LL1_parser.cpp">
+			<Option target="LexicalAnalyzer"/>
+		</Unit>
+		<Unit filename="D:/LexicalAnalyzer/src/Minimizer.cpp">
+			<Option target="LexicalAnalyzer"/>
+		</Unit>
 		<Unit filename="D:/LexicalAnalyzer/src/NFA.cpp">
 			<Option target="LexicalAnalyzer"/>
 		</Unit>
 		<Unit filename="D:/LexicalAnalyzer/src/Node.cpp">
 			<Option target="LexicalAnalyzer"/>
 		</Unit>
+		<Unit filename="D:/LexicalAnalyzer/src/ParseTable.cpp">
+			<Option target="LexicalAnalyzer"/>
+		</Unit>
 		<Unit filename="D:/LexicalAnalyzer/src/Parser.cpp">
+			<Option target="LexicalAnalyzer"/>
+		</Unit>
+		<Unit filename="D:/LexicalAnalyzer/src/Scanner.cpp">
+			<Option target="LexicalAnalyzer"/>
+		</Unit>
+		<Unit filename="D:/LexicalAnalyzer/src/readGrammar.cpp">
+			<Option target="LexicalAnalyzer"/>
+		</Unit>
+		<Unit filename="D:/LexicalAnalyzer/src/table.cpp">
 			<Option target="LexicalAnalyzer"/>
 		</Unit>
 		<Unit filename="D:/LexicalAnalyzer/CMakeLists.txt">

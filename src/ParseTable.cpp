@@ -1,7 +1,7 @@
 #include "../include/ParseTable.h"
 
-ParseTable::ParseTable(unordered_set<string> terminals, unordered_set<string> non_terminals, 
-    vector<pair<string, vector<string>>> split_grammar_set, string first_Nonterminal){ //constructor
+ParseTable::ParseTable(unordered_set<string> terminals, unordered_set<string> non_terminals,
+                       vector<pair<string, vector<string>>> split_grammar_set, string first_Nonterminal){ //constructor
     this->terminals = terminals;
     this->non_terminals = non_terminals;
     this->split_grammar_set = split_grammar_set;
@@ -164,7 +164,7 @@ void ParseTable::followTwo(const pair<string,vector<string>>& productions){
                         eps = false;
                         continue;
                     }
-                }  
+                }
             }
         }
     }
