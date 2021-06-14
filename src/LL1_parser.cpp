@@ -11,10 +11,25 @@ LL1_parser:: LL1_parser(string first_NonTerminal, vector<pair<string,vector<stri
     ParseTable * foundation_of_table = new ParseTable(*Terminals,*Nonterminals,*Grammar,first_NonTerminal);            
     unordered_map<string,unordered_set<string>> first_set = foundation_of_table->getFirstSet();
     unordered_map<string,unordered_set<string>> follow_set = foundation_of_table->getFollowSet();
-            
+
+    cout << endl;
+    cout << "Productions " << endl;
+
+    for(auto x: *Grammar){
+        cout << x.first << " --> ";
+        for(auto y : x.second){
+            cout  << y << " | ";
+        }
+        cout  << endl;
+    }
+
+    cout << endl;
+    cout << "First Set" << endl;        
     //for debugging
     foundation_of_table->print_firstSet();
     cout << "*************************" << endl;
+    cout << endl;
+    cout << "Follow Set" << endl;      
     foundation_of_table->print_followSet();
     cout << "*************************" << endl;
 
@@ -28,6 +43,10 @@ LL1_parser:: LL1_parser(string first_NonTerminal, vector<pair<string,vector<stri
         this->valid_parser = false;
             cout<<"Error: Grammar is not LL1, please modify grammar by removing any ambiguity from grammar."<<endl;
     }
+
+    cout<< endl;
+    cout << "Table" << endl;
+    parseing_table->print_table();
 
     //initialize pointers to sets of terminals and nonterminals
     this->nonterminals = Nonterminals;

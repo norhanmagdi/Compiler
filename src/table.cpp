@@ -21,30 +21,44 @@ table::table(unordered_map<string, unordered_set<string>> first_set, unordered_m
         vector<string> vector_of_productions = (gram->find(entry_in_first_set.first))->second;
         bool has_epsilon = false;
         for(auto terminal: entry_in_first_set.second){
+            bool found = false;
             for(auto production: vector_of_productions){
-                cout << "Terminal " << terminal << '\n';
-                cout << "Production " << production << '\n';
                 //if terminal comes from this production add them to the table
-                if(terminal.compare("eps") && production.compare("eps") && check_terminal_production(terminal,production,entry_in_first_set.first,Terminals,first_set)){
+                if(terminal.compare("eps") && production.compare("eps") && check_terminal_production(terminal,production,Terminals)){
                     pair<string,string> p = make_pair(entry_in_first_set.first,terminal);
-                    cout << "Production : " << p.first << " " << p.second << '\n';
                     if(parse_table.find(p) != parse_table.end()){
-                        cout << parse_table.find (p)->second << '\n';
                         /*
                         This cell in the table already has a value, hence ambiguous grammar -Not LL(1)-.
                         */
+                        cout << entry_in_first_set.first << "+" << terminal <<" --> " <<parse_table[p] << " but also " << production << endl;  
                         cout<< "ERROR2: Multiple parsing paths detected. Not LL1." << endl;
                         this->valid_table = false;
                         break;
                     }
                     this->parse_table[p] = production;
+                    found = true;
+                    break;
                 }
                 //if terminal t is epsilon,then for each terminal in follow set combine it with nonterminal n and give them this production in the table
                 if(!production.compare("eps")){
                     has_epsilon = true;
                 }
             }
+            if(!found){
+                for(auto production: vector_of_productions){
+                //if terminal comes from this production add them to the table
+                if(terminal.compare("eps") && production.compare("eps") && check_nonterminal_production(terminal,entry_in_first_set.first,first_set)){
+                    pair<string,string> p = make_pair(entry_in_first_set.first,terminal);
+                    if(parse_table.find(p) != parse_table.end()){
+                        break;
+                    }
+                    this->parse_table[p] = production;
+                    found = true;
+                    break;
+                }
+            }
         }
+    }
         if(has_epsilon){
             for(auto terminal_in_follow_set : (follow_set.find(entry_in_first_set.first))->second){
                 pair<string,string> p = make_pair(entry_in_first_set.first,terminal_in_follow_set);
@@ -72,19 +86,21 @@ table::table(unordered_map<string, unordered_set<string>> first_set, unordered_m
     }
 }
 
-bool table:: check_terminal_production(string terminal, string production,string nonterminal, unordered_set<string> Terminals, unordered_map<string, unordered_set<string>> first_set){
-    int terminal_index = 0;
-    int production_index = 0;
+bool table:: check_terminal_production(string terminal, string production,unordered_set<string> Terminals){
     vector<string>* terms_of_production = split_string(production);
     if(Terminals.find(terms_of_production->at(0)) != Terminals.end()){
-        if(terminal == terms_of_production->at(0))
+        if(!terminal.compare(terms_of_production->at(0)))
             return true;
         else
             return false;
     }
+    return false;
+}
+
+bool table:: check_nonterminal_production(string terminal, string nonterminal, unordered_map<string, unordered_set<string>> first_set){
     unordered_set<string> nonTerminal_first_set = (first_set.find(nonterminal))->second;
     for(auto entry: nonTerminal_first_set){
-        if(entry == terminal)
+        if(!entry.compare(terminal))
             return true;
     }
     return false;

@@ -37,8 +37,8 @@ public:
 
 
 private:
-    bool check_terminal_production(string terminal, string production, string nonterminal,
-                                   unordered_set<string> Terminals, unordered_map<string, unordered_set<string>> first_set);
+    bool check_terminal_production(string terminal, string production,unordered_set<string> Terminals);
+    bool check_nonterminal_production(string terminal, string nonterminal, unordered_map<string, unordered_set<string>> first_set);
     bool valid_table;
     /*      [Non_Terminal][Terminal] -->    production      */
     unordered_map<pair<string,string>, string, hash_pair> parse_table;
