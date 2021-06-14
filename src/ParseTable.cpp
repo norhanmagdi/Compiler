@@ -191,3 +191,23 @@ unordered_map<string, unordered_set<string>> ParseTable::getFirstSet() {
 unordered_map<string, unordered_set<string>> ParseTable::getFollowSet() {
     return this->follow_set;
 }
+
+void ParseTable:: print_firstSet(){
+    for(auto term: this->first_set){
+        cout << term.first << " --> ";
+        for(auto t: term.second){
+            cout << t << " | ";
+        }
+        cout << endl;
+    }
+}
+
+void ParseTable:: print_followSet(){
+    for(auto term: this->follow_set){
+        cout << term.first << " --> ";
+        for(auto t: term.second){
+            cout << t << " | ";
+        }
+        cout << endl;
+    }
+}

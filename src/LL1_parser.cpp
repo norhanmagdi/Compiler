@@ -16,6 +16,13 @@ LL1_parser:: LL1_parser(string first_NonTerminal, vector<pair<string,vector<stri
 
             unordered_map<string,unordered_set<string>> follow_set = foundation_of_table->getFollowSet();
 
+            //for debugging
+            foundation_of_table->print_firstSet();
+            cout << "*************************" << endl;
+
+            foundation_of_table->print_followSet();
+            cout << "*************************" << endl;
+
             //create parsing table and using first and follow sets, and the grammar. Then initialize a pointer to the created table.
             table * created_table = new table(first_set,follow_set,*Grammar,*Terminals);
             this->parseing_table = created_table;

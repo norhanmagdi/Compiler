@@ -13,6 +13,9 @@ public:
     unordered_map<string, unordered_set<string>> getFirstSet();
     unordered_map<string, unordered_set<string>> getFollowSet();
 
+    void print_firstSet();
+    void print_followSet();
+
 protected:
 
 private:
